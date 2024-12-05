@@ -114,7 +114,7 @@ from sklearn.tree import plot_tree
 # Define our model
 # extra parameter called n_estimators which is number of trees in the forest
 # a leaf is a class label at the end of the decision tree
-forest = RandomForestClassifier(n_estimators=100, max_depth=7, min_samples_leaf=1) 
+forest = RandomForestClassifier(n_estimators=100, max_depth=7, min_samples_leaf=1, random_state=5) 
 
 # train our model
 forest.fit(X_train, y_train)
