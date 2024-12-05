@@ -183,7 +183,9 @@ This is instead of writing a loop ourselves to divide every pixel by 255. Althou
 
 Now we need to initialise a neural network. Scikit-Learn has an entire library for this (`sklearn.neural_network`) and the `MLPClassifier` class handles multi-layer perceptrons. This network takes a few parameters including the size of the hidden layer, the maximum number of training iterations we're going to allow, the exact algorithm to use, whether or not we'd like verbose output about what the training is doing, and the initial state of the random number generator.
 
-In this example we specify a multi-layer perceptron with 50 hidden nodes, we allow a maximum of 50 iterations to train it, we turn on verbose output to see what's happening, and initialise the random state to 1 so that we always get the same behaviour.
+In scikit-learn's `MLPClassifier`, the `hidden_layer_sizes` parameter specifies the number and size of hidden layers in the neural network. For example, `hidden_layer_sizes=(50,)` creates a single hidden layer with 50 neurons, while `(100, 50)` creates two hidden layers with 100 and 50 neurons, respectively. It’s important to include the trailing comma for a single hidden layer (e.g., `(50,)`) because without it, `(50)` would be interpreted as an integer, not a tuple, and cause an error. The example, `MLPClassifier(hidden_layer_sizes=(50,), max_iter=50, verbose=1, random_state=1)`, builds a neural network with one hidden layer containing 50 neurons, runs for a maximum of 50 iterations, logs training progress, and ensures reproducibility with `random_state=1`.
+
+The max_iter parameter in MLPClassifier specifies the maximum number of iterations, not epochs. Since MLPClassifier uses stochastic gradient descent (or its variants), each iteration processes a small random subset of the data (a batch), and the full dataset may not be seen in a single iteration.
 
 ~~~
 import sklearn.neural_network as skl_nn
