@@ -260,12 +260,56 @@ This is a classic case of over-fitting - our model has produced extremely specif
 
 
 ## Classification using support vector machines
-Next, we'll look at another commonly used classification algorithm, and see how it compares. Support Vector Machines (SVM) work in a way that is conceptually similar to your own intuition when first looking at the data. They devise a set of hyperplanes that delineate the parameter space, such that each region contains ideally only observations from one class, and the boundaries fall between classes.
+Next, we'll look at another commonly used classification algorithm, and see how it compares. Support Vector Machines (SVM) work in a way that is conceptually similar to your own intuition when first looking at the data. They devise a set of hyperplanes that delineate the parameter space, such that each region contains ideally only observations from one class, and the boundaries fall between classes. One of the core strengths of Support Vector Machines (SVMs) is their ability to handle non-linear relationships between features by transforming the data into a higher-dimensional space. This transformation allows SVMs to find a linear boundary/hyperplane in this new space, which corresponds to a non-linear boundary in the original space.
 
-### Normalising data
-Unlike decision trees, SVMs require an additional pre-processing step for our data. We need to normalise it. Our raw data has parameters with different magnitudes such as bill length measured in 10's of mm's, whereas body mass is measured in 1000's of grams. If we trained an SVM directly on this data, it would only consider the parameter with the greatest variance (body mass).
+**What are the "trainable parameters" in an SVM?** 
+For a linear SVM, the trainable parameters are:
 
-Normalising maps each parameter to a new range so that it has a mean of 0 and a standard deviation of 1.
+- Weight vector: A vector that defines the orientation of the hyperplane. Its size is equal to the number of features in X.
+- Bias: A scalar value that shifts the hyperplane to maximize the margin.
+  
+### When to Choose SVM Over Decision Tree
+
+1. **High-Dimensional Data**:
+   - **Why SVM**: SVMs excel in high-dimensional spaces because the kernel trick allows them to separate classes even in complex feature spaces without explicitly mapping the data.
+   - **Why Not Decision Tree**: Decision trees struggle with high-dimensional data as the number of potential splits grows exponentially, leading to overfitting or underperformance.
+
+2. **Accuracy over Interpretbaility**:
+   - **Why SVM**: SVMs are often considered black-box models, focusing on accuracy rather than interpretability.
+   - **Why Not Decision Tree**: Decision trees are typically interpretable, making them better if you need to explain your model.
+
+### Standardizing data
+Unlike decision trees, SVMs require an additional pre-processing step for our data. We need to standardize or "z-score" it. Our raw data has parameters with different magnitudes such as bill length measured in 10's of mm's, whereas body mass is measured in 1000's of grams. If we trained an SVM directly on this data, it would only consider the parameter with the greatest variance (body mass). 
+
+Standarizing maps each parameter to a new range so that it has a mean of 0 and a standard deviation of 1. This places all features on the same playing field, and allows SVM to reveal the most accurate decision boundaries.
+
+#### When to Standardize Your Data: A Broader Overview
+
+Standardization is an essential preprocessing step for many machine learning models, particularly those that rely on **distance-based calculations** to make predictions or extract features. These models are sensitive to the scale of the input features because their mathematical foundations involve distances, magnitudes, or directions in the feature space. Without standardization, features with larger ranges can dominate the calculations, leading to suboptimal results. However, not all models require standardization; some, like decision trees, operate on thresholds and are unaffected by feature scaling. Here's a breakdown of when to standardize, explicitly explaining the role of distance-based calculations in each case.
+  
+##### When to Standardize: Models That Use Distance-Based Calculations
+
+1. **Support Vector Machines (SVMs)**: SVMs calculate the distance of data points to a hyperplane and aim to maximize the margin (the distance between the hyperplane and the nearest points, called support vectors).
+
+2. **k-Nearest Neighbors (k-NN)**: k-NN determines class or value predictions based on the distance between a query point and its k-nearest neighbors in the feature space.
+
+3. **Logistic Regression with Regularization**: Regularization terms (e.g., L1 or L2 penalties) involve calculating the magnitude (distance) of the parameter vector to reduce overfitting and encourage simplicity.
+
+4. **Principal Component Analysis (PCA)**: PCA identifies principal components by calculating the Euclidean distance from data points to the axes representing the highest variance directions in the feature space.
+
+5. **Neural Networks (NNs)**: Neural networks rely on gradient-based optimization to learn weights. If input features have vastly different scales, gradients can become unstable, slowing down training or causing convergence issues. Standardizing or normalizing (scaling from 0 to 1) features ensures that all inputs contribute equally to the optimization process.
+
+6. **Linear Regression (for Interpreting Many Coefficients)**: While linear regression itself doesn’t rely on distance-based calculations, standardization is crucial when interpreting coefficients because it ensures that all features are on the same scale, making their relative importance directly comparable. Without standardization, coefficients in linear regression reflect the relationship between the dependent variable and a feature in the units of that feature, making it difficult to compare features with different scales (e.g., height in centimeters vs. weight in kilograms).
+
+##### When to Skip Standardization: Models That Don’t Use Distance-Based Calculations
+
+1. **Decision Trees**: Decision trees split data based on thresholds, independent of feature scales, without relying on any distance-based calculations.
+
+2. **Random Forests**: Random forests aggregate decisions from multiple trees, which also use thresholds rather than distance-based metrics.
+
+3. **Gradient Boosted Trees**: Gradient boosting optimizes decision trees sequentially, focusing on residuals and splits rather than distance measures.
+
+By understanding whether a model relies on distance-based calculations (or benefits from standardized features for interpretability), you can decide whether standardization is necessary, ensuring that your preprocessing pipeline is well-suited to the algorithm you’re using.
 
 ~~~
 from sklearn import preprocessing
