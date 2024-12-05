@@ -75,22 +75,58 @@ Now lets create some random blobs using the `make_blobs` function. The `n_sample
 ~~~
 import matplotlib.pyplot as plt
 
-#Lets define some functions here to avoid repetitive code
 def plots_labels(data, labels):
+    """
+    Visualizes data points with associated labels in a 2D scatter plot.
+
+    Parameters:
+    data (ndarray): A 2D NumPy array with shape (n_samples, 2), representing the data points.
+    labels (ndarray or list): A 1D array or list of labels corresponding to the data points.
+
+    Returns:
+    None: Displays the scatter plot with labels as colors.
+    """
+    # Extract the x and y coordinates from the data
     tx = data[:, 0]
     ty = data[:, 1]
-
+    
+    # Create a figure with a specified size
     fig = plt.figure(1, figsize=(4, 4))
+    
+    # Scatter plot the data points, coloring them by their labels
     plt.scatter(tx, ty, edgecolor='k', c=labels)
+    
+    # Display the plot
     plt.show()
 
 def plot_clusters(data, clusters, Kmean):
+    """
+    Visualizes clustered data points with centroids marked.
+
+    Parameters:
+    data (ndarray): A 2D NumPy array with shape (n_samples, 2), representing the data points.
+    clusters (ndarray or list): A 1D array or list of cluster assignments for each data point.
+    Kmean (KMeans object): The fitted KMeans object containing cluster centers.
+
+    Returns:
+    None: Displays the scatter plot with clusters as colors and centroids marked with red crosses.
+    """
+    # Extract the x and y coordinates from the data
     tx = data[:, 0]
     ty = data[:, 1]
+    
+    # Create a figure with a specified size
     fig = plt.figure(1, figsize=(4, 4))
-    plt.scatter(tx, ty, s=5, linewidth=0, c=clusters)
+    
+    # Scatter plot the data points, coloring them by their cluster assignment
+    # plt.scatter(tx, ty, s=5, linewidth=0, c=clusters)
+    plt.scatter(tx, ty, c=clusters, cmap="nipy_spectral", edgecolor='k')
+    
+    # Loop through cluster centers and mark them with a red 'x'
     for cluster_x, cluster_y in Kmean.cluster_centers_:
         plt.scatter(cluster_x, cluster_y, s=100, c='r', marker='x')
+    
+    # Display the plot
     plt.show()
 ~~~
 {: .language-python}
@@ -98,7 +134,8 @@ def plot_clusters(data, clusters, Kmean):
 Lets create the clusters.
 
 ~~~
-data, cluster_id = skl_datasets.make_blobs(n_samples=400, cluster_std=0.75, centers=4, random_state=1)
+N_true_clusters = 4
+data, cluster_id = skl_datasets.make_blobs(n_samples=400, cluster_std=0.75, centers=N_true_clusters, random_state=1)
 plots_labels(data, cluster_id)
 ~~~
 {: .language-python}
@@ -108,7 +145,8 @@ plots_labels(data, cluster_id)
 Now that we have some data we can try to identify the clusters using k-means. First, we need to initialise the KMeans module and tell it how many clusters to look for. Next, we supply it with some data via the `fit` function, in much the same way we did with the regression functions earlier on. Finally, we run the predict function to find the clusters.
 
 ~~~
-Kmean = skl_cluster.KMeans(n_clusters=4)
+N_pred_clusters = 4
+Kmean = skl_cluster.KMeans(n_clusters=N_pred_clusters)
 Kmean.fit(data)
 clusters = Kmean.predict(data)
 ~~~
@@ -146,6 +184,105 @@ plot_clusters(data, clusters, Kmean)
 > multi-dimensional spaces.
 {: .callout}
 
+### Assessing cluster quality with the silhouette score
+Evaluating the quality of clusters is a crucial step in clustering analysis, as it helps determine how well the data points fit into their assigned clusters. A widely used metric for this purpose is the **silhouette score**, which measures how similar a data point is to its own cluster compared to other clusters. The silhouette score is defined for each data point and ranges from -1 to 1, where:
+
+- **1** indicates the data point is well matched to its cluster and poorly matched to other clusters.
+- **0** indicates the data point is on or very close to the decision boundary between clusters.
+- **-1** indicates the data point may have been misclassified into the wrong cluster.
+
+The silhouette score can be averaged across all data points to provide an overall measure of clustering quality. Additionally, examining silhouette scores for individual samples can help identify outliers or problematic clusters.
+
+Here is the Python code to calculate both the overall silhouette score and the individual sample scores:
+
+~~~
+from sklearn.metrics import silhouette_score, silhouette_samples
+
+# Calculate the overall silhouette score
+overall_silhouette = silhouette_score(data, clusters)
+print(f"Overall Silhouette Score: {overall_silhouette:.2f}")
+
+# Calculate silhouette scores for individual samples
+sample_silhouettes = silhouette_samples(data, clusters)
+sample_silhouettes
+~~~
+{: .language-python}
+
+> ## Exercise: How many clusters should we look for?
+> Using k-means requires us to specify the number of clusters to expect. A common strategy to get around this is to vary the number of clusters we are looking for, and use the silhouette score to select the most appropriate number of clusters.
+> Use the code below to loop through searching for between 2 and 10 clusters, generating silhouette plots for each. Which (if any) of the results look more sensible? What criteria might you use to select the best one?
+> 
+> ~~~
+> import matplotlib.pyplot as plt
+> import numpy as np
+> 
+> def plot_silhouette(data, clusters):
+>     """
+>     Calculates and plots silhouette scores for clustering results.
+>     
+>     Parameters:
+>     - data: array-like of shape (n_samples, n_features)
+>         Feature matrix of the dataset.
+>     - clusters: array-like of shape (n_samples,)
+>         Cluster labels for each sample in the dataset.
+>         
+>     Returns:
+>     - overall_silhouette: float
+>         The overall silhouette score for the clustering result.
+>     """
+>     # Calculate the overall silhouette score
+>     overall_silhouette = silhouette_score(data, clusters)
+>     print(f"Overall Silhouette Score: {overall_silhouette:.2f}")
+> 
+>     # Calculate silhouette scores for individual samples
+>     sample_silhouettes = silhouette_samples(data, clusters)
+> 
+>     # Plot silhouette values for each cluster
+>     y_lower = 10
+>     n_clusters = len(np.unique(clusters))
+> 
+>     for i in range(n_clusters):  # Iterate over each cluster
+>         cluster_silhouettes = sample_silhouettes[clusters == i]
+>         cluster_silhouettes.sort()
+>         cluster_size = len(cluster_silhouettes)
+>         y_upper = y_lower + cluster_size
+> 
+>         plt.fill_betweenx(
+>             np.arange(y_lower, y_upper),
+>             0,
+>             cluster_silhouettes,
+>             alpha=0.7
+>         )
+>         plt.text(-0.05, y_lower + 0.5 * cluster_size, str(i))
+>         y_lower = y_upper + 10
+> 
+>     plt.xlabel("Silhouette Coefficient")
+>     plt.ylabel("Cluster")
+>     plt.title("Silhouette Analysis")
+>     # Set x-axis limits
+>     plt.xlim([-.2, 1])
+>     plt.show()
+> 
+>     return overall_silhouette
+> 
+> ~~~
+> {: .language-python}
+>
+> ~~~
+> for cluster_count in range(2,11):
+>     Kmean = skl_cluster.KMeans(n_clusters=cluster_count)
+>     Kmean.fit(data)
+>     clusters = Kmean.predict(data)
+>     plot_silhouette(data, clusters)
+> ~~~
+> {: .language-python}
+>
+> > ## Solution
+> > The silouette score, unfortunately, incorrectly identifies N=2 as the most approprirate clustering configuration in this case (silhouette = 0.73). However, the silhouette score for N=4 (true cluster number) is very close (silhouette = 0.72). The silhouette can act as a useful guide in selecting cluster number, but it doesn't always produce perfect results. Clustering with different feature sets or exploring different clustering algorithms may yield better results.
+> > 
+> {: .solution}
+{: .challenge}
+
 ### Limitations of k-means
 
 * Requires number of clusters to be known in advance
@@ -176,28 +313,7 @@ plot_clusters(data, clusters, Kmean)
 > {: .solution}
 {: .challenge}
 
-> ## Exercise: How many clusters should we look for?
-> Using k-means requires us to specify the number of clusters to expect. A common strategy to get around this is to vary the number of clusters we are looking for.
-> Modify the program to loop through searching for between 2 and 10 clusters. Which (if any) of the results look more sensible? What criteria might you use to select the best one?
-> > ## Solution
-> > ~~~
-> > for cluster_count in range(2,11):
-> >     Kmean = skl_cluster.KMeans(n_clusters=cluster_count)
-> >     Kmean.fit(data)
-> >     clusters = Kmean.predict(data)
-> >     plt.scatter(data[:, 0], data[:, 1], s=5, linewidth=0,c=clusters)
-> >     for cluster_x, cluster_y in Kmean.cluster_centers_:
-> >         plt.scatter(cluster_x, cluster_y, s=100, c='r', marker='x')
-> >         # give the graph a title with the number of clusters
-> >         plt.title(str(cluster_count)+" Clusters")
-> >     plt.show()
-> > ~~~
-> > {: .language-python}
-> >
-> > None of these look like very sensible clusterings because all of the points form one large cluster.
-> > We might look at a measure of similarity to test if this single cluster is actually multiple clusters. A simple standard deviation or interquartile range might be a good starting point.
-> {: .solution}
-{: .challenge}
+
 
 
 ## Spectral clustering
