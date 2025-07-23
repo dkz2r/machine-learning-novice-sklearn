@@ -195,11 +195,35 @@ plt.show()
 
 ![Classification space for our decision tree](fig/e3_dt_space_2.png){alt="A scatter plot of the penguin daaset, showing bill length on the x-axis and body mass on the y-axis. The points are coloured by species. The decision tree is shown as colored regions, with the boundaries between the regions being orthogonal lines. The regions are generally aligned with the species clusters, but there are several misclassifications."}
 
+::::::::::::::::::::::::::::::::::::: challenge
+
 ## Tuning the `max_depth` hyperparameter
 
-Our decision tree using a `max_depth=2` is fairly simple and there are still some incorrect predictions in our final classifications. Let's try varying the `max_depth` hyperparameter to see if we can improve our model predictions.
+Our decision tree using a `max_depth=2` is fairly simple and there are still some incorrect predictions in our final
+classifications. What happens if we increase the `max_depth` hyperparameter? Will our model improve?
 
-<!-- We can reduce the over-fitting of our decision tree model by limiting its depth, forcing it to use less decisions to produce a classification, and resulting in a simpler decision space. -->
+Write a loop to train a decision tree classifier with `max_depth` values of 1, 2, 3, 4 and 5, and
+record the accuracy of each model on the test data. Then plot the accuracy against the `max_depth`
+values.
+
+Yout might find the following code snippets useful:
+
+```python
+clf = DecisionTreeClassifier(max_depth=2)
+clf.fit(X_train, y_train)
+acc = clf.score(X_test, y_test)
+```
+
+```python
+sns.lineplot(acc_df, x='depth', y='accuracy')
+plt.xlabel('Tree depth')
+plt.ylabel('Accuracy')
+plt.show()
+```
+
+What happens? Why?
+
+:::::::::::::::: solution
 
 ```python
 import pandas as pd
@@ -207,12 +231,12 @@ import pandas as pd
 max_depths = [1, 2, 3, 4, 5]
 
 accuracy = []
-for i, d in enumerate(max_depths):
-    clf = DecisionTreeClassifier(max_depth=d)
+for depth in max_depths:
+    clf = DecisionTreeClassifier(max_depth=depth)
     clf.fit(X_train, y_train)
     acc = clf.score(X_test, y_test)
 
-    accuracy.append((d, acc))
+    accuracy.append((depth, acc))
 
 acc_df = pd.DataFrame(accuracy, columns=['depth', 'accuracy'])
 
@@ -222,10 +246,19 @@ plt.ylabel('Accuracy')
 plt.show()
 ```
 
-
 ![Performance of decision trees of various depths](fig/e3_dt_overfit.png){alt="A line plot showing the accuracy of decision trees with various max_depth hyper-parameters. The x-axis shows the max_depth, and the y-axis shows the accuracy. The accuracy is highest at max_depth=2."}
 
-Here we can see that a `max_depth=2` performs slightly better on the test data than those with `max_depth > 2`. This can seem counter intuitive, as surely more questions should be able to better split up our categories and thus give better predictions?
+It looks like a `max_depth=2` performs slightly better on the test data than those with
+`max_depth > 2`. This can seem counter intuitive, as surely more questions should be able to better
+split up our categories and thus give better predictions?
+
+This is a classic case of over-fitting - our model has produced extremely specific parameters that
+work for the training data but are not necessarily representative of our test data.
+
+:::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::
+
+## Inspecting an over-fitted decision tree
 
 Let's reuse our fitting and plotting codes from above to inspect a decision tree that has `max_depth=5`:
 

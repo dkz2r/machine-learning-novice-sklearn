@@ -48,14 +48,14 @@ import seaborn as sns
 
 # Anscomes Quartet consists of 4 sets of data
 data = sns.load_dataset("anscombe")
-print(data.head())
+data.head()
 
 # Split out the 1st dataset from the total
 data_1 = data[data["dataset"]=="I"]
 data_1 = data_1.sort_values("x")
 
 # Inspect the data
-print(data_1.head())
+data_1.head()
 ```
 
 We see that the dataset bundle has the 3 columns `dataset`, `x`, and `y`. We have already used the `dataset` column to extract out Dataset I ready for our regression task. Let's visually inspect the data:
@@ -107,12 +107,12 @@ def fit_a_linear_model(x_data, y_data):
     model = LinearRegression(fit_intercept=True)
 
     # train our estimator/model using our data
-    lin_regress = model.fit(x_data,y_data)
+    lin_regress = model.fit(x_data, y_data)
 
     # inspect the trained estimator/model parameters
     m = lin_regress.coef_
     c = lin_regress.intercept_
-    print("linear coefs=",m, c)
+    print("linear coefs=", m, c)
 
     return lin_regress
 ```
@@ -130,7 +130,7 @@ def predict_linear_model(lin_regress, x_data, y_data):
 
     # calculated a RMS error as a quality of fit metric
     error = math.sqrt(mean_squared_error(y_data, linear_data))
-    print("linear error=",error)
+    print("linear error=", error)
 
     # return our trained model so that we can use it later
     return linear_data
@@ -246,12 +246,12 @@ def fit_poly_model(x_poly, y_data):
     poly_regress = LinearRegression()
 
     # define and train our model
-    poly_regress.fit(x_poly,y_data)
+    poly_regress.fit(x_poly, y_data)
 
     # inspect trained model parameters
     poly_m = poly_regress.coef_
     poly_c = poly_regress.intercept_
-    print("poly_coefs",poly_m, poly_c)
+    print("poly_coefs", poly_m, poly_c)
 
     return poly_regress
 
@@ -287,11 +287,11 @@ Lets plot our input dataset II, linear model, and polynomial model together, as 
 
 ```python
 # Sort our data in order of our x (feature) values
-data_2 = data[data["dataset"]=="II"]
+data_2 = data[data["dataset"] == "II"]
 data_2 = data_2.sort_values("x")
 
-fit_predict_plot_linear(data_2["x"],data_2["y"])
-fit_predict_plot_poly(data_2["x"],data_2["y"])
+fit_predict_plot_linear(data_2["x"], data_2["y"])
+fit_predict_plot_poly(data_2["x"], data_2["y"])
 
 plt.show()
 ```
@@ -311,12 +311,12 @@ Which performs better for each dataset? Modify your polynomial regression functi
 :::::::::::::::: solution
 
 ```python
-for ds in ["I","II","III","IV"]:
+for ds in ["I", "II", "III", "IV"]:
     # Sort our data in order of our x (feature) values
-    data_ds = data[data["dataset"]==ds]
+    data_ds = data[data["dataset"] == ds]
     data_ds = data_ds.sort_values("x")
-    fit_predict_plot_linear(data_ds["x"],data_ds["y"])
-    fit_predict_plot_poly(data_ds["x"],data_ds["y"])
+    fit_predict_plot_linear(data_ds["x"], data_ds["y"])
+    fit_predict_plot_poly(data_ds["x"], data_ds["y"])
 
     plt.show()
 ```
@@ -357,28 +357,28 @@ def fit_predict_plot_poly(x, y, N):
 
     return poly_regress
 
-for ds in ["I","II","III","IV"]:
+for ds in ["I", "II", "III", "IV"]:
     # Sort our data in order of our x (feature) values
-    data_ds = data[data["dataset"]==ds]
+    data_ds = data[data["dataset"] == ds]
     data_ds = data_ds.sort_values("x")
-    fit_predict_plot_linear(data_ds["x"],data_ds["y"])
+    fit_predict_plot_linear(data_ds["x"], data_ds["y"])
     for N in range(2,11):
         print("Polynomial degree =",N)
-        fit_predict_plot_poly(data_ds["x"],data_ds["y"],N)
+        fit_predict_plot_poly(data_ds["x"], data_ds["y"],N)
     plt.show()
 ```
 
 and
 
 ```python
-for ds in ["I","II","III","IV"]:
+for ds in ["I", "II", "III", "IV"]:
     # Sort our data in order of our x (feature) values
-    data_ds = data[data["dataset"]==ds]
+    data_ds = data[data["dataset"] == ds]
     data_ds = data_ds.sort_values("x")
-    fit_predict_plot_linear(data_ds["x"],data_ds["y"])
-    for N in range(2,11):
-        print("Polynomial degree =",N)
-        fit_predict_plot_poly(data_ds["x"],data_ds["y"],N)
+    fit_predict_plot_linear(data_ds["x"], data_ds["y"])
+    for N in range(2, 11):
+        print("Polynomial degree =", N)
+        fit_predict_plot_poly(data_ds["x"], data_ds["y"], N)
     plt.show()
 ```
 
