@@ -19,12 +19,12 @@ exercises: 30
 
 As seen in the last episode, general clustering algorithms work well with low-dimensional data. In this episode we see how higher-dimensional data, such as images of handwritten text or numbers, can be processed with dimensionality reduction techniques to make the datasets more accessible for other modelling techniques. The dataset we will be using is the Scikit-Learn subset of the Modified National Institute of Standards and Technology (MNIST) dataset.
 
-![MNIST example illustrating all the classes in the dataset](../fig/MnistExamples.png)
+![MNIST example illustrating all the classes in the dataset](fig/MnistExamples.png)
 
 
 The MNIST dataset contains 70,000 images of handwritten numbers, and are labelled from 0-9 with the number that each image contains. Each image is a greyscale and 28x28 pixels in size for a total of 784 pixels per image. Each pixel can take a value between 0-255 (8bits). When dealing with a series of images in machine learning we consider each pixel to be a feature that varies according to each of the sample images. Our previous penguin dataset only had no more than 7 features to train with, however even a small 28x28 MNIST image has as much as 784 features (pixels) to work with.
 
-![MNIST example of a single image](../fig/mnist_30000-letter.png)
+![MNIST example of a single image](fig/mnist_30000-letter.png)
 
 To make this episode a bit less computationally intensive, the Scikit-Learn example that we will work with is a smaller sample of 1797 images. Each image is 8x8 in size for a total of 64 pixels per image, resulting in 64 features for us to work with. The pixels can take a value between 0-15 (4bits). Let's retrieve and inspect the Scikit-Learn dataset with the following code:
 
@@ -96,7 +96,7 @@ plt.imshow(image_2D,cmap="gray_r")
 plt.plot([0,1,2,3],[4,4,4,4],"rx")
 plt.show()
 ```
-![SKLearn image with highlighted pixels](../fig/mnist_pairplot_pixels.png)
+![SKLearn image with highlighted pixels](fig/mnist_pairplot_pixels.png)
 
 ```
 import seaborn as sns
@@ -117,7 +117,7 @@ sns.pairplot(seaborn_data, vars=feature_subset, hue="labels",
              palette=sns.mpl_palette("Spectral", n_colors=10))
 ```
 
-![SKLearn image with highlighted pixels](../fig/mnist_pairplot.png)
+![SKLearn image with highlighted pixels](fig/mnist_pairplot.png)
 
 As we can see the dataset relations are far more complex than our previous examples. The histograms show that some numbers appear in those pixel positions more than others, but the `feature_vs_feature` plots are quite messy to try and decipher. There are gaps and patches of colour suggesting that there is some kind of structure there, but it's far harder to inspect than the penguin data. We can't easily see definitive clusters in our 2D representations, and we know our clustering algorithms will take a long time to try and crunch 64 dimensions at once, so let's see if we can represent our 64D data in fewer dimensions.
 
@@ -155,7 +155,7 @@ plots_labels(x_pca, None)
 ```
 
 
-![Reduction using PCA](../fig/pca_unlabelled.png)
+![Reduction using PCA](fig/pca_unlabelled.png)
 
 We now have a 2D representation of our 64D dataset that we can work with instead. Let's try some quick K-means clustering on our 2D representation of the data. Because we already have some knowledge about our data we can set `k=10` for the 10 digits present in the dataset.
 
@@ -167,7 +167,7 @@ plot_clusters(x_pca, clusters, Kmean)
 ```
 
 
-![Reduction using PCA](../fig/pca_clustered.png)
+![Reduction using PCA](fig/pca_clustered.png)
 
 And now we can compare how these clusters look against our actual image labels by colour coding our first scatter plot:
 
@@ -176,7 +176,7 @@ plot_clusters_labels(x_pca, labels)
 ```
 
 
-![Reduction using PCA](../fig/pca_labelled.png)
+![Reduction using PCA](fig/pca_labelled.png)
 
 PCA has done a valiant effort to reduce the dimensionality of our problem from 64D to 2D while still retaining some of our key structural information. We can see that the digits `0`,`1`,`4`, and `6` cluster up reasonably well even using a simple k-means test. However it does look like there is still quite a bit of overlap between the remaining digits, especially for the digits `5` and `8`. The clustering is from perfect in the largest "blob", but not a bad effort from PCA given the substantial dimensionality reduction.
 
@@ -204,7 +204,7 @@ plots_labels(x_tsne, None)
 ```
 
 
-![Reduction using PCA](../fig/tsne_unlabelled.png)
+![Reduction using PCA](fig/tsne_unlabelled.png)
 
 It looks like t-SNE has done a much better job of splitting our data up into clusters using only a 2D representation of the data. Once again, let's run a simple k-means clustering on this new 2D representation, and compare with the actual color-labelled data:
 
@@ -218,7 +218,7 @@ plot_clusters(x_tsne, clusters, Kmean)
 plot_clusters_labels(x_tsne, labels)
 ```
 
-![Reduction using PCA](../fig/tsne_clustered.png)![Reduction using PCA](../fig/tsne_labelled.png)
+![Reduction using PCA](fig/tsne_clustered.png)![Reduction using PCA](fig/tsne_labelled.png)
 
 
 It looks like t-SNE has successfully separated out our digits into accurate clusters using as little as a 2D representation and a simple k-means clustering algorithm. It has worked so well that you can clearly see several clusters which can be modelled, whereas for our PCA representation we needed to rely heavily on the knowledge that we had 10 types of digits to cluster.
@@ -255,7 +255,7 @@ plt.show()
 ```
 
 
-![Reduction to 3 components using pca](../fig/pca_3d.svg)
+![Reduction to 3 components using pca](fig/pca_3d.svg)
 
 ```python
 # t-SNE embedding
@@ -269,7 +269,7 @@ ax.scatter(x_tsne[:, 0], x_tsne[:, 1], x_tsne[:, 2], c=labels,
 plt.show()
 ```
 
-![Reduction to 3 components using tsne](../fig/tsne_3d.svg)
+![Reduction to 3 components using tsne](fig/tsne_3d.svg)
 
 
 :::::::::::::::::::::::::

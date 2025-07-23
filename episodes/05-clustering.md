@@ -96,7 +96,7 @@ data, cluster_id = skl_datasets.make_blobs(n_samples=400, cluster_std=0.75, cent
 plots_labels(data, cluster_id)
 ```
 
-![Plot of the random clusters](../fig/random_clusters.png)
+![Plot of the random clusters](fig/random_clusters.png)
 
 Now that we have some data we can try to identify the clusters using k-means. First, we need to initialise the KMeans module and tell it how many clusters to look for. Next, we supply it with some data via the `fit` function, in much the same way we did with the regression functions earlier on. Finally, we run the predict function to find the clusters.
 
@@ -112,7 +112,7 @@ The data can now be plotted to show all the points we randomly generated. To mak
 plot_clusters(data, clusters, Kmean)
 ```
 
-![Plot of the fitted random clusters](../fig/random_clusters_centre.png)
+![Plot of the fitted random clusters](fig/random_clusters_centre.png)
 
 Here is the code all in a single block.
 
@@ -146,7 +146,7 @@ multi-dimensional spaces.
 * Will always produce an answer finding the required number of clusters even if the data isn't clustered (or clustered in that many clusters)
 * Requires linear cluster boundaries
 
-![An example of kmeans failing on non-linear cluster boundaries](../fig/kmeans_concentric_circle.png)
+![An example of kmeans failing on non-linear cluster boundaries](fig/kmeans_concentric_circle.png)
 
 
 ### Advantages of k-means
@@ -166,7 +166,7 @@ Is there any strange behaviour?
 
 :::::::::::::::: solution
 Increasing n_samples to 4000 and cluster_std to 3.0 looks like this:
-![Kmeans attempting to classify overlapping clusters](../fig/kmeans_overlapping_clusters.png)
+![Kmeans attempting to classify overlapping clusters](fig/kmeans_overlapping_clusters.png)
 The straight line boundaries between clusters look a bit strange.
 :::::::::::::::::::::::::
 
@@ -203,7 +203,7 @@ It works by treating clustering as a graph partitioning problem and looks for no
 
 Here is an example of spectral clustering on two concentric circles:
 
-![Spectral clustering on two concentric circles](../fig/spectral_concentric_circle.png)
+![Spectral clustering on two concentric circles](fig/spectral_concentric_circle.png)
 
 Spectral clustering uses something called a 'kernel trick' to introduce additional dimensions to the data.
 A common example of this is trying to cluster one circle within another (concentric circles).
@@ -211,7 +211,7 @@ A k-means classifier will fail to do this and will end up effectively drawing a 
 However spectral clustering will introduce an additional dimension that effectively moves one of the circles away from the other in the
 additional dimension. This does have the downside of being more computationally expensive than k-means clustering.
 
-![Spectral clustering viewed with an extra dimension](../fig/spectral_concentric_3d.png)
+![Spectral clustering viewed with an extra dimension](fig/spectral_concentric_3d.png)
 
 ### Spectral clustering with Scikit-Learn
 
@@ -263,8 +263,8 @@ plots_labels(circles, labels)
 ```
 
 
-![Kmeans attempting to cluster the concentric circles](../fig/kmeans_concentric_circle_2.png)
-![Spectral clustering on the concentric circles](../fig/spectral_concentric_circle_2.png)
+![Kmeans attempting to cluster the concentric circles](fig/kmeans_concentric_circle_2.png)
+![Spectral clustering on the concentric circles](fig/spectral_concentric_circle_2.png)
 
 
 ::::::::::::::::::::::::::::::::::::: challenge

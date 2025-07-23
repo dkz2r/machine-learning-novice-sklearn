@@ -36,7 +36,7 @@ This is where we train a series of different models/estimators on the same input
 
 If we trained the same model multiple times on the same data we would expect very similar answers, and so the emphasis with stacking is to choose different models that can be used to build up a reliable concensus. Regression is then typically a good choice for the final decision-making model.
 
-![Stacking](../fig/stacking.jpeg)
+![Stacking](fig/stacking.jpeg)
 
 [Image from Vasily Zubarev via their blog](https://vas3k.com/blog/machine_learning/)
 
@@ -46,7 +46,7 @@ This is where we use the same model/estimator and fit it on different subsets of
 
 The most common example is known as the Random Forest algorithm, which we'll take a look at later on. Random Forests are typically used as a faster, computationally cheaper alternative to Neural Networks, which is ideal for real-time applications like camera face detection prompts.
 
-![Stacking](../fig/bagging.jpeg)
+![Stacking](fig/bagging.jpeg)
 
 [Image from Vasily Zubarev via their blog](https://vas3k.com/blog/machine_learning/)
 
@@ -56,7 +56,7 @@ This is where we train a single type of Model/estimator on an initial dataset, t
 
 Just like for bagging, boosting is trained mostly on subsets, however in this case these subsets are not randomly generated but are instead built using poorly estimated predictions. Boosting can produce some very high accuracies by learning from it's mistakes, but due to the iterative nature of these improvements it doesn't parallelize well unlike the other ensemble methods. Despite this it can still be a faster, and computationally cheaper alternative to Neural Networks.
 
-![Stacking](../fig/boosting.jpeg)
+![Stacking](fig/boosting.jpeg)
 
 [Image from Vasily Zubarev via their blog](https://vas3k.com/blog/machine_learning/)
 
@@ -102,7 +102,7 @@ We'll now take a look how we can use ensemble methods to perform a classificatio
 
 Random forests are built on decision trees and can provide another way to address over-fitting. Rather than classifying based on one single decision tree (which could overfit the data), an average of results of many trees can be derived for more robust/accurate estimates compared against single trees used in the ensemble.
 
-![Random Forests](../fig/randomforest.png)
+![Random Forests](fig/randomforest.png)
 
 [Image from Venkatak Jagannath](https://commons.wikimedia.org/wiki/File:Random_forest_diagram_complete.png)
 
@@ -144,7 +144,7 @@ for index in range(0, 5):
 plt.show()
 ```
 
-![random forest trees](../fig/rf_5_trees.png)
+![random forest trees](fig/rf_5_trees.png)
 
 We can see the first 5 (of 100) trees that were fitted as part of the forest.
 
@@ -167,7 +167,7 @@ sns.scatterplot(X_train, x=f1, y=f2, hue=y_train, palette="husl")
 plt.show()
 ```
 
-![random forest clf space](../fig/EM_rf_clf_space.png)
+![random forest clf space](fig/EM_rf_clf_space.png)
 
 There is still some overfitting indicated by the regions that contain only single points but using the same hyper-parameter settings used to fit the decision tree classifier, we can see that overfitting is reduced.
 
@@ -291,7 +291,7 @@ plt.title("Regressor predictions and their average")
 plt.show()
 ```
 
-![Regressor predictions and average from stack](../fig/house_price_voting_regressor.svg)
+![Regressor predictions and average from stack](fig/house_price_voting_regressor.svg)
 
 Finally, lets see how the average compares against each single estimator in the stack?
 
