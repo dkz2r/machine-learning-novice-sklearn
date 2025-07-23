@@ -260,12 +260,24 @@
 <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         7. Neural Networks
         </span>
-      
+      </button>
     </div><!--/div.accordion-header-->
+
+    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
+      <div class="accordion-body">
+        <ul><li><a href="#neural-networks">Neural networks</a></li>
+<li><a href="#perceptrons">Perceptrons</a></li>
+<li><a href="#multi-layer-perceptrons">Multi-layer perceptrons</a></li>
+<li><a href="#measuring-neural-network-performance">Measuring neural network performance</a></li>
+<li><a href="#cross-validation">Cross-validation</a></li>
+<li><a href="#deep-learning">Deep learning</a></li>
+        </ul></div><!--/div.accordion-body-->
+    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -388,18 +400,16 @@ used in the training process.</li>
 </div>
 </div>
 </div>
-<div class="section level1">
-<h1 id="neural-networks">Neural networks<a class="anchor" aria-label="anchor" href="#neural-networks"></a></h1>
-<p>Neural networks are a machine learning method inspired by how the
+<section><h2 class="section-heading" id="neural-networks">Neural networks<a class="anchor" aria-label="anchor" href="#neural-networks"></a></h2>
+<hr class="half-width"><p>Neural networks are a machine learning method inspired by how the
 human brain works. They are particularly good at pattern recognition and
 classification tasks, often using images as inputs. They are a
 well-established machine learning technique, having been around since
 the 1950s, but they’ve gone through several iterations to overcome
 limitations in previous generations. Using state-of-the-art neural
 networks is often referred to as ‘deep learning’.</p>
-<div class="section level2">
-<h2 id="perceptrons">Perceptrons<a class="anchor" aria-label="anchor" href="#perceptrons"></a></h2>
-<p>Perceptrons are the building blocks of neural networks. They are an
+</section><section><h2 class="section-heading" id="perceptrons">Perceptrons<a class="anchor" aria-label="anchor" href="#perceptrons"></a></h2>
+<hr class="half-width"><p>Perceptrons are the building blocks of neural networks. They are an
 artificial version of a single neuron in the brain. They typically have
 one or more inputs and a single output. Each input will be multiplied by
 a weight and the value of all the weighted inputs are then summed
@@ -562,10 +572,8 @@ linear separability. When this limitation was discovered in the 1960s it
 effectively halted development of neural networks for over a decade in a
 period known as the “AI Winter”.</p>
 </div>
-</div>
-<div class="section level2">
-<h2 id="multi-layer-perceptrons">Multi-layer perceptrons<a class="anchor" aria-label="anchor" href="#multi-layer-perceptrons"></a></h2>
-<p>A single perceptron cannot be used to solve a non-linearly separable
+</section><section><h2 class="section-heading" id="multi-layer-perceptrons">Multi-layer perceptrons<a class="anchor" aria-label="anchor" href="#multi-layer-perceptrons"></a></h2>
+<hr class="half-width"><p>A single perceptron cannot be used to solve a non-linearly separable
 function. For that, we need to use multiple perceptrons and typically
 multiple layers of perceptrons. They are formed of networks of
 artificial neurons which each take one or more inputs and typically have
@@ -824,10 +832,8 @@ print("Your digit is",mlp.predict(digit_norm.reshape(1,784)))</code></pre>
 </div>
 </div>
 </div>
-</div>
-<div class="section level2">
-<h2 id="measuring-neural-network-performance">Measuring neural network performance<a class="anchor" aria-label="anchor" href="#measuring-neural-network-performance"></a></h2>
-<p>We have now trained a neural network and tested prediction on a few
+</section><section><h2 class="section-heading" id="measuring-neural-network-performance">Measuring neural network performance<a class="anchor" aria-label="anchor" href="#measuring-neural-network-performance"></a></h2>
+<hr class="half-width"><p>We have now trained a neural network and tested prediction on a few
 images. This might have given us a feel for how well our network is
 performing, but it would be much more useful to have a more objective
 measure. Since recognising digits is a classification problem, we can
@@ -895,10 +901,8 @@ working with very large numbers of classes.</p>
 <span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>ConfusionMatrixDisplay.from_predictions(y_test,y_test_pred)</span></code></pre>
 </div>
 </div>
-</div>
-<div class="section level2">
-<h2 id="cross-validation">Cross-validation<a class="anchor" aria-label="anchor" href="#cross-validation"></a></h2>
-<p>Previously we split the data into training and test sets. But what if
+</section><section><h2 class="section-heading" id="cross-validation">Cross-validation<a class="anchor" aria-label="anchor" href="#cross-validation"></a></h2>
+<hr class="half-width"><p>Previously we split the data into training and test sets. But what if
 the test set includes important features we want to train on that happen
 to be missing in the training set? We are throwing away part of our data
 to use it in the testing set.</p>
@@ -1001,10 +1005,8 @@ ahead and train using the entire dataset by doing
 <span id="cb24-22"><a href="#cb24-22" tabindex="-1"></a>mlp.fit(data,labels)</span></code></pre>
 </div>
 </div>
-</div>
-<div class="section level2">
-<h2 id="deep-learning">Deep learning<a class="anchor" aria-label="anchor" href="#deep-learning"></a></h2>
-<p>Deep learning usually refers to newer neural network architectures
+</section><section><h2 class="section-heading" id="deep-learning">Deep learning<a class="anchor" aria-label="anchor" href="#deep-learning"></a></h2>
+<hr class="half-width"><p>Deep learning usually refers to newer neural network architectures
 which use a special type of network known as a ‘convolutional network’.
 Typically, these have many layers and thousands of neurons. They are
 very good at tasks such as image recognition but take a long time to
@@ -1076,12 +1078,7 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
 </div>
-</div>
-</div>
-
-
-
-      </div> <!-- / div.lesson-content -->
+</section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="06-dimensionality-reduction.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="08-ethics.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>

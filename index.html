@@ -197,12 +197,25 @@
                   <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         Summary and Setup
         </span>
-      
+      </button>
     </div><!--/div.accordion-header-->
+
+    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
+      <div class="accordion-body">
+        <ul><li><a href="#setup">Setup</a></li>
+<li><a href="#software">Software</a></li>
+<li><a href="#packages">Packages</a></li>
+<li><a href="#directory-setup">Directory Setup</a></li>
+<li><a href="#creating-a-new-virtual-environment">Creating a new Virtual Environment</a></li>
+<li><a href="#deactivatingactivating-environment">Deactivating/activating environment</a></li>
+<li><a href="#fallback-option-cloud-environment">Fallback option: cloud environment</a></li>
+        </ul></div><!--/div.accordion-body-->
+    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -381,11 +394,9 @@ for details.</p>
 <hr><!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
- --><section id="setup"><div class="section level1">
-<h1 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a></h1>
-<div class="section level2">
-<h2 id="software">Software<a class="anchor" aria-label="anchor" href="#software"></a></h2>
-<p>You will need a terminal, Python 3.8+, and the ability to create
+ --><section id="setup"><section><h2 class="section-heading" id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a></h2>
+<hr class="half-width"></section><section><h2 class="section-heading" id="software">Software<a class="anchor" aria-label="anchor" href="#software"></a></h2>
+<hr class="half-width"><p>You will need a terminal, Python 3.8+, and the ability to create
 Python virtual environments.</p>
 <div id="installing-python" class="callout">
 <div class="callout-square">
@@ -404,16 +415,11 @@ to go as soon as the workshop begins.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section level2">
-<h2 id="packages">Packages<a class="anchor" aria-label="anchor" href="#packages"></a></h2>
-<p>You will need the Seaborn, MatPlotLib, Pandas, Numpy and OpenCV
+</section><section><h2 class="section-heading" id="packages">Packages<a class="anchor" aria-label="anchor" href="#packages"></a></h2>
+<hr class="half-width"><p>You will need the Seaborn, MatPlotLib, Pandas, Numpy and OpenCV
 packages.</p>
-</div>
-</div>
-<div class="section level1">
-<h1 id="setup-1">Setup<a class="anchor" aria-label="anchor" href="#setup-1"></a></h1>
-<p>Create a new directory for the workshop, then launch a terminal in
+</section><section><h2 class="section-heading" id="directory-setup">Directory Setup<a class="anchor" aria-label="anchor" href="#directory-setup"></a></h2>
+<hr class="half-width"><p>Create a new directory for the workshop, then launch a terminal in
 it:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -421,9 +427,8 @@ it:</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">mkdir</span> workshop-ml</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="bu">cd</span> workshop-ml</span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="creating-a-new-virtual-environment">Creating a new Virtual Environment<a class="anchor" aria-label="anchor" href="#creating-a-new-virtual-environment"></a></h2>
-<p>We’ll install the prerequisites in a virtual environment, to prevent
+</section><section><h2 class="section-heading" id="creating-a-new-virtual-environment">Creating a new Virtual Environment<a class="anchor" aria-label="anchor" href="#creating-a-new-virtual-environment"></a></h2>
+<hr class="half-width"><p>We’ll install the prerequisites in a virtual environment, to prevent
 them from cluttering up your Python environment and causing conflicts.
 First, create a new directory and ent</p>
 <div class="tabs">
@@ -440,7 +445,7 @@ First, create a new directory and ent</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-1" class="tab-pane show active" aria-labelledby="nav-tab-1-1" role="tabpanel">
+<div id="nav-tabpanel-1-1" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-1">
 <p>Python usually comes with a built-in module called <code>venv</code>
 that allows you to create isolated environments for your projects.</p>
 <p>To create a new virtual environment (“venv”) called “intro_ml” for
@@ -474,7 +479,7 @@ in Terminal (Mac/Linux) or Git Bash (Windows) or Anaconda Prompt
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">pip</span> install numpy pandas matplotlib seaborn opencv-python scikit-learn</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-2" class="tab-pane" aria-labelledby="nav-tab-1-2" role="tabpanel">
+<div id="nav-tabpanel-1-2" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-2">
 <p>UV is a package manager that allows you to easily create and manage
 virtual environments. It is a great alternative to <code>venv</code>,
 <code>pip</code>, and <code>conda</code> for managing Python
@@ -525,10 +530,8 @@ packages using:</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section level2">
-<h2 id="deactivatingactivating-environment">Deactivating/activating environment<a class="anchor" aria-label="anchor" href="#deactivatingactivating-environment"></a></h2>
-<p>To deactivate your virtual environment, simply run
+</section><section><h2 class="section-heading" id="deactivatingactivating-environment">Deactivating/activating environment<a class="anchor" aria-label="anchor" href="#deactivatingactivating-environment"></a></h2>
+<hr class="half-width"><p>To deactivate your virtual environment, simply run
 <code>deactivate</code> in your terminal or prompt. If you close the
 terminal, Git Bash, or Conda Prompt without deactivating, the
 environment will automatically close as the session ends. Later, you can
@@ -538,10 +541,8 @@ terminal but no longer need this environment, it’s best to explicitly
 deactivate it. This ensures that the software installed for this
 workshop doesn’t interfere with your default Python setup or other
 projects.</p>
-</div>
-<div class="section level2">
-<h2 id="fallback-option-cloud-environment">Fallback option: cloud environment<a class="anchor" aria-label="anchor" href="#fallback-option-cloud-environment"></a></h2>
-<p>If a local installation does not work for you, it is also possible to
+</section><section><h2 class="section-heading" id="fallback-option-cloud-environment">Fallback option: cloud environment<a class="anchor" aria-label="anchor" href="#fallback-option-cloud-environment"></a></h2>
+<hr class="half-width"><p>If a local installation does not work for you, it is also possible to
 run this lesson in <a href="https://colab.research.google.com/" class="external-link">Google
 colab</a>. If you open a jupyter notebook there, the required packages
 are already pre-installed.</p>
@@ -549,11 +550,7 @@ are already pre-installed.</p>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</div>
-</div>
-
-
-      </section></main><nav class="bottom-pagination mx-md-4" aria-label="Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
+</section></section></main><nav class="bottom-pagination mx-md-4" aria-label="Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link float-end" href="01-introduction.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->

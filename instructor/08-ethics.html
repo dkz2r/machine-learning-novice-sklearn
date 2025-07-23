@@ -269,12 +269,24 @@
 <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         8. Ethics and the Implications of Machine Learning
         </span>
-      
+      </button>
     </div><!--/div.accordion-header-->
+
+    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
+      <div class="accordion-body">
+        <ul><li><a href="#ethics-and-machine-learning">Ethics and machine learning</a></li>
+<li><a href="#problems-with-bias">Problems with bias</a></li>
+<li><a href="#problems-with-explaining-decisions">Problems with explaining decisions</a></li>
+<li><a href="#problems-with-accuracy">Problems with accuracy</a></li>
+<li><a href="#energy-use">Energy use</a></li>
+<li><a href="#ethics-of-machine-learning-in-research">Ethics of machine learning in research</a></li>
+        </ul></div><!--/div.accordion-body-->
+    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -383,9 +395,8 @@ and in research.</li>
 </div>
 </div>
 </div>
-<div class="section level1">
-<h1 id="ethics-and-machine-learning">Ethics and machine learning<a class="anchor" aria-label="anchor" href="#ethics-and-machine-learning"></a></h1>
-<p>As machine learning has risen in visibility, so to have concerns
+<section><h2 class="section-heading" id="ethics-and-machine-learning">Ethics and machine learning<a class="anchor" aria-label="anchor" href="#ethics-and-machine-learning"></a></h2>
+<hr class="half-width"><p>As machine learning has risen in visibility, so to have concerns
 around the ethics of using the technology to make predictions and
 decisions that will affect people in everyday life. For example:</p>
 <ul><li>The first death from a driverless car which failed to brake for a
@@ -403,9 +414,8 @@ without the user’s consent. <a href="https://www.vox.com/policy-and-politics/2
 <li>The potential for autonomous military robots to be deployed in
 combat. <a href="https://www.theverge.com/2021/6/3/22462840/killer-robot-autonomous-drone-attack-libya-un-report-context" class="external-link"><span class="math display">\[5\]</span></a>
 </li>
-</ul><div class="section level2">
-<h2 id="problems-with-bias">Problems with bias<a class="anchor" aria-label="anchor" href="#problems-with-bias"></a></h2>
-<p>Machine learning systems are often argued to be be fairer and more
+</ul></section><section><h2 class="section-heading" id="problems-with-bias">Problems with bias<a class="anchor" aria-label="anchor" href="#problems-with-bias"></a></h2>
+<hr class="half-width"><p>Machine learning systems are often argued to be be fairer and more
 impartial in their decision-making than human beings, who are argued to
 be more emotional and biased, for example, when sentencing criminals or
 deciding if someone should be granted bail. But there are an increasing
@@ -416,28 +426,22 @@ cases or groups. For example, if you were trying to automatically screen
 job candidates and your training data consisted only of people who were
 previously hired by the company, then any biases in employment processes
 would be reflected in the results of the machine learning.</p>
-</div>
-<div class="section level2">
-<h2 id="problems-with-explaining-decisions">Problems with explaining decisions<a class="anchor" aria-label="anchor" href="#problems-with-explaining-decisions"></a></h2>
-<p>Many machine learning systems (e.g. neural networks) can’t really
+</section><section><h2 class="section-heading" id="problems-with-explaining-decisions">Problems with explaining decisions<a class="anchor" aria-label="anchor" href="#problems-with-explaining-decisions"></a></h2>
+<hr class="half-width"><p>Many machine learning systems (e.g. neural networks) can’t really
 explain their decisions. Although the input and output are known, trying
 to explain why the training caused the network to behave in a certain
 way can be very difficult. When decisions are questioned by a human it’s
 difficult to provide any rationale for how a decision was arrived
 at.</p>
-</div>
-<div class="section level2">
-<h2 id="problems-with-accuracy">Problems with accuracy<a class="anchor" aria-label="anchor" href="#problems-with-accuracy"></a></h2>
-<p>No machine learning system is ever 100% accurate. Getting into the
+</section><section><h2 class="section-heading" id="problems-with-accuracy">Problems with accuracy<a class="anchor" aria-label="anchor" href="#problems-with-accuracy"></a></h2>
+<hr class="half-width"><p>No machine learning system is ever 100% accurate. Getting into the
 high 90s is usually considered good. But when we’re evaluating millions
 of data items this can translate into 100s of thousands of
 mis-identifications. This would be an unacceptable margin of error if
 the results were going to have major implications for people, such as
 criminal sentencing decisions or structuring debt repayments.</p>
-</div>
-<div class="section level2">
-<h2 id="energy-use">Energy use<a class="anchor" aria-label="anchor" href="#energy-use"></a></h2>
-<p>Many machine learning systems (especially deep learning) need vast
+</section><section><h2 class="section-heading" id="energy-use">Energy use<a class="anchor" aria-label="anchor" href="#energy-use"></a></h2>
+<hr class="half-width"><p>Many machine learning systems (especially deep learning) need vast
 amounts of computational power which in turn can consume vast amounts of
 energy. Depending on the source of that energy this might account for
 significant amounts of fossil fuels being burned. It is not uncommon for
@@ -447,11 +451,8 @@ typical home in the OECD would use in an entire day. Energy use can be
 particularly high when models are constantly being retrained or when
 “parameter sweeps” are done to find the best set of parameters to train
 with.</p>
-</div>
-</div>
-<div class="section level1">
-<h1 id="ethics-of-machine-learning-in-research">Ethics of machine learning in research<a class="anchor" aria-label="anchor" href="#ethics-of-machine-learning-in-research"></a></h1>
-<p>Not all research using machine learning will have major ethical
+</section><section><h2 class="section-heading" id="ethics-of-machine-learning-in-research">Ethics of machine learning in research<a class="anchor" aria-label="anchor" href="#ethics-of-machine-learning-in-research"></a></h2>
+<hr class="half-width"><p>Not all research using machine learning will have major ethical
 implications. Many research projects don’t directly affect the lives of
 other people, but this isn’t always the case.</p>
 <p>Some questions you might want to ask yourself (and which an ethics
@@ -502,11 +503,7 @@ negatives.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</div>
-
-
-
-      </div> <!-- / div.lesson-content -->
+</section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/07-neural-networks.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="../instructor/09-learn-more.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>

@@ -224,12 +224,24 @@
 <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         3. Supervised methods - Classification
         </span>
-      
+      </button>
     </div><!--/div.accordion-header-->
+
+    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
+      <div class="accordion-body">
+        <ul><li><a href="#classification">Classification</a></li>
+<li><a href="#the-penguins-dataset">The penguins dataset</a></li>
+<li><a href="#training-testing-split">Training-testing split</a></li>
+<li><a href="#classification-using-a-decision-tree">Classification using a decision tree</a></li>
+<li><a href="#tuning-the-max_depth-hyperparameter">Tuning the <code>max_depth</code> hyperparameter</a></li>
+<li><a href="#classification-using-support-vector-machines">Classification using support vector machines</a></li>
+        </ul></div><!--/div.accordion-body-->
+    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -381,9 +393,8 @@
 </div>
 </div>
 </div>
-<div class="section level1">
-<h1 id="classification">Classification<a class="anchor" aria-label="anchor" href="#classification"></a></h1>
-<p>Classification is a supervised method to recognise and group data
+<section><h2 class="section-heading" id="classification">Classification<a class="anchor" aria-label="anchor" href="#classification"></a></h2>
+<hr class="half-width"><p>Classification is a supervised method to recognise and group data
 objects into a pre-determined categories. Where regression uses labelled
 observations to predict a continuous numerical value, classification
 predicts a discrete categorical fit to a class. Classification in ML
@@ -392,9 +403,8 @@ into their respective categories.</p>
 <p>In this episode we are going to introduce the concept of supervised
 classification by classifying penguin data into different species of
 penguins using Scikit-Learn.</p>
-<div class="section level2">
-<h2 id="the-penguins-dataset">The penguins dataset<a class="anchor" aria-label="anchor" href="#the-penguins-dataset"></a></h2>
-<p>We’re going to be using the <a href="https://github.com/allisonhorst/palmerpenguins" class="external-link">Palmer Penguins
+</section><section><h2 class="section-heading" id="the-penguins-dataset">The penguins dataset<a class="anchor" aria-label="anchor" href="#the-penguins-dataset"></a></h2>
+<hr class="half-width"><p>We’re going to be using the <a href="https://github.com/allisonhorst/palmerpenguins" class="external-link">Palmer Penguins
 dataset</a> of Allison Horst, The dataset contains 344 size measurements
 for three penguin species (Chinstrap, Gentoo and Adélie) observed on
 three islands in the Palmer Archipelago, Antarctica.</p>
@@ -444,10 +454,8 @@ complexity of the data.</p>
 <code>y</code>, we can now split the data using the
 <code>train_test_split</code> function.</p>
 </div>
-</div>
-<div class="section level2">
-<h2 id="training-testing-split">Training-testing split<a class="anchor" aria-label="anchor" href="#training-testing-split"></a></h2>
-<p>When undertaking any machine learning project, it’s important to be
+</section><section><h2 class="section-heading" id="training-testing-split">Training-testing split<a class="anchor" aria-label="anchor" href="#training-testing-split"></a></h2>
+<hr class="half-width"><p>When undertaking any machine learning project, it’s important to be
 able to evaluate how well your model works.</p>
 <p>Rather than evaluating this manually we can instead set aside some of
 our training data, usually 20% of our training data, and use these as a
@@ -546,10 +554,8 @@ the observation space, in this case the 4 measurement dimensions, into
 classes. When given a new observation, the model finds which of those
 class areas the new observation falls in to.</p>
 </div>
-</div>
-<div class="section level2">
-<h2 id="classification-using-a-decision-tree">Classification using a decision tree<a class="anchor" aria-label="anchor" href="#classification-using-a-decision-tree"></a></h2>
-<p>We’ll first apply a decision tree classifier to the data. Decisions
+</section><section><h2 class="section-heading" id="classification-using-a-decision-tree">Classification using a decision tree<a class="anchor" aria-label="anchor" href="#classification-using-a-decision-tree"></a></h2>
+<hr class="half-width"><p>We’ll first apply a decision tree classifier to the data. Decisions
 trees are conceptually similar to flow diagrams (or more precisely for
 the biologists: dichotomous keys). They split the classification problem
 into a binary tree of comparisons, at each step comparing a measurement
@@ -638,10 +644,8 @@ training a new model on only 2 features:</p>
 </div>
 <figure><img src="fig/e3_dt_space_2.png" alt="A scatter plot of the penguin daaset, showing bill length on the x-axis and body mass on the y-axis. The points are coloured by species. The decision tree is shown as colored regions, with the boundaries between the regions being orthogonal lines. The regions are generally aligned with the species clusters, but there are several misclassifications." class="figure mx-auto d-block"><div class="figcaption">Classification space for our decision tree</div>
 </figure></div>
-</div>
-<div class="section level2">
-<h2 id="tuning-the-max_depth-hyperparameter">Tuning the <code>max_depth</code> hyperparameter<a class="anchor" aria-label="anchor" href="#tuning-the-max_depth-hyperparameter"></a></h2>
-<p>Our decision tree using a <code>max_depth=2</code> is fairly simple
+</section><section><h2 class="section-heading" id="tuning-the-max_depth-hyperparameter">Tuning the <code>max_depth</code> hyperparameter<a class="anchor" aria-label="anchor" href="#tuning-the-max_depth-hyperparameter"></a></h2>
+<hr class="half-width"><p>Our decision tree using a <code>max_depth=2</code> is fairly simple
 and there are still some incorrect predictions in our final
 classifications. Let’s try varying the <code>max_depth</code>
 hyperparameter to see if we can improve our model predictions.</p>
@@ -716,10 +720,8 @@ to correctly classify every point in the training data.</p>
 <p>This is a classic case of over-fitting - our model has produced
 extremely specific parameters that work for the training data but are
 not representitive of our test data. Sometimes simplicity is better!</p>
-</div>
-<div class="section level2">
-<h2 id="classification-using-support-vector-machines">Classification using support vector machines<a class="anchor" aria-label="anchor" href="#classification-using-support-vector-machines"></a></h2>
-<p>Next, we’ll look at another commonly used classification algorithm,
+</section><section><h2 class="section-heading" id="classification-using-support-vector-machines">Classification using support vector machines<a class="anchor" aria-label="anchor" href="#classification-using-support-vector-machines"></a></h2>
+<hr class="half-width"><p>Next, we’ll look at another commonly used classification algorithm,
 and see how it compares. Support Vector Machines (SVM) work in a way
 that is conceptually similar to your own intuition when first looking at
 the data. They devise a set of hyperplanes that delineate the parameter
@@ -800,12 +802,7 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
 </div>
-</div>
-</div>
-
-
-
-      </div> <!-- / div.lesson-content -->
+</section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="02-regression.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="04-ensemble-methods.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>

@@ -251,12 +251,22 @@
 <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         6. Unsupervised methods - Dimensionality reduction
         </span>
-      
+      </button>
     </div><!--/div.accordion-header-->
+
+    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
+      <div class="accordion-body">
+        <ul><li><a href="#dimensionality-reduction">Dimensionality reduction</a></li>
+<li><a href="#our-goal-using-dimensionality-reduction-to-help-with-machine-learning">Our goal: using dimensionality-reduction to help with machine
+learning</a></li>
+<li><a href="#dimensionality-reduction-with-scikit-learn">Dimensionality reduction with Scikit-Learn</a></li>
+        </ul></div><!--/div.accordion-body-->
+    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -389,9 +399,8 @@ dimensionality.</li>
 </div>
 </div>
 </div>
-<div class="section level1">
-<h1 id="dimensionality-reduction">Dimensionality reduction<a class="anchor" aria-label="anchor" href="#dimensionality-reduction"></a></h1>
-<p>As seen in the last episode, general clustering algorithms work well
+<section><h2 class="section-heading" id="dimensionality-reduction">Dimensionality reduction<a class="anchor" aria-label="anchor" href="#dimensionality-reduction"></a></h2>
+<hr class="half-width"><p>As seen in the last episode, general clustering algorithms work well
 with low-dimensional data. In this episode we see how higher-dimensional
 data, such as images of handwritten text or numbers, can be processed
 with dimensionality reduction techniques to make the datasets more
@@ -464,10 +473,9 @@ dataset with the following code:</p>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="bu">print</span>(labels)</span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>features.head()</span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="our-goal-using-dimensionality-reduction-to-help-with-machine-learning">Our goal: using dimensionality-reduction to help with machine
+</section><section><h2 class="section-heading" id="our-goal-using-dimensionality-reduction-to-help-with-machine-learning">Our goal: using dimensionality-reduction to help with machine
 learning<a class="anchor" aria-label="anchor" href="#our-goal-using-dimensionality-reduction-to-help-with-machine-learning"></a></h2>
-<p>As humans we are pretty good at object and pattern recognition. We
+<hr class="half-width"><p>As humans we are pretty good at object and pattern recognition. We
 can look at the images above, inspect the intensity and position pixels
 relative to other pixels, and pretty quickly make an accurate guess at
 what the image shows. As humans we spends much of our younger lives
@@ -540,11 +548,8 @@ represent our 64D data in fewer dimensions.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section level1">
-<h1 id="dimensionality-reduction-with-scikit-learn">Dimensionality reduction with Scikit-Learn<a class="anchor" aria-label="anchor" href="#dimensionality-reduction-with-scikit-learn"></a></h1>
-<p>We will look at two commonly used techniques for dimensionality
+</section><section><h2 class="section-heading" id="dimensionality-reduction-with-scikit-learn">Dimensionality reduction with Scikit-Learn<a class="anchor" aria-label="anchor" href="#dimensionality-reduction-with-scikit-learn"></a></h2>
+<hr class="half-width"><p>We will look at two commonly used techniques for dimensionality
 reduction: Principal Component Analysis (PCA) and t-distributed
 Stochastic Neighbor Embedding (t-SNE). Both of these techniques are
 supported by Scikit-Learn.</p>
@@ -813,11 +818,7 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
 </div>
-</div>
-
-
-
-      </div> <!-- / div.lesson-content -->
+</section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/05-clustering.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="../instructor/07-neural-networks.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>

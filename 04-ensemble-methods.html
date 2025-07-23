@@ -233,12 +233,21 @@
 <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         4. Ensemble methods
         </span>
-      
+      </button>
     </div><!--/div.accordion-header-->
+
+    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
+      <div class="accordion-body">
+        <ul><li><a href="#ensemble-methods">Ensemble methods</a></li>
+<li><a href="#using-bagging-random-forests-for-a-classification-problem">Using Bagging (Random Forests) for a classification problem</a></li>
+<li><a href="#stacking-a-regression-problem">Stacking a regression problem</a></li>
+        </ul></div><!--/div.accordion-body-->
+    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -382,9 +391,8 @@
 </div>
 </div>
 </div>
-<div class="section level1">
-<h1 id="ensemble-methods">Ensemble methods<a class="anchor" aria-label="anchor" href="#ensemble-methods"></a></h1>
-<p>What’s better than one decision tree? Perhaps two? or three? How
+<section><h2 class="section-heading" id="ensemble-methods">Ensemble methods<a class="anchor" aria-label="anchor" href="#ensemble-methods"></a></h2>
+<hr class="half-width"><p>What’s better than one decision tree? Perhaps two? or three? How
 about enough trees to make up a forest? Ensemble methods bundle
 individual models together and use each of their outputs to contribute
 towards a final consensus for a given problem. Ensemble methods are
@@ -463,9 +471,8 @@ quick summary of the 3 ensemble methods:</p>
 <li>Boosting - subsets of bad estimates, same models, trained in
 series</li>
 </ul></div>
-<div class="section level2">
-<h2 id="using-bagging-random-forests-for-a-classification-problem">Using Bagging (Random Forests) for a classification problem<a class="anchor" aria-label="anchor" href="#using-bagging-random-forests-for-a-classification-problem"></a></h2>
-<p>In this session we’ll take another look at the penguins data and
+</section><section><h2 class="section-heading" id="using-bagging-random-forests-for-a-classification-problem">Using Bagging (Random Forests) for a classification problem<a class="anchor" aria-label="anchor" href="#using-bagging-random-forests-for-a-classification-problem"></a></h2>
+<hr class="half-width"><p>In this session we’ll take another look at the penguins data and
 applying one of the most common bagging approaches, random forests, to
 try and solve our species classification problem. First we’ll load in
 the dataset and define a train and test split.</p>
@@ -581,10 +588,8 @@ what do we think the plot will look like?</p>
 only single points but using the same hyper-parameter settings used to
 fit the decision tree classifier, we can see that overfitting is
 reduced.</p>
-</div>
-<div class="section level2">
-<h2 id="stacking-a-regression-problem">Stacking a regression problem<a class="anchor" aria-label="anchor" href="#stacking-a-regression-problem"></a></h2>
-<p>We’ve had a look at a bagging approach, but we’ll now take a look at
+</section><section><h2 class="section-heading" id="stacking-a-regression-problem">Stacking a regression problem<a class="anchor" aria-label="anchor" href="#stacking-a-regression-problem"></a></h2>
+<hr class="half-width"><p>We’ve had a look at a bagging approach, but we’ll now take a look at
 a stacking approach and apply it to a regression problem. We’ll also
 introduce a new dataset to play around with.</p>
 <div class="section level3">
@@ -840,7 +845,7 @@ comments below as a guide.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 
 </div>
@@ -864,12 +869,7 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
 </div>
-</div>
-</div>
-
-
-
-      </div> <!-- / div.lesson-content -->
+</section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="03-classification.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="05-clustering.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>

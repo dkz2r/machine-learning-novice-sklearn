@@ -242,12 +242,23 @@
 <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         5. Unsupervised methods - Clustering
         </span>
-      
+      </button>
     </div><!--/div.accordion-header-->
+
+    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
+      <div class="accordion-body">
+        <ul><li><a href="#unsupervised-learning">Unsupervised learning</a></li>
+<li><a href="#clustering">Clustering</a></li>
+<li><a href="#applications-of-clustering">Applications of clustering</a></li>
+<li><a href="#k-means-clustering">K-means clustering</a></li>
+<li><a href="#spectral-clustering">Spectral clustering</a></li>
+        </ul></div><!--/div.accordion-body-->
+    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -385,9 +396,8 @@ learning.</li>
 </div>
 </div>
 </div>
-<div class="section level1">
-<h1 id="unsupervised-learning">Unsupervised learning<a class="anchor" aria-label="anchor" href="#unsupervised-learning"></a></h1>
-<p>In episode 2 we learnt about supervised learning. Now it is time to
+<section><h2 class="section-heading" id="unsupervised-learning">Unsupervised learning<a class="anchor" aria-label="anchor" href="#unsupervised-learning"></a></h2>
+<hr class="half-width"><p>In episode 2 we learnt about supervised learning. Now it is time to
 explore unsupervised learning.</p>
 <p>Sometimes we do not have the luxury of using labelled data. This
 could be for a number of reasons:</p>
@@ -403,24 +413,19 @@ it labels, but instead we let it try to find its own patterns in the
 data and report back on any correlations that it might find. You can
 think of unsupervised learning as a way to discover labels from the data
 itself.</p>
-</div>
-<div class="section level1">
-<h1 id="clustering">Clustering<a class="anchor" aria-label="anchor" href="#clustering"></a></h1>
-<p>Clustering is the grouping of data points which are similar to each
+</section><section><h2 class="section-heading" id="clustering">Clustering<a class="anchor" aria-label="anchor" href="#clustering"></a></h2>
+<hr class="half-width"><p>Clustering is the grouping of data points which are similar to each
 other. It can be a powerful technique for identifying patterns in data.
 Clustering analysis does not usually require any training and is
 therefore known as an unsupervised learning technique. Clustering can be
 applied quickly due to this lack of training.</p>
-<div class="section level2">
-<h2 id="applications-of-clustering">Applications of clustering<a class="anchor" aria-label="anchor" href="#applications-of-clustering"></a></h2>
-<ul><li>Looking for trends in data</li>
+</section><section><h2 class="section-heading" id="applications-of-clustering">Applications of clustering<a class="anchor" aria-label="anchor" href="#applications-of-clustering"></a></h2>
+<hr class="half-width"><ul><li>Looking for trends in data</li>
 <li>Reducing the data around a point to just that point (e.g. reducing
 colour depth in an image)</li>
 <li>Pattern recognition</li>
-</ul></div>
-<div class="section level2">
-<h2 id="k-means-clustering">K-means clustering<a class="anchor" aria-label="anchor" href="#k-means-clustering"></a></h2>
-<p>The k-means clustering algorithm is a simple clustering algorithm
+</ul></section><section><h2 class="section-heading" id="k-means-clustering">K-means clustering<a class="anchor" aria-label="anchor" href="#k-means-clustering"></a></h2>
+<hr class="half-width"><p>The k-means clustering algorithm is a simple clustering algorithm
 that tries to identify the centre of each cluster. It does this by
 searching for a point which minimises the distance between the centre
 and all the points in the cluster. The algorithm needs to be told how
@@ -653,10 +658,8 @@ point.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section level2">
-<h2 id="spectral-clustering">Spectral clustering<a class="anchor" aria-label="anchor" href="#spectral-clustering"></a></h2>
-<p>Spectral clustering is a technique that attempts to overcome the
+</section><section><h2 class="section-heading" id="spectral-clustering">Spectral clustering<a class="anchor" aria-label="anchor" href="#spectral-clustering"></a></h2>
+<hr class="half-width"><p>Spectral clustering is a technique that attempts to overcome the
 linear boundary problem of k-means clustering. It works by treating
 clustering as a graph partitioning problem and looks for nodes in a
 graph with a small distance between them. See <a href="https://www.cvl.isy.liu.se/education/graduate/spectral-clustering/SC_course_part1.pdf" class="external-link">this
@@ -860,12 +863,7 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
 </div>
-</div>
-</div>
-
-
-
-      </div> <!-- / div.lesson-content -->
+</section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="04-ensemble-methods.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="06-dimensionality-reduction.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>

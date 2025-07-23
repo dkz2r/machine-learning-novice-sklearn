@@ -215,12 +215,22 @@
 <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         2. Supervised methods - Regression
         </span>
-      
+      </button>
     </div><!--/div.accordion-header-->
+
+    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
+      <div class="accordion-body">
+        <ul><li><a href="#supervised-learning">Supervised learning</a></li>
+<li><a href="#regression">Regression</a></li>
+<li><a href="#polynomial-regression-using-scikit-learn">Polynomial regression using Scikit-Learn</a></li>
+<li><a href="#lets-explore-a-more-realistic-scenario">Let’s explore a more realistic scenario</a></li>
+        </ul></div><!--/div.accordion-body-->
+    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -391,9 +401,8 @@ Scikit-Learn.</li>
 </div>
 </div>
 </div>
-<div class="section level1">
-<h1 id="supervised-learning">Supervised learning<a class="anchor" aria-label="anchor" href="#supervised-learning"></a></h1>
-<p>Classical machine learning is often divided into two categories –
+<section><h2 class="section-heading" id="supervised-learning">Supervised learning<a class="anchor" aria-label="anchor" href="#supervised-learning"></a></h2>
+<hr class="half-width"><p>Classical machine learning is often divided into two categories –
 supervised and unsupervised learning.</p>
 <p>For the case of supervised learning we act as a “supervisor” or
 “teacher” for our ML algorithms by providing the algorithm with
@@ -412,10 +421,8 @@ discrete, such as the “cat” or “dog” example, whereas for regression the
 labelled data is continuous, such as the house price example.</p>
 <p>In this episode we will explore how we can use regression to build a
 “model” that can be used to make predictions.</p>
-</div>
-<div class="section level1">
-<h1 id="regression">Regression<a class="anchor" aria-label="anchor" href="#regression"></a></h1>
-<p>Regression is a statistical technique that relates a dependent
+</section><section><h2 class="section-heading" id="regression">Regression<a class="anchor" aria-label="anchor" href="#regression"></a></h2>
+<hr class="half-width"><p>Regression is a statistical technique that relates a dependent
 variable (a label in ML terms) to one or more independent variables
 (features in ML terms). A regression model attempts to describe this
 relation by fitting the data as closely as possible according to
@@ -624,7 +631,7 @@ between the linear regressions on the 4 datasets?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -649,9 +656,8 @@ datasets.</p>
 </div>
 </div>
 </div>
-<div class="section level2">
-<h2 id="polynomial-regression-using-scikit-learn">Polynomial regression using Scikit-Learn<a class="anchor" aria-label="anchor" href="#polynomial-regression-using-scikit-learn"></a></h2>
-<p>Now that we have learnt how to do a linear regression it’s time look
+</section><section><h2 class="section-heading" id="polynomial-regression-using-scikit-learn">Polynomial regression using Scikit-Learn<a class="anchor" aria-label="anchor" href="#polynomial-regression-using-scikit-learn"></a></h2>
+<hr class="half-width"><p>Now that we have learnt how to do a linear regression it’s time look
 into polynomial regressions. Polynomial functions are non-linear
 functions that are commonly-used to model data. Mathematically they have
 <code>N</code> degrees of freedom and they take the following form
@@ -764,7 +770,7 @@ each dataset?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -851,10 +857,8 @@ lesson.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section level2">
-<h2 id="lets-explore-a-more-realistic-scenario">Let’s explore a more realistic scenario<a class="anchor" aria-label="anchor" href="#lets-explore-a-more-realistic-scenario"></a></h2>
-<p>Now that we have some convenient Python functions to perform quick
+</section><section><h2 class="section-heading" id="lets-explore-a-more-realistic-scenario">Let’s explore a more realistic scenario<a class="anchor" aria-label="anchor" href="#lets-explore-a-more-realistic-scenario"></a></h2>
+<hr class="half-width"><p>Now that we have some convenient Python functions to perform quick
 regressions on data it’s time to explore a more realistic regression
 modelling scenario.</p>
 <p>Let’s start by loading in and examining a new dataset from Seaborn: a
@@ -972,12 +976,7 @@ data.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</div>
-</div>
-
-
-
-      </div> <!-- / div.lesson-content -->
+</section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/01-introduction.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="../instructor/03-classification.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
