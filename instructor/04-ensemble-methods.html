@@ -367,9 +367,9 @@
 <div class="card-body">
 <div class="inner">
 <h3 class="card-title">Questions</h3>
-<ul><li>“What are ensemble methods?”</li>
-<li>“What are random forests?”</li>
-<li>“How can we stack estimators in sci-kit learn?”</li>
+<ul><li>What are ensemble methods?</li>
+<li>What are random forests?</li>
+<li>How can we stack estimators in sci-kit learn?</li>
 </ul></div>
 </div>
 </div>
@@ -377,8 +377,8 @@
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>“Learn about applying ensemble methods in scikit-learn.”</li>
-<li>“Understand why ensemble methods are useful.”</li>
+<ul><li>Learn about applying ensemble methods in scikit-learn.</li>
+<li>Understand why ensemble methods are useful.</li>
 </ul></div>
 </div>
 </div>
@@ -419,7 +419,7 @@ expect very similar answers, and so the emphasis with stacking is to
 choose different models that can be used to build up a reliable
 concensus. Regression is then typically a good choice for the final
 decision-making model.</p>
-<figure><img src="../fig/stacking.jpeg" alt="Stacking" class="figure mx-auto d-block"><div class="figcaption">Stacking</div>
+<figure><img src="../fig/stacking.jpeg" alt="A diagram showing how stacking works. It shows three different models being trained on the same data, and then their outputs being combined in a final model to make a prediction." class="figure mx-auto d-block"><div class="figcaption">Stacking</div>
 </figure><p><a href="https://vas3k.com/blog/machine_learning/" class="external-link">Image from Vasily
 Zubarev via their blog</a></p>
 </div>
@@ -435,7 +435,7 @@ which we’ll take a look at later on. Random Forests are typically used
 as a faster, computationally cheaper alternative to Neural Networks,
 which is ideal for real-time applications like camera face detection
 prompts.</p>
-<figure><img src="../fig/bagging.jpeg" alt="Stacking" class="figure mx-auto d-block"><div class="figcaption">Stacking</div>
+<figure><img src="../fig/bagging.jpeg" alt="A diagram showing how bagging works. It shows the same model being trained on different subsets of the data, and then their outputs being averaged to make a prediction." class="figure mx-auto d-block"><div class="figcaption">Stacking</div>
 </figure><p><a href="https://vas3k.com/blog/machine_learning/" class="external-link">Image from Vasily
 Zubarev via their blog</a></p>
 </div>
@@ -452,7 +452,7 @@ high accuracies by learning from it’s mistakes, but due to the iterative
 nature of these improvements it doesn’t parallelize well unlike the
 other ensemble methods. Despite this it can still be a faster, and
 computationally cheaper alternative to Neural Networks.</p>
-<figure><img src="../fig/boosting.jpeg" alt="Stacking" class="figure mx-auto d-block"><div class="figcaption">Stacking</div>
+<figure><img src="../fig/boosting.jpeg" alt="A diagram showing how boosting works. It shows the same model being trained on the same data, but with each iteration focusing on the samples that were poorly predicted by the previous iteration." class="figure mx-auto d-block"><div class="figcaption">Stacking</div>
 </figure><p><a href="https://vas3k.com/blog/machine_learning/" class="external-link">Image from Vasily
 Zubarev via their blog</a></p>
 </div>
@@ -507,7 +507,7 @@ way to address over-fitting. Rather than classifying based on one single
 decision tree (which could overfit the data), an average of results of
 many trees can be derived for more robust/accurate estimates compared
 against single trees used in the ensemble.</p>
-<figure><img src="../fig/randomforest.png" alt="Random Forests" class="figure mx-auto d-block"><div class="figcaption">Random Forests</div>
+<figure><img src="../fig/randomforest.png" alt="A diagram showing how a random forest works. It shows multiple decision trees being trained on different subsets of the data, and then their outputs being combined to make a prediction." class="figure mx-auto d-block"><div class="figcaption">Random Forests</div>
 </figure><p><a href="https://commons.wikimedia.org/wiki/File:Random_forest_diagram_complete.png" class="external-link">Image
 from Venkatak Jagannath</a></p>
 <p>We can now define a random forest estimator and train it using the
@@ -554,7 +554,7 @@ of how this model differs from a single decision tree.</p>
 <span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a></span>
 <span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
-<figure><img src="../fig/rf_5_trees.png" alt="random forest trees" class="figure mx-auto d-block"><div class="figcaption">random forest trees</div>
+<figure><img src="../fig/rf_5_trees.png" alt="A figure showing the first 5 trees in a random forest model. Each tree is a decision tree with different splits based on the penguin features, and each tree has a different structure and depth." class="figure mx-auto d-block"><div class="figcaption">random forest trees</div>
 </figure><p>We can see the first 5 (of 100) trees that were fitted as part of the
 forest.</p>
 <p>If we train the random forest estimator using the same two parameters
@@ -578,7 +578,7 @@ what do we think the plot will look like?</p>
 <span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>sns.scatterplot(X_train, x<span class="op">=</span>f1, y<span class="op">=</span>f2, hue<span class="op">=</span>y_train, palette<span class="op">=</span><span class="st">"husl"</span>)</span>
 <span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
-<figure><img src="../fig/EM_rf_clf_space.png" alt="random forest clf space" class="figure mx-auto d-block"><div class="figcaption">random forest clf space</div>
+<figure><img src="../fig/EM_rf_clf_space.png" alt="A scatter plot of the penguin dataset, showing body mass on the x-axis and bill length on the y-axis. The points are coloured by species. The random forest classifier is shown as colored regions, with the boundaries between the regions being orthogonal lines. The regions are generally aligned with the species clusters, but there are still several misclassifications and a complicated decision space." class="figure mx-auto d-block"><div class="figcaption">random forest clf space</div>
 </figure><p>There is still some overfitting indicated by the regions that contain
 only single points but using the same hyper-parameter settings used to
 fit the decision tree classifier, we can see that overfitting is
@@ -755,7 +755,7 @@ regressors. To get a sense of what this is doing lets predict the first
 <span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a></span>
 <span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
-<figure><img src="../fig/house_price_voting_regressor.svg" alt="Regressor predictions and average from stack" class="figure mx-auto d-block"><div class="figcaption">Regressor predictions and average from
+<figure><img src="../fig/house_price_voting_regressor.svg" alt="A plot showing the predictions of different regression models on the same dataset. Each model's predictions are represented by different colored markers, and the voting regressor's predictions are shown as larger red crosses." class="figure mx-auto d-block"><div class="figcaption">Regressor predictions and average from
 stack</div>
 </figure><p>Finally, lets see how the average compares against each single
 estimator in the stack?</p>
@@ -856,8 +856,8 @@ comments below as a guide.</p>
 <div class="callout-inner">
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
-<ul><li>“Ensemble methods can be used to reduce under/over fitting training
-data.”</li>
+<ul><li>Ensemble methods can be used to reduce under/over fitting training
+data.</li>
 </ul></div>
 </div>
 </div>

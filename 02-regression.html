@@ -365,10 +365,10 @@
 <div class="card-body">
 <div class="inner">
 <h3 class="card-title">Questions</h3>
-<ul><li>“What is supervised learning?”</li>
-<li>“What is regression?”</li>
-<li>“How can I model data and make predictions using regression
-methods?”</li>
+<ul><li>What is supervised learning?</li>
+<li>What is regression?</li>
+<li>How can I model data and make predictions using regression
+methods?</li>
 </ul></div>
 </div>
 </div>
@@ -376,14 +376,14 @@ methods?”</li>
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>“Apply linear regression with Scikit-Learn to create a model.”</li>
-<li>“Measure the error between a regression model and input data.”</li>
-<li>“Analyse and assess the accuracy of a linear model using
-Scikit-Learn’s metrics library.”</li>
-<li>“Understand how more complex models can be built with non-linear
-equations.”</li>
-<li>“Apply polynomial modelling to non-linear data using
-Scikit-Learn.”</li>
+<ul><li>Apply linear regression with Scikit-Learn to create a model.</li>
+<li>Measure the error between a regression model and input data.</li>
+<li>Analyse and assess the accuracy of a linear model using
+Scikit-Learn’s metrics library.</li>
+<li>Understand how more complex models can be built with non-linear
+equations.</li>
+<li>Apply polynomial modelling to non-linear data using
+Scikit-Learn.</li>
 </ul></div>
 </div>
 </div>
@@ -427,7 +427,7 @@ polynomial regression, and is used routinely around the world in both
 industry and research. You may have already used regression in the past
 without knowing that it is also considered a machine learning
 technique!</p>
-<figure><img src="fig/regression_example.png" alt="Example of linear and polynomial regressions" class="figure mx-auto d-block"><div class="figcaption">Example of linear and polynomial
+<figure><img src="fig/regression_example.png" alt="A pair of graphs comparing a linear and a polynomial regression. The linear regression is a straight line that fits through the data points, while the polynomial regression is a curved line that fits more closely to the data points." class="figure mx-auto d-block"><div class="figcaption">Example of linear and polynomial
 regressions</div>
 </figure><div class="section level3">
 <h3 id="linear-regression-using-scikit-learn">Linear regression using Scikit-Learn<a class="anchor" aria-label="anchor" href="#linear-regression-using-scikit-learn"></a></h3>
@@ -467,7 +467,7 @@ ready for our regression task. Let’s visually inspect the data:</p>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>plt.ylabel(<span class="st">"y"</span>)</span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
-<figure><img src="fig/regression_inspect.png" alt="Inspection of our dataset" class="figure mx-auto d-block"><div class="figcaption">Inspection of our dataset</div>
+<figure><img src="fig/regression_inspect.png" alt="A scatter plot of the first Anscombe dataset." class="figure mx-auto d-block"><div class="figcaption">Inspection of our dataset</div>
 </figure><p>In this regression example we will create a Linear Regression model
 that will try to predict <code>y</code> values based upon <code>x</code>
 values.</p>
@@ -584,7 +584,7 @@ that was generated:</p>
 <span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a></span>
 <span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
-<figure><img src="fig/regress_linear.png" alt="Linear regression of dataset I" class="figure mx-auto d-block"><div class="figcaption">Linear regression of dataset I</div>
+<figure><img src="fig/regress_linear.png" alt="A plot of the first Anscombe dataset with a linear regression line fitted to the data points." class="figure mx-auto d-block"><div class="figcaption">Linear regression of dataset I</div>
 </figure><p>This looks like a reasonable linear fit to our first dataset. Thanks
 to our function we can quickly perform more linear regressions on other
 datasets.</p>
@@ -598,7 +598,7 @@ dataset:</p>
 <span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
 <span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
-<figure><img src="fig/regress_linear_2nd.png" alt="Linear regression of dataset II" class="figure mx-auto d-block"><div class="figcaption">Linear regression of dataset II</div>
+<figure><img src="fig/regress_linear_2nd.png" alt="A plot of the second Anscombe dataset with a linear regression line fitted to the data points. The points are not well aligned with the linear regression line." class="figure mx-auto d-block"><div class="figcaption">Linear regression of dataset II</div>
 </figure><p>It looks like our linear fit on Dataset II produces a nearly
 identical fit to the linear fit on Dataset I. Although our errors look
 to be almost identical our visual inspection tells us that Dataset II is
@@ -632,8 +632,9 @@ between the linear regressions on the 4 datasets?</p>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>fit_predict_plot_linear(data_3[<span class="st">"x"</span>],data_3[<span class="st">"y"</span>])</span>
 <span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
-<p><img src="fig/regress_linear_3rd.png" alt="Linear regression of dataset III" class="figure"><img src="fig/regress_linear_4th.png" alt="Linear regression of dataset IV" class="figure"></p>
-<p>The 4 datasets all produce very similar linear regression fit
+<figure><img src="fig/regress_linear_3rd.png" alt="A plot of the third Anscombe dataset with a linear regression line fitted to the data points. The points are not well aligned with the linear regression line." class="figure mx-auto d-block"><div class="figcaption">Linear regression of dataset III</div>
+</figure><figure><img src="fig/regress_linear_4th.png" alt="A plot of the fourth Anscombe dataset with a linear regression line fitted to the data points. The points are not well aligned with the linear regression line." class="figure mx-auto d-block"><div class="figcaption">Linear regression of dataset IV</div>
+</figure><p>The 4 datasets all produce very similar linear regression fit
 parameters (<code>m</code> and <code>c</code>) and RMSEs despite visual
 differences in the 4 datasets. This is intentional as the Anscombe
 Quartet is designed to produce near identical basic statistical values
@@ -736,7 +737,7 @@ fits.</p>
 <span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a></span>
 <span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
-<figure><img src="fig/regress_both.png" alt="Comparison of the regressions of our dataset" class="figure mx-auto d-block"><div class="figcaption">Comparison of the regressions of our
+<figure><img src="fig/regress_both.png" alt="The second Anscombe dataset with a linear regression line and a polynomial regression line fitted to the data points. The polynomial regression fits the data points much more closely than the linear regression." class="figure mx-auto d-block"><div class="figcaption">Comparison of the regressions of our
 dataset</div>
 </figure><p>Comparing the plots and errors it seems like a polynomial regression
 of N=2 is a far superior fit to Dataset II than a linear fit. In fact,
@@ -775,7 +776,7 @@ each dataset?</p>
 <span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a></span>
 <span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>    plt.show()</span></code></pre>
 </div>
-<p><img src="fig/regress_polynomial_1st.png" alt="Polynomial regression of dataset I" class="figure"><img src="fig/regress_polynomial_2nd.png" alt="Polynomial regression of dataset II" class="figure"><img src="fig/regress_polynomial_3rd.png" alt="Polynomial regression of dataset III" class="figure"><img src="fig/regress_polynomial_4th.png" alt="Polynomial regression of dataset IV" class="figure"></p>
+<p><img src="fig/regress_polynomial_1st.png" alt="A plot of the first Anscombe dataset with a polynomial regression line fitted to the data points." class="figure"><img src="fig/regress_polynomial_2nd.png" alt="A plot of the second Anscombe dataset with a polynomial regression line fitted to the data points." class="figure"><img src="fig/regress_polynomial_3rd.png" alt="A plot of the third Anscombe dataset with a polynomial regression line fitted to the data points." class="figure"><img src="fig/regress_polynomial_4th.png" alt="A plot of the fourth Anscombe dataset with a polynomial regression line fitted to the data points." class="figure"></p>
 <p>The <code>N=2</code> polynomial fit is far better for Dataset II.
 According to the RMSE the polynomial is a slightly better fit for
 Datasets I and III, however it could be argued that a linear fit is good
@@ -843,7 +844,7 @@ model the data (Dataset IV). Datasets I and III slowly decrease their
 RMSE and N is increased, but it is likely that these more complex models
 are overfitting the data. Overfitting is discussed later in the
 lesson.</p>
-<p><img src="fig/regress_polynomial_n_1st.png" alt="Polynomial regression of dataset I with N between 1 and 10" class="figure"><img src="fig/regress_polynomial_n_2nd.png" alt="Polynomial regression of dataset II with N between 1 and 10" class="figure"><img src="fig/regress_polynomial_n_3rd.png" alt="Polynomial regression of dataset III with N between 1 and 10" class="figure"><img src="fig/regress_polynomial_n_4th.png" alt="Polynomial regression of dataset IV with N between 1 and 10" class="figure"></p>
+<p><img src="fig/regress_polynomial_n_1st.png" alt="A plot of the first Anscombe dataset with polynomial regression lines fitted to the data points for polynomial degrees N=1 to N=10. The polynomial lines become more complex as N increases." class="figure"><img src="fig/regress_polynomial_n_2nd.png" alt="A plot of the second Anscombe dataset with polynomial regression lines fitted to the data points for polynomial degrees N=1 to N=10. All of the polynomial lines are very similar and overlap the data points." class="figure"><img src="fig/regress_polynomial_n_3rd.png" alt="A plot of the third Anscombe dataset with polynomial regression lines fitted to the data points for polynomial degrees N=1 to N=10." class="figure"><img src="fig/regress_polynomial_n_4th.png" alt="A plot of the fourth Anscombe dataset with polynomial regression lines fitted to the data points for polynomial degrees N=1 to N=10. All of the polynomial lines are similar and overlap." class="figure"></p>
 </div>
 </div>
 </div>
@@ -898,7 +899,7 @@ our model.</p>
 <span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a>plt.ylabel(<span class="st">"depth mm"</span>)</span>
 <span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
-<figure><img src="fig/regress_penguin_lin.png" alt="Comparison of the regressions of our dataset" class="figure mx-auto d-block"><div class="figcaption">Comparison of the regressions of our
+<figure><img src="fig/regress_penguin_lin.png" alt="A plot of a subset of the penguin dataset with a linear regression line fitted to the data points. The points are well aligned with the linear regression line." class="figure mx-auto d-block"><div class="figcaption">Comparison of the regressions of our
 dataset</div>
 </figure><p>Congratulations! We’ve taken our linear regression function and
 quickly created and trained a new linear regression model on a brand new
@@ -927,7 +928,7 @@ inspect how the linear regression model performs.</p>
 <span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a>plt.legend()</span>
 <span id="cb19-14"><a href="#cb19-14" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
-<figure><img src="fig/regress_penguin_lin_tot.png" alt="Comparison of the regressions of our dataset" class="figure mx-auto d-block"><div class="figcaption">Comparison of the regressions of our
+<figure><img src="fig/regress_penguin_lin_tot.png" alt="A plot of the same regression, this time with the entire dataset. It is now clear that the lonear regression fits two classes, but is a poor predictor of the third class of penguins." class="figure mx-auto d-block"><div class="figcaption">Comparison of the regressions of our
 dataset</div>
 </figure><p>Oh dear. It looks like our linear regression fits okay for our subset
 of the penguin data, and a few additional samples, but there appears to
@@ -957,11 +958,11 @@ explore the penguin dataset in more depth in the next section!</p>
 <div class="callout-inner">
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
-<ul><li>“Scikit-Learn is a Python library with lots of useful machine
-learning functions.”</li>
-<li>“Scikit-Learn includes a linear regression function.”</li>
-<li>“Scikit-Learn can perform polynomial regressions to model non-linear
-data.”</li>
+<ul><li>Scikit-Learn is a Python library with lots of useful machine
+learning functions.</li>
+<li>Scikit-Learn includes a linear regression function.</li>
+<li>Scikit-Learn can perform polynomial regressions to model non-linear
+data.</li>
 </ul></div>
 </div>
 </div>

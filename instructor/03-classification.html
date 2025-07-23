@@ -367,7 +367,7 @@
 <div class="card-body">
 <div class="inner">
 <h3 class="card-title">Questions</h3>
-<ul><li>“How can I classify data into known categories?”</li>
+<ul><li>How can I classify data into known categories?</li>
 </ul></div>
 </div>
 </div>
@@ -375,9 +375,9 @@
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>“Use two different supervised methods to classify data.”</li>
-<li>“Learn about the concept of hyper-parameters.”</li>
-<li>“Learn to validate and cross-validate models”</li>
+<ul><li>Use two different supervised methods to classify data.</li>
+<li>Learn about the concept of hyper-parameters.</li>
+<li>Learn to validate and cross-validate models</li>
 </ul></div>
 </div>
 </div>
@@ -396,14 +396,13 @@ classification by classifying penguin data into different species of
 penguins using Scikit-Learn.</p>
 <div class="section level2">
 <h2 id="the-penguins-dataset">The penguins dataset<a class="anchor" aria-label="anchor" href="#the-penguins-dataset"></a></h2>
-<p>We’re going to be using the penguins dataset of Allison Horst,
-published <a href="https://github.com/allisonhorst/palmerpenguins" class="external-link">here</a>, The
-dataset contains 344 size measurements for three penguin species
-(Chinstrap, Gentoo and Adélie) observed on three islands in the Palmer
-Archipelago, Antarctica.</p>
-<figure><img src="../fig/palmer_penguins.png" alt="Artwork by @allison_horst" class="figure mx-auto d-block"><div class="figcaption"><em>Artwork by <span class="citation">@allison_horst</span></em></div>
+<p>We’re going to be using the <a href="https://github.com/allisonhorst/palmerpenguins" class="external-link">Palmer Penguins
+dataset</a> of Allison Horst, The dataset contains 344 size measurements
+for three penguin species (Chinstrap, Gentoo and Adélie) observed on
+three islands in the Palmer Archipelago, Antarctica.</p>
+<figure><img src="../fig/palmer_penguins.png" alt="A cartoon image of three penguins standing on a snowy island. The penguins are labelled as Chinstrap, Gentoo and Adélie." class="figure mx-auto d-block"><div class="figcaption"><em>Artwork by <span class="citation">@allison_horst</span></em></div>
 </figure><p>The physical attributes measured are flipper length, beak length,
-beak width, body mass, and sex. <img src="../fig/culmen_depth.png" alt="Artwork by @allison_horst" class="figure"></p>
+beak width, body mass, and sex. <img src="../fig/culmen_depth.png" alt="A drawn image of a penguin's head, showing where bill length and bill depth are measured." class="figure"></p>
 <p>In other words, the dataset contains 344 rows with 7 features i.e. 5
 physical attributes, species and the island where the observations were
 made.</p>
@@ -530,7 +529,7 @@ might identify.</p>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>fig01 <span class="op">=</span> sns.scatterplot(X_train, x<span class="op">=</span>feature_names[<span class="dv">0</span>], y<span class="op">=</span>feature_names[<span class="dv">1</span>], hue<span class="op">=</span>dataset[<span class="st">'species'</span>])</span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
-<figure><img src="../fig/e3_penguins_vis.png" alt="Visualising the penguins dataset" class="figure mx-auto d-block"><div class="figcaption">Visualising the penguins dataset</div>
+<figure><img src="../fig/e3_penguins_vis.png" alt="A scatter plot of the penguin dataset, showing bill length on the x-axis and bill depth on the y-axis. The points are coloured by species. There are three clusters of points, one for each species, with some overlap between the species." class="figure mx-auto d-block"><div class="figcaption">Visualising the penguins dataset</div>
 </figure><p>As there are four measurements for each penguin, we need quite a few
 plots to visualise all four dimensions against each other. Here is a
 handy Seaborn function to do so:</p>
@@ -540,7 +539,7 @@ handy Seaborn function to do so:</p>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>sns.pairplot(dataset, hue<span class="op">=</span><span class="st">"species"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
-<figure><img src="../fig/pairplot.png" alt="Visualising the penguins dataset" class="figure mx-auto d-block"><div class="figcaption">Visualising the penguins dataset</div>
+<figure><img src="../fig/pairplot.png" alt="A pairplot of the penguin dataset, showing scatter plots of each pair of features. The points are coloured by species. There are three clusters of points, one for each species, with some overlap between the species." class="figure mx-auto d-block"><div class="figcaption">Visualising the penguins dataset</div>
 </figure><p>We can see that penguins from each species form fairly distinct
 spatial clusters in these plots, so that you could draw lines between
 those clusters to delineate each species. This is effectively what many
@@ -558,7 +557,7 @@ the biologists: dichotomous keys). They split the classification problem
 into a binary tree of comparisons, at each step comparing a measurement
 to a value, and moving left or right down the tree until a
 classification is reached.</p>
-<figure><img src="../fig/decision_tree_example.png" alt="Decision tree for classifying penguins" class="figure mx-auto d-block"><div class="figcaption">Decision tree for classifying penguins</div>
+<figure><img src="../fig/decision_tree_example.png" alt="A decision tree example showing how one might classify four species of animals based on their features. The tree starts with 'Has feathers?' and branches into 'Can Fly?' and 'Has fur?'. The outcomes are Hawk, Penguin, Bear, and Dolphin" class="figure mx-auto d-block"><div class="figcaption">Decision tree for classifying penguins</div>
 </figure><p>Training and using a decision tree in Scikit-Learn is
 straightforward:</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -606,7 +605,7 @@ look at the decision tree that was generated:</p>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>plot_tree(clf, class_names<span class="op">=</span>class_names, feature_names<span class="op">=</span>feature_names, filled<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>fig.gca())</span>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
-<figure><img src="../fig/e3_dt_2.png" alt="Decision tree for classifying penguins" class="figure mx-auto d-block"><div class="figcaption">Decision tree for classifying penguins</div>
+<figure><img src="../fig/e3_dt_2.png" alt="An auomatically generated decision tree based on the model we just trained, showing how the model makes decisions based on the penguin features. The tree has 2 levels, with the first level splitting on flipper length, the second level splitting on bill length and bill depth." class="figure mx-auto d-block"><div class="figcaption">Decision tree for classifying penguins</div>
 </figure><p>The first first question (<code>depth=1</code>) splits the training
 data into “Adelie” and “Gentoo” categories using the criteria
 <code>flipper_length_mm &lt;= 206.5</code>, and the next two questions
@@ -639,7 +638,7 @@ training a new model on only 2 features:</p>
 <span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>sns.scatterplot(X_train, x<span class="op">=</span>f1, y<span class="op">=</span>f2, hue<span class="op">=</span>y_train, palette<span class="op">=</span><span class="st">"husl"</span>)</span>
 <span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
-<figure><img src="../fig/e3_dt_space_2.png" alt="Classification space for our decision tree" class="figure mx-auto d-block"><div class="figcaption">Classification space for our decision tree</div>
+<figure><img src="../fig/e3_dt_space_2.png" alt="A scatter plot of the penguin daaset, showing bill length on the x-axis and body mass on the y-axis. The points are coloured by species. The decision tree is shown as colored regions, with the boundaries between the regions being orthogonal lines. The regions are generally aligned with the species clusters, but there are several misclassifications." class="figure mx-auto d-block"><div class="figcaption">Classification space for our decision tree</div>
 </figure></div>
 </div>
 <div class="section level2">
@@ -671,7 +670,7 @@ hyperparameter to see if we can improve our model predictions.</p>
 <span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>plt.ylabel(<span class="st">'Accuracy'</span>)</span>
 <span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
-<figure><img src="../fig/e3_dt_overfit.png" alt="Performance of decision trees of various depths" class="figure mx-auto d-block"><div class="figcaption">Performance of decision trees of various
+<figure><img src="../fig/e3_dt_overfit.png" alt="A line plot showing the accuracy of decision trees with various max_depth hyper-parameters. The x-axis shows the max_depth, and the y-axis shows the accuracy. The accuracy is highest at max_depth=2." class="figure mx-auto d-block"><div class="figcaption">Performance of decision trees of various
 depths</div>
 </figure><p>Here we can see that a <code>max_depth=2</code> performs slightly
 better on the test data than those with <code>max_depth &gt; 2</code>.
@@ -689,7 +688,7 @@ decision tree that has <code>max_depth=5</code>:</p>
 <span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>plot_tree(clf, class_names<span class="op">=</span>class_names, feature_names<span class="op">=</span>feature_names, filled<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>fig.gca())</span>
 <span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
-<figure><img src="../fig/e3_dt_6.png" alt="Simplified decision tree" class="figure mx-auto d-block"><div class="figcaption">Simplified decision tree</div>
+<figure><img src="../fig/e3_dt_6.png" alt="An automatically generated decision tree based on the model we just trained, showing how the model makes decisions based on the penguin features. The tree has 4 levels, and is difficult to read." class="figure mx-auto d-block"><div class="figcaption">Simplified decision tree</div>
 </figure><p>It looks like our decision tree has split up the training data into
 the correct penguin categories and more accurately than the
 <code>max_depth=2</code> model did, however it used some very specific
@@ -710,7 +709,7 @@ understanding:</p>
 <span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>sns.scatterplot(X_train, x<span class="op">=</span>f1, y<span class="op">=</span>f2, hue<span class="op">=</span>y_train, palette<span class="op">=</span><span class="st">'husl'</span>)</span>
 <span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
-<figure><img src="../fig/e3_dt_space_6.png" alt="Classification space of the simplified decision tree" class="figure mx-auto d-block"><div class="figcaption">Classification space of the simplified decision
+<figure><img src="../fig/e3_dt_space_6.png" alt="A scatter plot of the penguin daaset, showing bill length on the x-axis and body mass on the y-axis. The points are coloured by species. The decision tree is shown as colored regions, with the boundaries between the regions being orthogonal lines. The regions are generally aligned with the species clusters, but there are many small regions that only select a single point." class="figure mx-auto d-block"><div class="figcaption">Classification space of the simplified decision
 tree</div>
 </figure><p>Earlier we saw that the <code>max_depth=2</code> model split the data
 into 3 simple bounding boxes, whereas for <code>max_depth=5</code> we
@@ -779,7 +778,7 @@ two parameters:</p>
 <span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>sns.scatterplot(x2, x<span class="op">=</span>feature_names[<span class="dv">0</span>], y<span class="op">=</span>feature_names[<span class="dv">1</span>], hue<span class="op">=</span>dataset[<span class="st">'species'</span>])</span>
 <span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
-<figure><img src="../fig/e3_svc_space.png" alt="Classification space generated by the SVM model" class="figure mx-auto d-block"><div class="figcaption">Classification space generated by the SVM
+<figure><img src="../fig/e3_svc_space.png" alt="A scatter plot of the penguin daaset, showing bill length on the x-axis and bill depth on the y-axis. The points are coloured by species. The SVM is shown as colored regions, with the boundaries between the regions being curved lines. The regions are generally aligned with the species clusters, but there are still several misclassifications." class="figure mx-auto d-block"><div class="figcaption">Classification space generated by the SVM
 model</div>
 </figure><p>While this SVM model performs slightly worse than our decision tree
 (95.6% vs. 98.5%), it’s likely that the non-linear boundaries will
@@ -794,7 +793,7 @@ that is appropriate for your problem and data trends!</p>
 <div class="callout-inner">
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
-<ul><li>“Classification requires labelled data (is supervised)”</li>
+<ul><li>Classification requires labelled data (is supervised).</li>
 </ul></div>
 </div>
 </div>
