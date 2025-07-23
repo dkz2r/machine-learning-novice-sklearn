@@ -781,14 +781,14 @@ contents:</p>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># Anscomes Quartet consists of 4 sets of data</span></span>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>data <span class="op">=</span> sns.load_dataset(<span class="st">"anscombe"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="bu">print</span>(data.head())</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>data.head()</span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co"># Split out the 1st dataset from the total</span></span>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>data_1 <span class="op">=</span> data[data[<span class="st">"dataset"</span>]<span class="op">==</span><span class="st">"I"</span>]</span>
 <span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>data_1 <span class="op">=</span> data_1.sort_values(<span class="st">"x"</span>)</span>
 <span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a></span>
 <span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="co"># Inspect the data</span></span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="bu">print</span>(data_1.head())</span></code></pre>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>data_1.head()</span></code></pre>
 </div>
 <p>We see that the dataset bundle has the 3 columns
 <code>dataset</code>, <code>x</code>, and <code>y</code>. We have
@@ -848,12 +848,12 @@ We’ll also inspect the trained model parameters <code>m</code> and
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>    model <span class="op">=</span> LinearRegression(fit_intercept<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>    <span class="co"># train our estimator/model using our data</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>    lin_regress <span class="op">=</span> model.fit(x_data,y_data)</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>    lin_regress <span class="op">=</span> model.fit(x_data, y_data)</span>
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a></span>
 <span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>    <span class="co"># inspect the trained estimator/model parameters</span></span>
 <span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>    m <span class="op">=</span> lin_regress.coef_</span>
 <span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>    c <span class="op">=</span> lin_regress.intercept_</span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"linear coefs="</span>,m, c)</span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"linear coefs="</span>, m, c)</span>
 <span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a></span>
 <span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>    <span class="cf">return</span> lin_regress</span></code></pre>
 </div>
@@ -873,7 +873,7 @@ predictions:</p>
 <span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a></span>
 <span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>    <span class="co"># calculated a RMS error as a quality of fit metric</span></span>
 <span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>    error <span class="op">=</span> math.sqrt(mean_squared_error(y_data, linear_data))</span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"linear error="</span>,error)</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"linear error="</span>, error)</span>
 <span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a></span>
 <span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>    <span class="co"># return our trained model so that we can use it later</span></span>
 <span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>    <span class="cf">return</span> linear_data</span></code></pre>
@@ -959,7 +959,7 @@ between the linear regressions on the 4 datasets?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1024,12 +1024,12 @@ function, but this time using the polynomial representation of our
 <span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a>    poly_regress <span class="op">=</span> LinearRegression()</span>
 <span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a></span>
 <span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a>    <span class="co"># define and train our model</span></span>
-<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a>    poly_regress.fit(x_poly,y_data)</span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a>    poly_regress.fit(x_poly, y_data)</span>
 <span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a></span>
 <span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a>    <span class="co"># inspect trained model parameters</span></span>
 <span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a>    poly_m <span class="op">=</span> poly_regress.coef_</span>
 <span id="cb11-24"><a href="#cb11-24" tabindex="-1"></a>    poly_c <span class="op">=</span> poly_regress.intercept_</span>
-<span id="cb11-25"><a href="#cb11-25" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"poly_coefs"</span>,poly_m, poly_c)</span>
+<span id="cb11-25"><a href="#cb11-25" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"poly_coefs"</span>, poly_m, poly_c)</span>
 <span id="cb11-26"><a href="#cb11-26" tabindex="-1"></a></span>
 <span id="cb11-27"><a href="#cb11-27" tabindex="-1"></a>    <span class="cf">return</span> poly_regress</span>
 <span id="cb11-28"><a href="#cb11-28" tabindex="-1"></a></span>
@@ -1067,11 +1067,11 @@ fits.</p>
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Sort our data in order of our x (feature) values</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>data_2 <span class="op">=</span> data[data[<span class="st">"dataset"</span>]<span class="op">==</span><span class="st">"II"</span>]</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>data_2 <span class="op">=</span> data[data[<span class="st">"dataset"</span>] <span class="op">==</span> <span class="st">"II"</span>]</span>
 <span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>data_2 <span class="op">=</span> data_2.sort_values(<span class="st">"x"</span>)</span>
 <span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>fit_predict_plot_linear(data_2[<span class="st">"x"</span>],data_2[<span class="st">"y"</span>])</span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>fit_predict_plot_poly(data_2[<span class="st">"x"</span>],data_2[<span class="st">"y"</span>])</span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>fit_predict_plot_linear(data_2[<span class="st">"x"</span>], data_2[<span class="st">"y"</span>])</span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>fit_predict_plot_poly(data_2[<span class="st">"x"</span>], data_2[<span class="st">"y"</span>])</span>
 <span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a></span>
 <span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
@@ -1100,17 +1100,17 @@ each dataset?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="cf">for</span> ds <span class="kw">in</span> [<span class="st">"I"</span>,<span class="st">"II"</span>,<span class="st">"III"</span>,<span class="st">"IV"</span>]:</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="cf">for</span> ds <span class="kw">in</span> [<span class="st">"I"</span>, <span class="st">"II"</span>, <span class="st">"III"</span>, <span class="st">"IV"</span>]:</span>
 <span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>    <span class="co"># Sort our data in order of our x (feature) values</span></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>    data_ds <span class="op">=</span> data[data[<span class="st">"dataset"</span>]<span class="op">==</span>ds]</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>    data_ds <span class="op">=</span> data[data[<span class="st">"dataset"</span>] <span class="op">==</span> ds]</span>
 <span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>    data_ds <span class="op">=</span> data_ds.sort_values(<span class="st">"x"</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>    fit_predict_plot_linear(data_ds[<span class="st">"x"</span>],data_ds[<span class="st">"y"</span>])</span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>    fit_predict_plot_poly(data_ds[<span class="st">"x"</span>],data_ds[<span class="st">"y"</span>])</span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>    fit_predict_plot_linear(data_ds[<span class="st">"x"</span>], data_ds[<span class="st">"y"</span>])</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>    fit_predict_plot_poly(data_ds[<span class="st">"x"</span>], data_ds[<span class="st">"y"</span>])</span>
 <span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a></span>
 <span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>    plt.show()</span></code></pre>
 </div>
@@ -1151,28 +1151,28 @@ IV it looks like <code>y</code> may be a better estimator of
 <span id="cb14-23"><a href="#cb14-23" tabindex="-1"></a></span>
 <span id="cb14-24"><a href="#cb14-24" tabindex="-1"></a>    <span class="cf">return</span> poly_regress</span>
 <span id="cb14-25"><a href="#cb14-25" tabindex="-1"></a></span>
-<span id="cb14-26"><a href="#cb14-26" tabindex="-1"></a><span class="cf">for</span> ds <span class="kw">in</span> [<span class="st">"I"</span>,<span class="st">"II"</span>,<span class="st">"III"</span>,<span class="st">"IV"</span>]:</span>
+<span id="cb14-26"><a href="#cb14-26" tabindex="-1"></a><span class="cf">for</span> ds <span class="kw">in</span> [<span class="st">"I"</span>, <span class="st">"II"</span>, <span class="st">"III"</span>, <span class="st">"IV"</span>]:</span>
 <span id="cb14-27"><a href="#cb14-27" tabindex="-1"></a>    <span class="co"># Sort our data in order of our x (feature) values</span></span>
-<span id="cb14-28"><a href="#cb14-28" tabindex="-1"></a>    data_ds <span class="op">=</span> data[data[<span class="st">"dataset"</span>]<span class="op">==</span>ds]</span>
+<span id="cb14-28"><a href="#cb14-28" tabindex="-1"></a>    data_ds <span class="op">=</span> data[data[<span class="st">"dataset"</span>] <span class="op">==</span> ds]</span>
 <span id="cb14-29"><a href="#cb14-29" tabindex="-1"></a>    data_ds <span class="op">=</span> data_ds.sort_values(<span class="st">"x"</span>)</span>
-<span id="cb14-30"><a href="#cb14-30" tabindex="-1"></a>    fit_predict_plot_linear(data_ds[<span class="st">"x"</span>],data_ds[<span class="st">"y"</span>])</span>
+<span id="cb14-30"><a href="#cb14-30" tabindex="-1"></a>    fit_predict_plot_linear(data_ds[<span class="st">"x"</span>], data_ds[<span class="st">"y"</span>])</span>
 <span id="cb14-31"><a href="#cb14-31" tabindex="-1"></a>    <span class="cf">for</span> N <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">11</span>):</span>
 <span id="cb14-32"><a href="#cb14-32" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Polynomial degree ="</span>,N)</span>
-<span id="cb14-33"><a href="#cb14-33" tabindex="-1"></a>        fit_predict_plot_poly(data_ds[<span class="st">"x"</span>],data_ds[<span class="st">"y"</span>],N)</span>
+<span id="cb14-33"><a href="#cb14-33" tabindex="-1"></a>        fit_predict_plot_poly(data_ds[<span class="st">"x"</span>], data_ds[<span class="st">"y"</span>],N)</span>
 <span id="cb14-34"><a href="#cb14-34" tabindex="-1"></a>    plt.show()</span></code></pre>
 </div>
 <p>and</p>
 <div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="cf">for</span> ds <span class="kw">in</span> [<span class="st">"I"</span>,<span class="st">"II"</span>,<span class="st">"III"</span>,<span class="st">"IV"</span>]:</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="cf">for</span> ds <span class="kw">in</span> [<span class="st">"I"</span>, <span class="st">"II"</span>, <span class="st">"III"</span>, <span class="st">"IV"</span>]:</span>
 <span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>    <span class="co"># Sort our data in order of our x (feature) values</span></span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>    data_ds <span class="op">=</span> data[data[<span class="st">"dataset"</span>]<span class="op">==</span>ds]</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>    data_ds <span class="op">=</span> data[data[<span class="st">"dataset"</span>] <span class="op">==</span> ds]</span>
 <span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>    data_ds <span class="op">=</span> data_ds.sort_values(<span class="st">"x"</span>)</span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>    fit_predict_plot_linear(data_ds[<span class="st">"x"</span>],data_ds[<span class="st">"y"</span>])</span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>    <span class="cf">for</span> N <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">11</span>):</span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Polynomial degree ="</span>,N)</span>
-<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>        fit_predict_plot_poly(data_ds[<span class="st">"x"</span>],data_ds[<span class="st">"y"</span>],N)</span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>    fit_predict_plot_linear(data_ds[<span class="st">"x"</span>], data_ds[<span class="st">"y"</span>])</span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>    <span class="cf">for</span> N <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">11</span>):</span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Polynomial degree ="</span>, N)</span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>        fit_predict_plot_poly(data_ds[<span class="st">"x"</span>], data_ds[<span class="st">"y"</span>], N)</span>
 <span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>    plt.show()</span></code></pre>
 </div>
 <p>With a large enough polynomial you can fit through every point with a
@@ -1606,55 +1606,99 @@ training a new model on only 2 features:</p>
 <span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
 <figure><img src="fig/e3_dt_space_2.png" alt="A scatter plot of the penguin daaset, showing bill length on the x-axis and body mass on the y-axis. The points are coloured by species. The decision tree is shown as colored regions, with the boundaries between the regions being orthogonal lines. The regions are generally aligned with the species clusters, but there are several misclassifications." class="figure mx-auto d-block"><div class="figcaption">Classification space for our decision tree</div>
-</figure>
+</figure><div id="tuning-the-max_depth-hyperparameter" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
 </div>
-</section><section><h2 class="section-heading" id="tuning-the-max_depth-hyperparameter">Tuning the <code>max_depth</code> hyperparameter<a class="anchor" aria-label="anchor" href="#tuning-the-max_depth-hyperparameter"></a>
-</h2>
-<hr class="half-width">
+<div id="tuning-the-max_depth-hyperparameter" class="callout-inner">
+<h3 class="callout-title">Tuning the <code>max_depth</code>
+hyperparameter</h3>
+<div class="callout-content">
 <p>Our decision tree using a <code>max_depth=2</code> is fairly simple
 and there are still some incorrect predictions in our final
-classifications. Let’s try varying the <code>max_depth</code>
-hyperparameter to see if we can improve our model predictions.</p>
-<!-- We can reduce the over-fitting of our decision tree model by limiting its depth, forcing it to use less decisions to produce a classification, and resulting in a simpler decision space. -->
+classifications. What happens if we increase the <code>max_depth</code>
+hyperparameter? Will our model improve?</p>
+<p>Write a loop to train a decision tree classifier with
+<code>max_depth</code> values of 1, 2, 3, 4 and 5, and record the
+accuracy of each model on the test data. Then plot the accuracy against
+the <code>max_depth</code> values.</p>
+<p>Yout might find the following code snippets useful:</p>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>max_depths <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>accuracy <span class="op">=</span> []</span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="cf">for</span> i, d <span class="kw">in</span> <span class="bu">enumerate</span>(max_depths):</span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>    clf <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span>d)</span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>    clf.fit(X_train, y_train)</span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>    acc <span class="op">=</span> clf.score(X_test, y_test)</span>
-<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>    accuracy.append((d, acc))</span>
-<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a></span>
-<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>acc_df <span class="op">=</span> pd.DataFrame(accuracy, columns<span class="op">=</span>[<span class="st">'depth'</span>, <span class="st">'accuracy'</span>])</span>
-<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a></span>
-<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>sns.lineplot(acc_df, x<span class="op">=</span><span class="st">'depth'</span>, y<span class="op">=</span><span class="st">'accuracy'</span>)</span>
-<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>plt.xlabel(<span class="st">'Tree depth'</span>)</span>
-<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>plt.ylabel(<span class="st">'Accuracy'</span>)</span>
-<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a>plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>clf <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>clf.fit(X_train, y_train)</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>acc <span class="op">=</span> clf.score(X_test, y_test)</span></code></pre>
 </div>
-<figure><img src="fig/e3_dt_overfit.png" alt="A line plot showing the accuracy of decision trees with various max_depth hyper-parameters. The x-axis shows the max_depth, and the y-axis shows the accuracy. The accuracy is highest at max_depth=2." class="figure mx-auto d-block"><div class="figcaption">Performance of decision trees of various
-depths</div>
-</figure><p>Here we can see that a <code>max_depth=2</code> performs slightly
-better on the test data than those with <code>max_depth &gt; 2</code>.
-This can seem counter intuitive, as surely more questions should be able
-to better split up our categories and thus give better predictions?</p>
-<p>Let’s reuse our fitting and plotting codes from above to inspect a
-decision tree that has <code>max_depth=5</code>:</p>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>clf <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>clf.fit(X_train, y_train)</span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">10</span>))</span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>plot_tree(clf, class_names<span class="op">=</span>class_names, feature_names<span class="op">=</span>feature_names, filled<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>fig.gca())</span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>sns.lineplot(acc_df, x<span class="op">=</span><span class="st">'depth'</span>, y<span class="op">=</span><span class="st">'accuracy'</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>plt.xlabel(<span class="st">'Tree depth'</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>plt.ylabel(<span class="st">'Accuracy'</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>plt.show()</span></code></pre>
+</div>
+<p>What happens? Why?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb12">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>max_depths <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>accuracy <span class="op">=</span> []</span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="cf">for</span> depth <span class="kw">in</span> max_depths:</span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>    clf <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span>depth)</span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>    clf.fit(X_train, y_train)</span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>    acc <span class="op">=</span> clf.score(X_test, y_test)</span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>    accuracy.append((depth, acc))</span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a>acc_df <span class="op">=</span> pd.DataFrame(accuracy, columns<span class="op">=</span>[<span class="st">'depth'</span>, <span class="st">'accuracy'</span>])</span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a>sns.lineplot(acc_df, x<span class="op">=</span><span class="st">'depth'</span>, y<span class="op">=</span><span class="st">'accuracy'</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a>plt.xlabel(<span class="st">'Tree depth'</span>)</span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a>plt.ylabel(<span class="st">'Accuracy'</span>)</span>
+<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a>plt.show()</span></code></pre>
+</div>
+<figure><img src="fig/e3_dt_overfit.png" alt="A line plot showing the accuracy of decision trees with various max_depth hyper-parameters. The x-axis shows the max_depth, and the y-axis shows the accuracy. The accuracy is highest at max_depth=2." class="figure mx-auto d-block"><div class="figcaption">Performance of decision trees of various
+depths</div>
+</figure><p>It looks like a <code>max_depth=2</code> performs slightly better on
+the test data than those with <code>max_depth &gt; 2</code>. This can
+seem counter intuitive, as surely more questions should be able to
+better split up our categories and thus give better predictions?</p>
+<p>This is a classic case of over-fitting - our model has produced
+extremely specific parameters that work for the training data but are
+not necessarily representative of our test data.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="inspecting-an-over-fitted-decision-tree">Inspecting an over-fitted decision tree<a class="anchor" aria-label="anchor" href="#inspecting-an-over-fitted-decision-tree"></a>
+</h2>
+<hr class="half-width">
+<p>Let’s reuse our fitting and plotting codes from above to inspect a
+decision tree that has <code>max_depth=5</code>:</p>
+<div class="codewrapper sourceCode" id="cb13">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>clf <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>clf.fit(X_train, y_train)</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">10</span>))</span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>plot_tree(clf, class_names<span class="op">=</span>class_names, feature_names<span class="op">=</span>feature_names, filled<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>fig.gca())</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
 <figure><img src="fig/e3_dt_6.png" alt="An automatically generated decision tree based on the model we just trained, showing how the model makes decisions based on the penguin features. The tree has 4 levels, and is difficult to read." class="figure mx-auto d-block"><div class="figcaption">Simplified decision tree</div>
 </figure><p>It looks like our decision tree has split up the training data into
@@ -1663,19 +1707,19 @@ the correct penguin categories and more accurately than the
 questions to split up the penguins into the correct categories. Let’s
 try visualising the classification space for a more intuitive
 understanding:</p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>f1 <span class="op">=</span> feature_names[<span class="dv">0</span>]</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>f2 <span class="op">=</span> feature_names[<span class="dv">3</span>]</span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>clf <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>clf.fit(X_train[[f1, f2]], y_train)</span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>d <span class="op">=</span> DecisionBoundaryDisplay.from_estimator(clf, X_train[[f1, f2]])</span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>sns.scatterplot(X_train, x<span class="op">=</span>f1, y<span class="op">=</span>f2, hue<span class="op">=</span>y_train, palette<span class="op">=</span><span class="st">'husl'</span>)</span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a>plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>f1 <span class="op">=</span> feature_names[<span class="dv">0</span>]</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>f2 <span class="op">=</span> feature_names[<span class="dv">3</span>]</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>clf <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>clf.fit(X_train[[f1, f2]], y_train)</span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>d <span class="op">=</span> DecisionBoundaryDisplay.from_estimator(clf, X_train[[f1, f2]])</span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>sns.scatterplot(X_train, x<span class="op">=</span>f1, y<span class="op">=</span>f2, hue<span class="op">=</span>y_train, palette<span class="op">=</span><span class="st">'husl'</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
 <figure><img src="fig/e3_dt_space_6.png" alt="A scatter plot of the penguin daaset, showing bill length on the x-axis and body mass on the y-axis. The points are coloured by species. The decision tree is shown as colored regions, with the boundaries between the regions being orthogonal lines. The regions are generally aligned with the species clusters, but there are many small regions that only select a single point." class="figure mx-auto d-block"><div class="figcaption">Classification space of the simplified decision
 tree</div>
@@ -1706,46 +1750,46 @@ directly on this data, it would only consider the parameter with the
 greatest variance (body mass).</p>
 <p>Normalising maps each parameter to a new range so that it has a mean
 of 0 and a standard deviation of 1.</p>
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> preprocessing</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>scalar <span class="op">=</span> preprocessing.StandardScaler()</span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>scalar.fit(X_train)</span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>X_train_scaled <span class="op">=</span> pd.DataFrame(scalar.transform(X_train), columns<span class="op">=</span>X_train.columns, index<span class="op">=</span>X_train.index)</span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>X_test_scaled <span class="op">=</span> pd.DataFrame(scalar.transform(X_test), columns<span class="op">=</span>X_test.columns, index<span class="op">=</span>X_test.index)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> preprocessing</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>scalar <span class="op">=</span> preprocessing.StandardScaler()</span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>scalar.fit(X_train)</span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>X_train_scaled <span class="op">=</span> pd.DataFrame(scalar.transform(X_train), columns<span class="op">=</span>X_train.columns, index<span class="op">=</span>X_train.index)</span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>X_test_scaled <span class="op">=</span> pd.DataFrame(scalar.transform(X_test), columns<span class="op">=</span>X_test.columns, index<span class="op">=</span>X_test.index)</span></code></pre>
 </div>
 <p>Note that we fit the scalar to our training data - we then use this
 same pre-trained scalar to transform our testing data.</p>
 <p>With this scaled data, training the models works exactly the same as
 before.</p>
-<div class="codewrapper sourceCode" id="cb14">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> svm</span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>SVM <span class="op">=</span> svm.SVC(kernel<span class="op">=</span><span class="st">'poly'</span>, degree<span class="op">=</span><span class="dv">3</span>, C<span class="op">=</span><span class="fl">1.5</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>SVM.fit(X_train_scaled, y_train)</span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>svm_score <span class="op">=</span> SVM.score(X_test_scaled, y_test)</span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Decision tree score is "</span>, clf_score)</span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"SVM score is "</span>, svm_score)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> svm</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>SVM <span class="op">=</span> svm.SVC(kernel<span class="op">=</span><span class="st">'poly'</span>, degree<span class="op">=</span><span class="dv">3</span>, C<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>SVM.fit(X_train_scaled, y_train)</span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>svm_score <span class="op">=</span> SVM.score(X_test_scaled, y_test)</span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Decision tree score is "</span>, clf_score)</span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"SVM score is "</span>, svm_score)</span></code></pre>
 </div>
 <p>We can again visualise the decision space produced, also using only
 two parameters:</p>
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>x2 <span class="op">=</span> X_train_scaled[[feature_names[<span class="dv">0</span>], feature_names[<span class="dv">1</span>]]]</span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>SVM <span class="op">=</span> svm.SVC(kernel<span class="op">=</span><span class="st">'poly'</span>, degree<span class="op">=</span><span class="dv">3</span>, C<span class="op">=</span><span class="fl">1.5</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>SVM.fit(x2, y_train)</span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>DecisionBoundaryDisplay.from_estimator(SVM, x2) <span class="co">#, ax=ax</span></span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>sns.scatterplot(x2, x<span class="op">=</span>feature_names[<span class="dv">0</span>], y<span class="op">=</span>feature_names[<span class="dv">1</span>], hue<span class="op">=</span>dataset[<span class="st">'species'</span>])</span>
-<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>x2 <span class="op">=</span> X_train_scaled[[feature_names[<span class="dv">0</span>], feature_names[<span class="dv">1</span>]]]</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>SVM <span class="op">=</span> svm.SVC(kernel<span class="op">=</span><span class="st">'poly'</span>, degree<span class="op">=</span><span class="dv">3</span>, C<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>SVM.fit(x2, y_train)</span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>DecisionBoundaryDisplay.from_estimator(SVM, x2) <span class="co">#, ax=ax</span></span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a>sns.scatterplot(x2, x<span class="op">=</span>feature_names[<span class="dv">0</span>], y<span class="op">=</span>feature_names[<span class="dv">1</span>], hue<span class="op">=</span>dataset[<span class="st">'species'</span>])</span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
 <figure><img src="fig/e3_svc_space.png" alt="A scatter plot of the penguin daaset, showing bill length on the x-axis and bill depth on the y-axis. The points are coloured by species. The SVM is shown as colored regions, with the boundaries between the regions being curved lines. The regions are generally aligned with the species clusters, but there are still several misclassifications." class="figure mx-auto d-block"><div class="figcaption">Classification space generated by the SVM
 model</div>
@@ -2566,7 +2610,7 @@ any strange behaviour?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Increasing n_samples to 4000 and cluster_std to 3.0 looks like
 this:</p>
@@ -2598,7 +2642,7 @@ one?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2742,7 +2786,7 @@ real)?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>KMeans version: runtime around 4 seconds (your computer might be
 faster/slower)</p>
