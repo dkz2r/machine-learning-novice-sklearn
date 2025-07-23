@@ -45,7 +45,7 @@ python3 -m venv intro_ml # mac/linux
 python -m venv intro_ml # windows
 ```
 
-::: info
+::: callout
 If you're on Linux and this doesn't work, you may need to install venv first. Try running `sudo apt-get install python3-venv` first, then `python3 -m venv intro_ml`
 :::
 
