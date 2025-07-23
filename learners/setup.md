@@ -1,7 +1,8 @@
 ---
 title: Setup
 ---
-# Requirements
+
+# Setup
 
 ## Software
 
