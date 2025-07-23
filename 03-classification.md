@@ -14,7 +14,7 @@ exercises: 0
 - Learn to validate and cross-validate models
 ::::::
 
-# Classification
+## Classification
 
 Classification is a supervised method to recognise and group data objects into a pre-determined categories. Where regression uses labelled observations to predict a continuous numerical value, classification predicts a discrete categorical fit to a class. Classification in ML leverages a wide range of algorithms to classify a set of data/datasets into their respective categories.
 

@@ -15,7 +15,7 @@ exercises: 10
 - Be aware of some caveats when using Machine Learning.
 ::::::
 
-# What is machine learning?
+## What is machine learning?
 
 Machine learning is a set of techniques that enable computers to use data to improve their performance in a given task. This is similar in concept to how humans learn to make predictions based upon previous experience and knowledge. Machine learning encompasses a wide range of activities, but broadly speaking it can be used to: find trends in a dataset, classify data into groups or categories, make predictions based upon data, and even "learn" how to interact with an environment when provided with goals to achieve.
 
@@ -85,7 +85,7 @@ Sometimes ML algorithms become over-trained and subsequently don't perform well 
 Machine learning techniques will return an answer based on the input data and model parameters even if that answer is wrong. Most systems are unable to explain the logic used to arrive at that answer. This can make detecting and diagnosing problems difficult.
 
 
-# Getting started with Scikit-Learn
+## Getting started with Scikit-Learn
 
 ### About Scikit-Learn
 
@@ -116,7 +116,7 @@ If we want our ML models to make predictions or classifications, we also provide
 ![Types of Machine Learning](fig/introduction/sklearn_input.png){alt="A feature matrix, which contains N features and N samples (which is referred to as 'X'), and a target array, which contains N labels or values (referred to as 'y')."}
 Figure from the [Python Data Science Handbook](https://github.com/jakevdp/PythonDataScienceHandbook)
 
-# What will we cover today?
+## What will we cover today?
 
 This lesson will introduce you to some of the key concepts and sub-domains of ML such as supervised learning, unsupervised learning, and neural networks.
 

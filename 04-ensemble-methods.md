@@ -15,7 +15,7 @@ exercises: 30
  - Understand why ensemble methods are useful.
 ::::::
 
-# Ensemble methods
+## Ensemble methods
 
 What's better than one decision tree? Perhaps two? or three? How about enough trees to make up a forest?
 Ensemble methods bundle individual models together and use each of their outputs to contribute towards a final consensus for a given problem. Ensemble methods are based on the mantra that the whole is greater than the sum of the parts.

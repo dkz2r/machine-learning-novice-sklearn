@@ -16,7 +16,7 @@ exercises: 30
  - Use spectral clustering to overcome the limitations of k-means.
 ::::::
 
-# Unsupervised learning
+## Unsupervised learning
 
 In episode 2 we learnt about supervised learning. Now it is time to explore unsupervised learning.
 
@@ -29,7 +29,7 @@ Sometimes we do not have the luxury of using labelled data. This could be for a 
 
 In this case we need to use unsupervised learning. As the name suggests, this time we do not "supervise" the ML algorithm by providing it labels, but instead we let it try to find its own patterns in the data and report back on any correlations that it might find. You can think of unsupervised learning as a way to discover labels from the data itself.
 
-# Clustering
+## Clustering
 
 Clustering is the grouping of data points which are similar to each other. It can be a powerful technique for identifying patterns in data.
 Clustering analysis does not usually require any training and is therefore known as an unsupervised learning technique. Clustering can be applied quickly due to this lack of training.
