@@ -5,15 +5,15 @@ exercises: 30
 ---
 
 :::::: questions
- - "What is unsupervised learning?"
- - "How can we use clustering to find data points with similar attributes?"
+ - What is unsupervised learning?
+ - How can we use clustering to find data points with similar attributes?
 ::::::
 
 :::::: objectives
- - "Understand the difference between supervised and unsupervised learning"
- - "Identify clusters in data using k-means clustering."
- - "Understand the limitations of k-means when clusters overlap."
- - "Use spectral clustering to overcome the limitations of k-means."
+ - Understand the difference between supervised and unsupervised learning.
+ - Identify clusters in data using k-means clustering.
+ - Understand the limitations of k-means when clusters overlap.
+ - Use spectral clustering to overcome the limitations of k-means.
 ::::::
 
 # Unsupervised learning
@@ -96,7 +96,7 @@ data, cluster_id = skl_datasets.make_blobs(n_samples=400, cluster_std=0.75, cent
 plots_labels(data, cluster_id)
 ```
 
-![Plot of the random clusters](../fig/random_clusters.png)
+![Plot of the random clusters](fig/random_clusters.png){alt="A scatter plot of randomly generated clusters. The points are coloured by their cluster id, with four distinct clusters visible."}
 
 Now that we have some data we can try to identify the clusters using k-means. First, we need to initialise the KMeans module and tell it how many clusters to look for. Next, we supply it with some data via the `fit` function, in much the same way we did with the regression functions earlier on. Finally, we run the predict function to find the clusters.
 
@@ -112,7 +112,7 @@ The data can now be plotted to show all the points we randomly generated. To mak
 plot_clusters(data, clusters, Kmean)
 ```
 
-![Plot of the fitted random clusters](../fig/random_clusters_centre.png)
+![Plot of the fitted random clusters](fig/random_clusters_centre.png){alt="A scatter plot of the random clusters, with the points coloured by their cluster id. The centres of each cluster are marked with a red X."}
 
 Here is the code all in a single block.
 
@@ -146,7 +146,7 @@ multi-dimensional spaces.
 * Will always produce an answer finding the required number of clusters even if the data isn't clustered (or clustered in that many clusters)
 * Requires linear cluster boundaries
 
-![An example of kmeans failing on non-linear cluster boundaries](../fig/kmeans_concentric_circle.png)
+![An example of kmeans failing on non-linear cluster boundaries](fig/kmeans_concentric_circle.png){alt="A scatter plot showing the failure of k-means clustering on non-linear cluster boundaries. The points are coloured by their cluster id, with two distinct circular clusters visible. Each circle of points is half in one cluster and half in the other."}
 
 
 ### Advantages of k-means
@@ -166,7 +166,9 @@ Is there any strange behaviour?
 
 :::::::::::::::: solution
 Increasing n_samples to 4000 and cluster_std to 3.0 looks like this:
-![Kmeans attempting to classify overlapping clusters](../fig/kmeans_overlapping_clusters.png)
+
+![Kmeans attempting to classify overlapping clusters](fig/kmeans_overlapping_clusters.png){alt="A scatter plot showing two rings of points."}
+
 The straight line boundaries between clusters look a bit strange.
 :::::::::::::::::::::::::
 
@@ -199,11 +201,11 @@ We might look at a measure of similarity to test if this single cluster is actua
 ## Spectral clustering
 
 Spectral clustering is a technique that attempts to overcome the linear boundary problem of k-means clustering.
-It works by treating clustering as a graph partitioning problem and looks for nodes in a graph with a small distance between them. See [this](https://www.cvl.isy.liu.se/education/graduate/spectral-clustering/SC_course_part1.pdf) introduction to spectral clustering if you are interested in more details about how spectral clustering works.
+It works by treating clustering as a graph partitioning problem and looks for nodes in a graph with a small distance between them. See [this introduction to spectral clustering](https://www.cvl.isy.liu.se/education/graduate/spectral-clustering/SC_course_part1.pdf) if you are interested in more details about how spectral clustering works.
 
 Here is an example of spectral clustering on two concentric circles:
 
-![Spectral clustering on two concentric circles](../fig/spectral_concentric_circle.png)
+![Spectral clustering on two concentric circles](fig/spectral_concentric_circle.png){alt="A scatter plot showing the results of spectral clustering on two concentric circles. The points are coloured by their cluster id, with one circle in red and the other in black. Unlike k-means, the clusters are not split by a straight line."}
 
 Spectral clustering uses something called a 'kernel trick' to introduce additional dimensions to the data.
 A common example of this is trying to cluster one circle within another (concentric circles).
@@ -211,7 +213,7 @@ A k-means classifier will fail to do this and will end up effectively drawing a 
 However spectral clustering will introduce an additional dimension that effectively moves one of the circles away from the other in the
 additional dimension. This does have the downside of being more computationally expensive than k-means clustering.
 
-![Spectral clustering viewed with an extra dimension](../fig/spectral_concentric_3d.png)
+![Spectral clustering viewed with an extra dimension](fig/spectral_concentric_3d.png){alt="A 3D scatter plot showing the results of spectral clustering on two concentric circles. The points are coloured by their cluster id, with one circle in red and the other in black. The circles are separated vertically in the third dimension."}
 
 ### Spectral clustering with Scikit-Learn
 
@@ -263,8 +265,9 @@ plots_labels(circles, labels)
 ```
 
 
-![Kmeans attempting to cluster the concentric circles](../fig/kmeans_concentric_circle_2.png)
-![Spectral clustering on the concentric circles](../fig/spectral_concentric_circle_2.png)
+![Kmeans attempting to cluster the concentric circles](fig/kmeans_concentric_circle_2.png){alt="A scatter plot showing the results of k-means clustering on two concentric circles. The points are coloured by their cluster id, with one circle in yellow and the other in purple. The clusters are split by a straight line."}
+
+![Spectral clustering on the concentric circles](fig/spectral_concentric_circle_2.png){alt="A scatter plot showing the results of spectral clustering on two concentric circles. The points are coloured by their cluster id, with one circle in yellow and the other in purple. Unlike k-means, the clusters are not split by a straight line and are correctly identified."}
 
 
 ::::::::::::::::::::::::::::::::::::: challenge
@@ -352,11 +355,11 @@ Kmeans might take a few minutes while spectral will take hours.
 :::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::: keypoints
-- "Clustering is a form of unsupervised learning."
-- "Unsupervised learning algorithms don't need training."
-- "Kmeans is a popular clustering algorithm."
-- "Kmeans is less useful when one cluster exists within another, such as concentric circles."
-- "Spectral clustering can overcome some of the limitations of Kmeans."
-- "Spectral clustering is much slower than Kmeans."
-- "Scikit-Learn has functions to create example data."
+- Clustering is a form of unsupervised learning.
+- Unsupervised learning algorithms don't need training.
+- Kmeans is a popular clustering algorithm.
+- Kmeans is less useful when one cluster exists within another, such as concentric circles.
+- Spectral clustering can overcome some of the limitations of Kmeans.
+- Spectral clustering is much slower than Kmeans.
+- Scikit-Learn has functions to create example data.
 ::::::

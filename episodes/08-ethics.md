@@ -5,11 +5,11 @@ exercises: 5
 ---
 
 :::::: questions
-- "What are the ethical implications of using machine learning in research?"
+- What are the ethical implications of using machine learning in research?
 ::::::
 
 :::::: objectives
-- "Consider the ethical implications of machine learning, in general, and in research."
+- Consider the ethical implications of machine learning, in general, and in research.
 ::::::
 
 # Ethics and machine learning
@@ -66,8 +66,8 @@ Write down your group's answers in the etherpad.
 :::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::: keypoints
-- "The results of machine learning reflect biases in the training and input data."
-- "Many machine learning algorithms can't explain how they arrived at a decision."
-- "Machine learning can be used for unethical purposes."
-- "Consider the implications of false positives and false negatives."
+- The results of machine learning reflect biases in the training and input data.
+- Many machine learning algorithms can't explain how they arrived at a decision.
+- Machine learning can be used for unethical purposes.
+- Consider the implications of false positives and false negatives.
 ::::::
