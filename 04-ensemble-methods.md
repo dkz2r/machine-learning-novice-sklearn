@@ -204,6 +204,28 @@ For the the purposes of learning how to create and use ensemble methods and sinc
 
 For this episode we simply want to learn how to build and use an Ensemble rather than actually solve a regression problem. To build up your skills as an ML practitioner, investigate and visualise this dataset. What can you say about the dataset itself, and what can you summarise about about any potential relationships or prediction problems?
 
+:::::::::::::::: solution
+
+There's no real right answer here, but here's a couple of things you might have looked at:
+
+```python
+# Both the target and the House age are capped
+y.hist(bins=50)
+X.HouseAge.hist(bins=50)
+
+# Some of the fields are highly skewed
+X.MedInc.hist(bins=50)
+X.AveBedrms.describe()
+
+# Houses are more expensive in the coastal areas
+plt.scatter(X.Longitude, X.Latitude, c=y, cmap='coolwarm', s=10, alpha=0.5)
+
+# Some features are correlated with the target
+plt.scatter(X.MedInc, y)
+```
+
+:::::::::::::::::::::::::
+
 :::::::::::::::::::::::::::::::::::::::::::::::
 
 Lets start by splitting the dataset into training and testing subsets:
@@ -217,10 +239,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 print(f'train size: {X_train.shape}')
 print(f'test size: {X_test.shape}')
 ```
-
-Lets stack a series of regression models. In the same way the RandomForest classifier derives a results from a series of trees, we will combine the results from a series of different models in our stack. This is done using what's called an ensemble meta-estimator called a VotingRegressor.
-
-We'll apply a Voting regressor to a random forest, gradient boosting and linear regressor.
 
 Lets stack a series of regression models. In the same way the RandomForest classifier derives a results from a series of trees, we will combine the results from a series of different models in our stack. This is done using what's called an ensemble meta-estimator called a VotingRegressor.
 
