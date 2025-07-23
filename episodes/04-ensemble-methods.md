@@ -5,14 +5,14 @@ exercises: 30
 ---
 
 :::::: questions
-- "What are ensemble methods?"
-- "What are random forests?"
-- "How can we stack estimators in sci-kit learn?"
+- What are ensemble methods?
+- What are random forests?
+- How can we stack estimators in sci-kit learn?
 ::::::
 
 :::::: objectives
- - "Learn about applying ensemble methods in scikit-learn."
- - "Understand why ensemble methods are useful."
+ - Learn about applying ensemble methods in scikit-learn.
+ - Understand why ensemble methods are useful.
 ::::::
 
 # Ensemble methods
@@ -358,5 +358,5 @@ The code above loads the penguins data and splits it into test and training port
 :::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::: keypoints
-- "Ensemble methods can be used to reduce under/over fitting training data."
+- Ensemble methods can be used to reduce under/over fitting training data.
 ::::::

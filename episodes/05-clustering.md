@@ -5,15 +5,15 @@ exercises: 30
 ---
 
 :::::: questions
- - "What is unsupervised learning?"
- - "How can we use clustering to find data points with similar attributes?"
+ - What is unsupervised learning?
+ - How can we use clustering to find data points with similar attributes?
 ::::::
 
 :::::: objectives
- - "Understand the difference between supervised and unsupervised learning"
- - "Identify clusters in data using k-means clustering."
- - "Understand the limitations of k-means when clusters overlap."
- - "Use spectral clustering to overcome the limitations of k-means."
+ - Understand the difference between supervised and unsupervised learning.
+ - Identify clusters in data using k-means clustering.
+ - Understand the limitations of k-means when clusters overlap.
+ - Use spectral clustering to overcome the limitations of k-means.
 ::::::
 
 # Unsupervised learning
@@ -352,11 +352,11 @@ Kmeans might take a few minutes while spectral will take hours.
 :::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::: keypoints
-- "Clustering is a form of unsupervised learning."
-- "Unsupervised learning algorithms don't need training."
-- "Kmeans is a popular clustering algorithm."
-- "Kmeans is less useful when one cluster exists within another, such as concentric circles."
-- "Spectral clustering can overcome some of the limitations of Kmeans."
-- "Spectral clustering is much slower than Kmeans."
-- "Scikit-Learn has functions to create example data."
+- Clustering is a form of unsupervised learning.
+- Unsupervised learning algorithms don't need training.
+- Kmeans is a popular clustering algorithm.
+- Kmeans is less useful when one cluster exists within another, such as concentric circles.
+- Spectral clustering can overcome some of the limitations of Kmeans.
+- Spectral clustering is much slower than Kmeans.
+- Scikit-Learn has functions to create example data.
 ::::::

@@ -5,17 +5,17 @@ exercises: 30
 ---
 
 :::::: questions
-- "What is supervised learning?"
-- "What is regression?"
-- "How can I model data and make predictions using regression methods?"
+- What is supervised learning?
+- What is regression?
+- How can I model data and make predictions using regression methods?
 ::::::
 
 :::::: objectives
-- "Apply linear regression with Scikit-Learn to create a model."
-- "Measure the error between a regression model and input data."
-- "Analyse and assess the accuracy of a linear model using Scikit-Learn's metrics library."
-- "Understand how more complex models can be built with non-linear equations."
-- "Apply polynomial modelling to non-linear data using Scikit-Learn."
+- Apply linear regression with Scikit-Learn to create a model.
+- Measure the error between a regression model and input data.
+- Analyse and assess the accuracy of a linear model using Scikit-Learn's metrics library.
+- Understand how more complex models can be built with non-linear equations.
+- Apply polynomial modelling to non-linear data using Scikit-Learn.
 ::::::
 
 # Supervised learning
@@ -468,7 +468,7 @@ Over fitting is the ML equivalent of learning an exam papers mark scheme off by 
 Perhaps our model is too simple? Perhaps our data is more complex than we thought? Perhaps our question/goal needs adjusting? Let's explore the penguin dataset in more depth in the next section!
 
 :::::: keypoints
-- "Scikit-Learn is a Python library with lots of useful machine learning functions."
-- "Scikit-Learn includes a linear regression function."
-- "Scikit-Learn can perform polynomial regressions to model non-linear data."
+- Scikit-Learn is a Python library with lots of useful machine learning functions.
+- Scikit-Learn includes a linear regression function.
+- Scikit-Learn can perform polynomial regressions to model non-linear data.
 ::::::

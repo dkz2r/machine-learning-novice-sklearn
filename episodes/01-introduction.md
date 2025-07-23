@@ -5,14 +5,14 @@ exercises: 10
 ---
 
 :::::: questions
-- "What is machine learning?"
-- "What are some useful machine learning techniques?"
+- What is machine learning?
+- What are some useful machine learning techniques?
 ::::::
 
 :::::: objectives
-- "Gain an overview of what machine learning is and the techniques available."
-- "Understand how machine learning and artificial intelligence differ."
-- "Be aware of some caveats when using Machine Learning."
+- Gain an overview of what machine learning is and the techniques available.
+- Understand how machine learning and artificial intelligence differ.
+- Be aware of some caveats when using Machine Learning.
 ::::::
 
 # What is machine learning?
@@ -126,8 +126,8 @@ The figure below provides a nice overview of some of the sub-domains of ML and t
 [Image from Vasily Zubarev via their blog](https://vas3k.com/blog/machine_learning/) with modifications in blue to denote lesson content.
 
 :::::: keypoints
-- "Machine learning is a set of tools and techniques that use data to make predictions."
-- "Artificial intelligence is a broader term that refers to making computers show human-like intelligence."
-- "Deep learning is a subset of machine learning."
-- "All machine learning systems have limitations to be aware of."
+- Machine learning is a set of tools and techniques that use data to make predictions.
+- Artificial intelligence is a broader term that refers to making computers show human-like intelligence.
+- Deep learning is a subset of machine learning.
+- All machine learning systems have limitations to be aware of.
 ::::::

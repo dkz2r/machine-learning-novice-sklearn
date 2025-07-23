@@ -9,10 +9,10 @@ exercises: 30
 ::::::
 
 :::::: objectives
- - "Recall that most data is inherently multidimensional."
- - "Understand that reducing the number of dimensions can simplify modelling and allow classifications to be performed."
- - "Apply Principle Component Analysis (PCA) and t-distributed Stochastic Neighbor Embedding (t-SNE) to reduce the dimensions of data."
- - "Evaluate the relative performance of PCA and t-SNE in reducing data dimensionality."
+ - Recall that most data is inherently multidimensional.
+ - Understand that reducing the number of dimensions can simplify modelling and allow classifications to be performed.
+ - Apply Principle Component Analysis (PCA) and t-distributed Stochastic Neighbor Embedding (t-SNE) to reduce the dimensions of data.
+ - Evaluate the relative performance of PCA and t-SNE in reducing data dimensionality.
 ::::::
 
 # Dimensionality reduction
@@ -302,8 +302,7 @@ exploration?
 
 :::::::::::::::::::::::::::::::::::::::::::::::
 
-::: keypoints
-- "PCA is a linear dimensionality reduction technique for tabular data"
-- "t-SNE is another dimensionality reduction technique for tabular data that is more general than PCA"
-:::
-
+:::::: keypoints
+- PCA is a linear dimensionality reduction technique for tabular data.
+- t-SNE is another dimensionality reduction technique for tabular data that is more general than PCA.
+::::::

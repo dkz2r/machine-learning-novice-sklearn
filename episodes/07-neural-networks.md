@@ -5,17 +5,17 @@ exercises: 30
 ---
 
 :::::: questions
-- "What are Neural Networks?"
-- "How can we classify images using a neural network?"
+- What are Neural Networks?
+- How can we classify images using a neural network?
 ::::::
 
 :::::: objectives
-- "Understand the basic architecture of a perceptron."
-- "Be able to create a perceptron to encode a simple function."
-- "Understand that layers of perceptrons allow non-linear separable problems to be solved."
-- "Train a multi-layer perceptron using Scikit-Learn."
-- "Evaluate the accuracy of a multi-layer perceptron using real input data."
-- "Understand that cross validation allows the entire data set to be used in the training process."
+- Understand the basic architecture of a perceptron.
+- Be able to create a perceptron to encode a simple function.
+- Understand that layers of perceptrons allow non-linear separable problems to be solved.
+- Train a multi-layer perceptron using Scikit-Learn.
+- Evaluate the accuracy of a multi-layer perceptron using real input data.
+- Understand that cross validation allows the entire data set to be used in the training process.
 ::::::
 
 
@@ -490,14 +490,14 @@ Does it do any better/worse than Google?
 :::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::: keypoints
-- "Perceptrons are artificial neurons which build neural networks."
-- "A perceptron takes multiple inputs, multiplies each by a weight value and sums the weighted inputs. It then applies an activation function to the sum."
-- "A single perceptron can solve simple functions which are linearly separable."
-- "Multiple perceptrons can be combined to form a neural network which can solve functions that aren't linearly separable."
-- "We can train a whole neural network with the back propagation algorithm. Scikit-learn includes an implementation of this algorithm."
-- "Training a neural network requires some training data to show the network examples of what to learn."
-- "To validate our training we split the training data into a training set and a test set."
-- "To ensure the whole dataset can be used in training and testing we can train multiple times with different subsets of the data acting as training/testing data. This is called cross validation."
-- "Deep learning neural networks are a very powerful modern machine learning technique. Scikit-Learn does not support these but other libraries like Tensorflow do."
-- "Several companies now offer cloud APIs where we can train neural networks on powerful computers."
+- Perceptrons are artificial neurons which build neural networks.
+- A perceptron takes multiple inputs, multiplies each by a weight value and sums the weighted inputs. It then applies an activation function to the sum.
+- A single perceptron can solve simple functions which are linearly separable.
+- Multiple perceptrons can be combined to form a neural network which can solve functions that aren't linearly separable.
+- We can train a whole neural network with the back propagation algorithm. Scikit-learn includes an implementation of this algorithm."
+- Training a neural network requires some training data to show the network examples of what to learn
+- To validate our training we split the training data into a training set and a test set.
+- To ensure the whole dataset can be used in training and testing we can train multiple times with different subsets of the data acting as training/testing data. This is called cross validation.
+- Deep learning neural networks are a very powerful modern machine learning technique. Scikit-Learn does not support these but other libraries like Tensorflow do.
+- Several companies now offer cloud APIs where we can train neural networks on powerful computers.
 ::::::

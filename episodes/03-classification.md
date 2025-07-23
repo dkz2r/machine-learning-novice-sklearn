@@ -5,13 +5,13 @@ exercises: 0
 ---
 
 :::::: questions
-- "How can I classify data into known categories?"
+- How can I classify data into known categories?
 ::::::
 
 :::::: objectives
-- "Use two different supervised methods to classify data."
-- "Learn about the concept of hyper-parameters."
-- "Learn to validate and cross-validate models"
+- Use two different supervised methods to classify data.
+- Learn about the concept of hyper-parameters.
+- Learn to validate and cross-validate models
 ::::::
 
 # Classification
@@ -317,5 +317,5 @@ plt.show()
 While this SVM model performs slightly worse than our decision tree (95.6% vs. 98.5%), it's likely that the non-linear boundaries will perform better when exposed to more and more real data, as decision trees are prone to overfitting and requires complex linear models to reproduce simple non-linear boundaries. It's important to pick a model that is appropriate for your problem and data trends!
 
 :::::: keypoints
-- "Classification requires labelled data (is supervised)"
+- Classification requires labelled data (is supervised).
 ::::::
