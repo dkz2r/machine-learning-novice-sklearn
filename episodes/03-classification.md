@@ -21,7 +21,7 @@ Classification is a supervised method to recognise and group data objects into a
 In this episode we are going to introduce the concept of supervised classification by classifying penguin data into different species of penguins using Scikit-Learn.
 
 ## The penguins dataset
-We're going to be using the penguins dataset of Allison Horst, published [here](https://github.com/allisonhorst/palmerpenguins), The dataset contains 344 size measurements for three penguin species (Chinstrap, Gentoo and Adélie) observed on three islands in the Palmer Archipelago, Antarctica.
+We're going to be using the [Palmer Penguins dataset](https://github.com/allisonhorst/palmerpenguins) of Allison Horst, The dataset contains 344 size measurements for three penguin species (Chinstrap, Gentoo and Adélie) observed on three islands in the Palmer Archipelago, Antarctica.
 
 ![*Artwork by @allison_horst*](fig/palmer_penguins.png){alt="A cartoon image of three penguins standing on a snowy island. The penguins are labelled as Chinstrap, Gentoo and Adélie."}
 

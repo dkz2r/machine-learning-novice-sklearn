@@ -201,7 +201,7 @@ We might look at a measure of similarity to test if this single cluster is actua
 ## Spectral clustering
 
 Spectral clustering is a technique that attempts to overcome the linear boundary problem of k-means clustering.
-It works by treating clustering as a graph partitioning problem and looks for nodes in a graph with a small distance between them. See [this](https://www.cvl.isy.liu.se/education/graduate/spectral-clustering/SC_course_part1.pdf) introduction to spectral clustering if you are interested in more details about how spectral clustering works.
+It works by treating clustering as a graph partitioning problem and looks for nodes in a graph with a small distance between them. See [this introduction to spectral clustering](https://www.cvl.isy.liu.se/education/graduate/spectral-clustering/SC_course_part1.pdf) if you are interested in more details about how spectral clustering works.
 
 Here is an example of spectral clustering on two concentric circles:
 
