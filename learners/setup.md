@@ -2,7 +2,7 @@
 title: Setup
 ---
 
-# Setup
+## Setup
 
 ## Software
 
@@ -26,7 +26,7 @@ you are ready to go as soon as the workshop begins.
 
 You will need the Seaborn, MatPlotLib, Pandas, Numpy and OpenCV packages.
 
-# Setup
+## Directory Setup
 
 Create a new directory for the workshop, then launch a terminal in it:
 

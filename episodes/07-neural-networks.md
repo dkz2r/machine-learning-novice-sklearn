@@ -19,7 +19,7 @@ exercises: 30
 ::::::
 
 
-# Neural networks
+## Neural networks
 
 Neural networks are a machine learning method inspired by how the human brain works. They are particularly good at pattern recognition and classification tasks, often using images as inputs. They are a well-established machine learning technique, having been around since the 1950s, but they've gone through several iterations to overcome limitations in previous generations. Using state-of-the-art neural networks is often referred to as 'deep learning'.
 
