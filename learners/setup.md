@@ -66,6 +66,7 @@ With the environment activated, install the prerequisites:
 
 ```bash
 pip install numpy pandas matplotlib seaborn opencv-python scikit-learn
+pip install jupyterlab # optional
 ```
 
 ### uv
@@ -110,6 +111,7 @@ Once the environment is activated, you can install the required packages using:
 
 ```bash
 uv pip install numpy pandas matplotlib seaborn opencv-python scikit-learn
+uv pip install jupyterlab # optional
 ```
 
 :::

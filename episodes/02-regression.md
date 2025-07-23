@@ -43,6 +43,13 @@ Regression can be as simple as drawing a "line of best fit" through data points,
 
 We've had a lot of theory so time to start some actual coding! Let's create regression models for a small bundle of datasets known as [Anscombe's Quartet](https://en.wikipedia.org/wiki/Anscombe%27s_quartet). These datasets are available through the Python plotting library [Seaborn](https://seaborn.pydata.org/). Let's define our bundle of datasets, extract out the first dataset, and inspect it's contents:
 
+
+::: instructor
+
+Francis Anscombe was a statistician who created a set of datasets that all have the same basic statistical properties, such as means and standard deviations, but which look very different when plotted. This is a great example of how statistics can be misleading, and why visualising data is important.
+
+:::
+
 ```python
 import seaborn as sns
 
@@ -104,7 +111,7 @@ from sklearn.linear_model import LinearRegression
 
 def fit_a_linear_model(x_data, y_data):
     # Define our estimator/model
-    model = LinearRegression(fit_intercept=True)
+    model = LinearRegression()
 
     # train our estimator/model using our data
     lin_regress = model.fit(x_data, y_data)
@@ -135,6 +142,21 @@ def predict_linear_model(lin_regress, x_data, y_data):
     # return our trained model so that we can use it later
     return linear_data
 ```
+
+::: instructor
+
+The Mean Squared Error (MSE) is a common metric used to measure the quality of a regression model.
+It calculates the average of the squares of the errors, which are the differences between predicted
+and actual values. The RMSE is simply the square root of the MSE, and it provides a measure of how
+far off our predictions are from the actual values in the same units as our labels.
+
+Why not Mean Absolute Error? or Mean Squared Error?
+
+RMSE more heavily penalises large errors, and because we square and then take the root, the value
+is in the same units as our data, which makes it easier to interpret. It also has nice mathematical
+properties that make it easier to work with in some cases.
+
+:::
 
 Finally, we'll define a function to plot our input data, our linear fit, and our predictions:
 
@@ -225,6 +247,15 @@ Now that we have learnt how to do a linear regression it's time look into polyno
 If we have a polynomial of degree N=1 we once again return to a linear equation `y = a + bx` or as it is more commonly written `y = mx + c`. Let's create a polynomial regression using N=2.
 
 In Scikit-Learn this is done in two steps. First we pre-process our input data `x_data` into a polynomial representation using the `PolynomialFeatures` function. Then we can create our polynomial regressions using the `LinearRegression().fit()` function, but this time using the polynomial representation of our `x_data`.
+
+::: instructor
+
+`PolynomialFeatures` is a class in Scikit-Learn that generates polynomial features. We specify a
+degree, then "fit_transform" our data to create a new feature set that includes all polynomial
+combinations, so for example `PolynomialFeatures(degree=2)` will create a new feature set that
+includes a constant term, the original feature, and the square of the original feature.
+
+:::
 
 ```python
 from sklearn.preprocessing import PolynomialFeatures
@@ -332,43 +363,59 @@ Dataset III looks like a linear relation that has a single outlier, rather than 
 For Dataset IV it looks like `y` may be a better estimator of `x`, than `x` is at estimating `y`.
 
 ```python
-def pre_process_poly(x, y, N):
+def pre_process_poly(x, y, N):  # <- Add N as an input parameter
     # sklearn requires a 2D array, so lets reshape our 1D arrays.
     x_data = np.array(x).reshape(-1, 1)
     y_data = np.array(y).reshape(-1, 1)
 
     # create a polynomial representation of our data
-    poly_features = PolynomialFeatures(degree=N)
+    poly_features = PolynomialFeatures(degree=N) # <- Replace 2 with N
     x_poly = poly_features.fit_transform(x_data)
 
     return x_poly, x_data, y_data
 
-def plot_poly_model(x_data, poly_data, N):
-    # visualise!
-    plt.plot(x_data, poly_data, label="poly fit N=" + str(N))
-    plt.legend()
+def fit_poly_model(x_poly, y_data):
+    # Define our estimator/model(s)
+    poly_regress = LinearRegression()
 
-def fit_predict_plot_poly(x, y, N):
-    # Combine all of the steps
-    x_poly, x_data, y_data = pre_process_poly(x, y, N)
-    poly_regress = fit_poly_model(x_poly, y_data)
-    poly_data = predict_poly_model(poly_regress, x_poly, y_data)
-    plot_poly_model(x_data, poly_data, N)
+    # define and train our model
+    poly_regress.fit(x_poly, y_data)
+
+    # inspect trained model parameters
+    poly_m = poly_regress.coef_
+    poly_c = poly_regress.intercept_
+    print("poly_coefs", poly_m, poly_c)
 
     return poly_regress
 
-for ds in ["I", "II", "III", "IV"]:
-    # Sort our data in order of our x (feature) values
-    data_ds = data[data["dataset"] == ds]
-    data_ds = data_ds.sort_values("x")
-    fit_predict_plot_linear(data_ds["x"], data_ds["y"])
-    for N in range(2,11):
-        print("Polynomial degree =",N)
-        fit_predict_plot_poly(data_ds["x"], data_ds["y"],N)
-    plt.show()
+def predict_poly_model(poly_regress, x_poly, y_data):
+    # predict some values using our trained estimator/model
+    # (in this case - our input data)
+    poly_data = poly_regress.predict(x_poly)
+
+    poly_error = math.sqrt(mean_squared_error(y_data, poly_data))
+    print("poly error=", poly_error)
+
+    return poly_data
+
+
+def plot_poly_model(x_data, poly_data, N): # <- Add N as an input parameter
+    # visualise!
+    plt.plot(x_data, poly_data, label=f"poly fit (N={N})") # <- Add N to the label
+    plt.legend()
+
+
+def fit_predict_plot_poly(x, y, N): # <- Add N as an input parameter
+    # Combine all of the steps
+    x_poly, x_data, y_data = pre_process_poly(x, y, N) # <- Pass N to pre_process_poly
+    poly_regress = fit_poly_model(x_poly, y_data)
+    poly_data = predict_poly_model(poly_regress, x_poly, y_data)
+    plot_poly_model(x_data, poly_data, N) # <- Pass N to plot_poly_model
+
+    return poly_regress
 ```
 
-and
+and a loop to perform polynomial regressions for N=2 to N=10 on each of the datasets:
 
 ```python
 for ds in ["I", "II", "III", "IV"]:
