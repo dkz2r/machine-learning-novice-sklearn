@@ -625,9 +625,9 @@ inspect the attributes by printing them out.</p>
 <p>For the the purposes of learning how to create and use ensemble
 methods and since it is a toy dataset, we will blindly use this dataset
 without inspecting it, cleaning or pre-processing it further.</p>
-<div id="exercise-investigate-and-visualise-the-dataset" class="callout discussion">
+<div id="exercise-investigate-and-visualise-the-dataset" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise-investigate-and-visualise-the-dataset" class="callout-inner">
 <h3 class="callout-title">Exercise: Investigate and visualise the dataset</h3>
@@ -641,26 +641,49 @@ problems?</p>
 </div>
 </div>
 </div>
-<p>Lets start by splitting the dataset into training and testing
-subsets:</p>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>There’s no real right answer here, but here’s a couple of things you
+might have looked at:</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># split into train and test sets, We are selecting an 80%-20% train-test split.</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'train size: </span><span class="sc">{</span>X_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'test size: </span><span class="sc">{</span>X_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Both the target and the House age are capped</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>y.hist(bins<span class="op">=</span><span class="dv">50</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>X.HouseAge.hist(bins<span class="op">=</span><span class="dv">50</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co"># Some of the fields are highly skewed</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>X.MedInc.hist(bins<span class="op">=</span><span class="dv">50</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>X.AveBedrms.describe()</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co"># Houses are more expensive in the coastal areas</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>plt.scatter(X.Longitude, X.Latitude, c<span class="op">=</span>y, cmap<span class="op">=</span><span class="st">'coolwarm'</span>, s<span class="op">=</span><span class="dv">10</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co"># Some features are correlated with the target</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>plt.scatter(X.MedInc, y)</span></code></pre>
 </div>
-<p>Lets stack a series of regression models. In the same way the
-RandomForest classifier derives a results from a series of trees, we
-will combine the results from a series of different models in our stack.
-This is done using what’s called an ensemble meta-estimator called a
-VotingRegressor.</p>
-<p>We’ll apply a Voting regressor to a random forest, gradient boosting
-and linear regressor.</p>
+</div>
+</div>
+</div>
+</div>
+<p>Lets start by splitting the dataset into training and testing
+subsets:</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># split into train and test sets, We are selecting an 80%-20% train-test split.</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'train size: </span><span class="sc">{</span>X_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'test size: </span><span class="sc">{</span>X_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code></pre>
+</div>
 <p>Lets stack a series of regression models. In the same way the
 RandomForest classifier derives a results from a series of trees, we
 will combine the results from a series of different models in our stack.
@@ -703,29 +726,29 @@ ensemble in an ensemble!</p>
 <p>A VotingRegressor can train several base estimators on the whole
 dataset, and it can take the average of the individual predictions to
 form a final prediction.</p>
-<div class="codewrapper sourceCode" id="cb7">
+<div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> (</span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>    GradientBoostingRegressor,</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>    RandomForestRegressor,</span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>    VotingRegressor,</span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>)</span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co"># Initialize estimators</span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>rf_reg <span class="op">=</span> RandomForestRegressor(random_state<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>gb_reg <span class="op">=</span> GradientBoostingRegressor(random_state<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>linear_reg <span class="op">=</span> LinearRegression()</span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>voting_reg <span class="op">=</span> VotingRegressor([(<span class="st">"rf"</span>, rf_reg), (<span class="st">"gb"</span>, gb_reg), (<span class="st">"lr"</span>, linear_reg)])</span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="co"># fit/train voting estimator</span></span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>voting_reg.fit(X_train, y_train)</span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="co"># lets also fit/train the individual models for comparison</span></span>
-<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a>rf_reg.fit(X_train, y_train)</span>
-<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>gb_reg.fit(X_train, y_train)</span>
-<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a>linear_reg.fit(X_train, y_train)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> (</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>    GradientBoostingRegressor,</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>    RandomForestRegressor,</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>    VotingRegressor,</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>)</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co"># Initialize estimators</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>rf_reg <span class="op">=</span> RandomForestRegressor(random_state<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>gb_reg <span class="op">=</span> GradientBoostingRegressor(random_state<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>linear_reg <span class="op">=</span> LinearRegression()</span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>voting_reg <span class="op">=</span> VotingRegressor([(<span class="st">"rf"</span>, rf_reg), (<span class="st">"gb"</span>, gb_reg), (<span class="st">"lr"</span>, linear_reg)])</span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co"># fit/train voting estimator</span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>voting_reg.fit(X_train, y_train)</span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="co"># lets also fit/train the individual models for comparison</span></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a>rf_reg.fit(X_train, y_train)</span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a>gb_reg.fit(X_train, y_train)</span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a>linear_reg.fit(X_train, y_train)</span></code></pre>
 </div>
 <p>We fit the voting regressor in the same way we would fit a single
 model. When the voting regressor is instantiated we pass it a parameter
@@ -733,47 +756,47 @@ containing a list of tuples that contain the estimators we wish to
 stack: in this case the random forest, gradient boosting and linear
 regressors. To get a sense of what this is doing lets predict the first
 20 samples in the test portion of the data and plot the results.</p>
-<div class="codewrapper sourceCode" id="cb8">
+<div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co"># make predictions</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>X_test_20 <span class="op">=</span> X_test[:<span class="dv">20</span>] <span class="co"># first 20 for visualisation</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>rf_pred <span class="op">=</span> rf_reg.predict(X_test_20)</span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>gb_pred <span class="op">=</span> gb_reg.predict(X_test_20)</span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>linear_pred <span class="op">=</span> linear_reg.predict(X_test_20)</span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>voting_pred <span class="op">=</span> voting_reg.predict(X_test_20)</span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>plt.figure()</span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>plt.plot(gb_pred,  <span class="st">"o"</span>, color<span class="op">=</span><span class="st">"black"</span>, label<span class="op">=</span><span class="st">"GradientBoostingRegressor"</span>)</span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>plt.plot(rf_pred,  <span class="st">"o"</span>, color<span class="op">=</span><span class="st">"blue"</span>, label<span class="op">=</span><span class="st">"RandomForestRegressor"</span>)</span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>plt.plot(linear_pred,  <span class="st">"o"</span>, color<span class="op">=</span><span class="st">"green"</span>, label<span class="op">=</span><span class="st">"LinearRegression"</span>)</span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>plt.plot(voting_pred,  <span class="st">"x"</span>, color<span class="op">=</span><span class="st">"red"</span>, ms<span class="op">=</span><span class="dv">10</span>, label<span class="op">=</span><span class="st">"VotingRegressor"</span>)</span>
-<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a>plt.tick_params(axis<span class="op">=</span><span class="st">"x"</span>, which<span class="op">=</span><span class="st">"both"</span>, bottom<span class="op">=</span><span class="va">False</span>, top<span class="op">=</span><span class="va">False</span>, labelbottom<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a>plt.ylabel(<span class="st">"predicted"</span>)</span>
-<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a>plt.xlabel(<span class="st">"training samples"</span>)</span>
-<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">"best"</span>)</span>
-<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a>plt.title(<span class="st">"Regressor predictions and their average"</span>)</span>
-<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a></span>
-<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a>plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co"># make predictions</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>X_test_20 <span class="op">=</span> X_test[:<span class="dv">20</span>] <span class="co"># first 20 for visualisation</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>rf_pred <span class="op">=</span> rf_reg.predict(X_test_20)</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>gb_pred <span class="op">=</span> gb_reg.predict(X_test_20)</span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>linear_pred <span class="op">=</span> linear_reg.predict(X_test_20)</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>voting_pred <span class="op">=</span> voting_reg.predict(X_test_20)</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>plt.figure()</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>plt.plot(gb_pred,  <span class="st">"o"</span>, color<span class="op">=</span><span class="st">"black"</span>, label<span class="op">=</span><span class="st">"GradientBoostingRegressor"</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>plt.plot(rf_pred,  <span class="st">"o"</span>, color<span class="op">=</span><span class="st">"blue"</span>, label<span class="op">=</span><span class="st">"RandomForestRegressor"</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>plt.plot(linear_pred,  <span class="st">"o"</span>, color<span class="op">=</span><span class="st">"green"</span>, label<span class="op">=</span><span class="st">"LinearRegression"</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a>plt.plot(voting_pred,  <span class="st">"x"</span>, color<span class="op">=</span><span class="st">"red"</span>, ms<span class="op">=</span><span class="dv">10</span>, label<span class="op">=</span><span class="st">"VotingRegressor"</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>plt.tick_params(axis<span class="op">=</span><span class="st">"x"</span>, which<span class="op">=</span><span class="st">"both"</span>, bottom<span class="op">=</span><span class="va">False</span>, top<span class="op">=</span><span class="va">False</span>, labelbottom<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>plt.ylabel(<span class="st">"predicted"</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a>plt.xlabel(<span class="st">"training samples"</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">"best"</span>)</span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a>plt.title(<span class="st">"Regressor predictions and their average"</span>)</span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
 <figure><img src="../fig/house_price_voting_regressor.svg" alt="A plot showing the predictions of different regression models on the same dataset. Each model's predictions are represented by different colored markers, and the voting regressor's predictions are shown as larger red crosses." class="figure mx-auto d-block"><div class="figcaption">Regressor predictions and average from
 stack</div>
 </figure><p>Finally, lets see how the average compares against each single
 estimator in the stack?</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'random forest: </span><span class="sc">{</span>rf_reg<span class="sc">.</span>score(X_test, y_test)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'gradient boost: </span><span class="sc">{</span>gb_reg<span class="sc">.</span>score(X_test, y_test)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'linear regression: </span><span class="sc">{</span>linear_reg<span class="sc">.</span>score(X_test, y_test)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'voting regressor: </span><span class="sc">{</span>voting_reg<span class="sc">.</span>score(X_test, y_test)<span class="sc">}</span><span class="ss">'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'random forest: </span><span class="sc">{</span>rf_reg<span class="sc">.</span>score(X_test, y_test)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'gradient boost: </span><span class="sc">{</span>gb_reg<span class="sc">.</span>score(X_test, y_test)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'linear regression: </span><span class="sc">{</span>linear_reg<span class="sc">.</span>score(X_test, y_test)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'voting regressor: </span><span class="sc">{</span>voting_reg<span class="sc">.</span>score(X_test, y_test)<span class="sc">}</span><span class="ss">'</span>)</span></code></pre>
 </div>
 <p>Each of our models score between 0.61-0.82, which at the high end is
 good, but at the low end is a pretty poor prediction accuracy score. Do
@@ -797,57 +820,57 @@ or adjusting our training data features and train-test-split data.</p>
 apply a stack to the penguins dataset using a random forest, SVM and
 decision tree classifier, or a selection of any other classifier
 estimators available in sci-kit learn?</p>
-<div class="codewrapper sourceCode" id="cb10">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>penguins <span class="op">=</span> sns.load_dataset(<span class="st">'penguins'</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>feature_names <span class="op">=</span> [<span class="st">'bill_length_mm'</span>, <span class="st">'bill_depth_mm'</span>, <span class="st">'flipper_length_mm'</span>, <span class="st">'body_mass_g'</span>]</span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>penguins.dropna(subset<span class="op">=</span>feature_names, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>species_names <span class="op">=</span> penguins[<span class="st">'species'</span>].unique()</span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co"># Define data and targets</span></span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>X <span class="op">=</span> penguins[feature_names]</span>
-<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>y <span class="op">=</span> penguins.species</span>
-<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a></span>
-<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="co"># Split data in training and test set</span></span>
-<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a></span>
-<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a></span>
-<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'train size: </span><span class="sc">{</span>X_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'test size: </span><span class="sc">{</span>X_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>penguins <span class="op">=</span> sns.load_dataset(<span class="st">'penguins'</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>feature_names <span class="op">=</span> [<span class="st">'bill_length_mm'</span>, <span class="st">'bill_depth_mm'</span>, <span class="st">'flipper_length_mm'</span>, <span class="st">'body_mass_g'</span>]</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>penguins.dropna(subset<span class="op">=</span>feature_names, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>species_names <span class="op">=</span> penguins[<span class="st">'species'</span>].unique()</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co"># Define data and targets</span></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>X <span class="op">=</span> penguins[feature_names]</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>y <span class="op">=</span> penguins.species</span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="co"># Split data in training and test set</span></span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'train size: </span><span class="sc">{</span>X_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'test size: </span><span class="sc">{</span>X_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code></pre>
 </div>
 <p>The code above loads the penguins data and splits it into test and
 training portions. Have a play around with stacking some classifiers
 using the <code>sklearn.ensemble.VotingClassifier</code> using the code
 comments below as a guide.</p>
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># import classifiers</span></span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co"># instantiate classifiers</span></span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co"># fit classifiers</span></span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co"># instantiate voting classifier and fit data</span></span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co"># make predictions</span></span>
-<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a></span>
-<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="co"># compare scores</span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># import classifiers</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="co"># instantiate classifiers</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co"># fit classifiers</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co"># instantiate voting classifier and fit data</span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="co"># make predictions</span></span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="co"># compare scores</span></span></code></pre>
 </div>
 </div>
 </div>
 </div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 
 </div>

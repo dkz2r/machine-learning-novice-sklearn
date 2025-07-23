@@ -444,6 +444,7 @@ Quartet</a>. These datasets are available through the Python plotting
 library <a href="https://seaborn.pydata.org/" class="external-link">Seaborn</a>. Let’s define
 our bundle of datasets, extract out the first dataset, and inspect it’s
 contents:</p>
+
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -515,7 +516,7 @@ We’ll also inspect the trained model parameters <code>m</code> and
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="kw">def</span> fit_a_linear_model(x_data, y_data):</span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>    <span class="co"># Define our estimator/model</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>    model <span class="op">=</span> LinearRegression(fit_intercept<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>    model <span class="op">=</span> LinearRegression()</span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>    <span class="co"># train our estimator/model using our data</span></span>
 <span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>    lin_regress <span class="op">=</span> model.fit(x_data, y_data)</span>
@@ -548,6 +549,7 @@ predictions:</p>
 <span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>    <span class="co"># return our trained model so that we can use it later</span></span>
 <span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>    <span class="cf">return</span> linear_data</span></code></pre>
 </div>
+
 <p>Finally, we’ll define a function to plot our input data, our linear
 fit, and our predictions:</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -670,6 +672,7 @@ the <code>PolynomialFeatures</code> function. Then we can create our
 polynomial regressions using the <code>LinearRegression().fit()</code>
 function, but this time using the polynomial representation of our
 <code>x_data</code>.</p>
+
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -794,42 +797,59 @@ IV it looks like <code>y</code> may be a better estimator of
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="kw">def</span> pre_process_poly(x, y, N):</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="kw">def</span> pre_process_poly(x, y, N):  <span class="co"># &lt;- Add N as an input parameter</span></span>
 <span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>    <span class="co"># sklearn requires a 2D array, so lets reshape our 1D arrays.</span></span>
 <span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>    x_data <span class="op">=</span> np.array(x).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
 <span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>    y_data <span class="op">=</span> np.array(y).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
 <span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a></span>
 <span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>    <span class="co"># create a polynomial representation of our data</span></span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>    poly_features <span class="op">=</span> PolynomialFeatures(degree<span class="op">=</span>N)</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>    poly_features <span class="op">=</span> PolynomialFeatures(degree<span class="op">=</span>N) <span class="co"># &lt;- Replace 2 with N</span></span>
 <span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>    x_poly <span class="op">=</span> poly_features.fit_transform(x_data)</span>
 <span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a></span>
 <span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>    <span class="cf">return</span> x_poly, x_data, y_data</span>
 <span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a></span>
-<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="kw">def</span> plot_poly_model(x_data, poly_data, N):</span>
-<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a>    <span class="co"># visualise!</span></span>
-<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a>    plt.plot(x_data, poly_data, label<span class="op">=</span><span class="st">"poly fit N="</span> <span class="op">+</span> <span class="bu">str</span>(N))</span>
-<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a>    plt.legend()</span>
-<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a></span>
-<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a><span class="kw">def</span> fit_predict_plot_poly(x, y, N):</span>
-<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a>    <span class="co"># Combine all of the steps</span></span>
-<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a>    x_poly, x_data, y_data <span class="op">=</span> pre_process_poly(x, y, N)</span>
-<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a>    poly_regress <span class="op">=</span> fit_poly_model(x_poly, y_data)</span>
-<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a>    poly_data <span class="op">=</span> predict_poly_model(poly_regress, x_poly, y_data)</span>
-<span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a>    plot_poly_model(x_data, poly_data, N)</span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="kw">def</span> fit_poly_model(x_poly, y_data):</span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a>    <span class="co"># Define our estimator/model(s)</span></span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a>    poly_regress <span class="op">=</span> LinearRegression()</span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a>    <span class="co"># define and train our model</span></span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a>    poly_regress.fit(x_poly, y_data)</span>
+<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a>    <span class="co"># inspect trained model parameters</span></span>
+<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a>    poly_m <span class="op">=</span> poly_regress.coef_</span>
+<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a>    poly_c <span class="op">=</span> poly_regress.intercept_</span>
+<span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"poly_coefs"</span>, poly_m, poly_c)</span>
 <span id="cb14-23"><a href="#cb14-23" tabindex="-1"></a></span>
 <span id="cb14-24"><a href="#cb14-24" tabindex="-1"></a>    <span class="cf">return</span> poly_regress</span>
 <span id="cb14-25"><a href="#cb14-25" tabindex="-1"></a></span>
-<span id="cb14-26"><a href="#cb14-26" tabindex="-1"></a><span class="cf">for</span> ds <span class="kw">in</span> [<span class="st">"I"</span>, <span class="st">"II"</span>, <span class="st">"III"</span>, <span class="st">"IV"</span>]:</span>
-<span id="cb14-27"><a href="#cb14-27" tabindex="-1"></a>    <span class="co"># Sort our data in order of our x (feature) values</span></span>
-<span id="cb14-28"><a href="#cb14-28" tabindex="-1"></a>    data_ds <span class="op">=</span> data[data[<span class="st">"dataset"</span>] <span class="op">==</span> ds]</span>
-<span id="cb14-29"><a href="#cb14-29" tabindex="-1"></a>    data_ds <span class="op">=</span> data_ds.sort_values(<span class="st">"x"</span>)</span>
-<span id="cb14-30"><a href="#cb14-30" tabindex="-1"></a>    fit_predict_plot_linear(data_ds[<span class="st">"x"</span>], data_ds[<span class="st">"y"</span>])</span>
-<span id="cb14-31"><a href="#cb14-31" tabindex="-1"></a>    <span class="cf">for</span> N <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">11</span>):</span>
-<span id="cb14-32"><a href="#cb14-32" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Polynomial degree ="</span>,N)</span>
-<span id="cb14-33"><a href="#cb14-33" tabindex="-1"></a>        fit_predict_plot_poly(data_ds[<span class="st">"x"</span>], data_ds[<span class="st">"y"</span>],N)</span>
-<span id="cb14-34"><a href="#cb14-34" tabindex="-1"></a>    plt.show()</span></code></pre>
+<span id="cb14-26"><a href="#cb14-26" tabindex="-1"></a><span class="kw">def</span> predict_poly_model(poly_regress, x_poly, y_data):</span>
+<span id="cb14-27"><a href="#cb14-27" tabindex="-1"></a>    <span class="co"># predict some values using our trained estimator/model</span></span>
+<span id="cb14-28"><a href="#cb14-28" tabindex="-1"></a>    <span class="co"># (in this case - our input data)</span></span>
+<span id="cb14-29"><a href="#cb14-29" tabindex="-1"></a>    poly_data <span class="op">=</span> poly_regress.predict(x_poly)</span>
+<span id="cb14-30"><a href="#cb14-30" tabindex="-1"></a></span>
+<span id="cb14-31"><a href="#cb14-31" tabindex="-1"></a>    poly_error <span class="op">=</span> math.sqrt(mean_squared_error(y_data, poly_data))</span>
+<span id="cb14-32"><a href="#cb14-32" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"poly error="</span>, poly_error)</span>
+<span id="cb14-33"><a href="#cb14-33" tabindex="-1"></a></span>
+<span id="cb14-34"><a href="#cb14-34" tabindex="-1"></a>    <span class="cf">return</span> poly_data</span>
+<span id="cb14-35"><a href="#cb14-35" tabindex="-1"></a></span>
+<span id="cb14-36"><a href="#cb14-36" tabindex="-1"></a></span>
+<span id="cb14-37"><a href="#cb14-37" tabindex="-1"></a><span class="kw">def</span> plot_poly_model(x_data, poly_data, N): <span class="co"># &lt;- Add N as an input parameter</span></span>
+<span id="cb14-38"><a href="#cb14-38" tabindex="-1"></a>    <span class="co"># visualise!</span></span>
+<span id="cb14-39"><a href="#cb14-39" tabindex="-1"></a>    plt.plot(x_data, poly_data, label<span class="op">=</span><span class="ss">f"poly fit (N=</span><span class="sc">{</span>N<span class="sc">}</span><span class="ss">)"</span>) <span class="co"># &lt;- Add N to the label</span></span>
+<span id="cb14-40"><a href="#cb14-40" tabindex="-1"></a>    plt.legend()</span>
+<span id="cb14-41"><a href="#cb14-41" tabindex="-1"></a></span>
+<span id="cb14-42"><a href="#cb14-42" tabindex="-1"></a></span>
+<span id="cb14-43"><a href="#cb14-43" tabindex="-1"></a><span class="kw">def</span> fit_predict_plot_poly(x, y, N): <span class="co"># &lt;- Add N as an input parameter</span></span>
+<span id="cb14-44"><a href="#cb14-44" tabindex="-1"></a>    <span class="co"># Combine all of the steps</span></span>
+<span id="cb14-45"><a href="#cb14-45" tabindex="-1"></a>    x_poly, x_data, y_data <span class="op">=</span> pre_process_poly(x, y, N) <span class="co"># &lt;- Pass N to pre_process_poly</span></span>
+<span id="cb14-46"><a href="#cb14-46" tabindex="-1"></a>    poly_regress <span class="op">=</span> fit_poly_model(x_poly, y_data)</span>
+<span id="cb14-47"><a href="#cb14-47" tabindex="-1"></a>    poly_data <span class="op">=</span> predict_poly_model(poly_regress, x_poly, y_data)</span>
+<span id="cb14-48"><a href="#cb14-48" tabindex="-1"></a>    plot_poly_model(x_data, poly_data, N) <span class="co"># &lt;- Pass N to plot_poly_model</span></span>
+<span id="cb14-49"><a href="#cb14-49" tabindex="-1"></a></span>
+<span id="cb14-50"><a href="#cb14-50" tabindex="-1"></a>    <span class="cf">return</span> poly_regress</span></code></pre>
 </div>
-<p>and</p>
+<p>and a loop to perform polynomial regressions for N=2 to N=10 on each
+of the datasets:</p>
 <div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>

@@ -416,7 +416,42 @@ any links that you are not going to use.
 
       <section id="aggregate-instructor-notes"><section id="01-introduction"><h2 class="section-heading"><a href="01-introduction.html">Introduction</a></h2>
 <hr class="half-width"></section><section id="02-regression"><h2 class="section-heading"><a href="02-regression.html">Supervised methods - Regression</a></h2>
-<hr class="half-width"></section><section id="03-classification"><h2 class="section-heading"><a href="03-classification.html">Supervised methods - Classification</a></h2>
+<hr class="half-width">
+<h3 id="02-regression-headingInstructor1">
+<a href="02-regression.html#headingInstructor1">Instructor Note</a><a class="anchor" aria-label="anchor" href="#02-regression-headingInstructor1"></a>
+</h3>
+<p>Francis Anscombe was a statistician who created a set of datasets
+that all have the same basic statistical properties, such as means and
+standard deviations, but which look very different when plotted. This is
+a great example of how statistics can be misleading, and why visualising
+data is important.</p>
+<hr>
+<br><h3 id="02-regression-headingInstructor2">
+<a href="02-regression.html#headingInstructor2">Instructor Note</a><a class="anchor" aria-label="anchor" href="#02-regression-headingInstructor2"></a>
+</h3>
+<p>The Mean Squared Error (MSE) is a common metric used to measure the
+quality of a regression model. It calculates the average of the squares
+of the errors, which are the differences between predicted and actual
+values. The RMSE is simply the square root of the MSE, and it provides a
+measure of how far off our predictions are from the actual values in the
+same units as our labels.</p>
+<p>Why not Mean Absolute Error? or Mean Squared Error?</p>
+<p>RMSE more heavily penalises large errors, and because we square and
+then take the root, the value is in the same units as our data, which
+makes it easier to interpret. It also has nice mathematical properties
+that make it easier to work with in some cases.</p>
+<hr>
+<br><h3 id="02-regression-headingInstructor3">
+<a href="02-regression.html#headingInstructor3">Instructor Note</a><a class="anchor" aria-label="anchor" href="#02-regression-headingInstructor3"></a>
+</h3>
+<p><code>PolynomialFeatures</code> is a class in Scikit-Learn that
+generates polynomial features. We specify a degree, then “fit_transform”
+our data to create a new feature set that includes all polynomial
+combinations, so for example <code>PolynomialFeatures(degree=2)</code>
+will create a new feature set that includes a constant term, the
+original feature, and the square of the original feature.</p>
+<hr>
+<br></section><section id="03-classification"><h2 class="section-heading"><a href="03-classification.html">Supervised methods - Classification</a></h2>
 <hr class="half-width"></section><section id="04-ensemble-methods"><h2 class="section-heading"><a href="04-ensemble-methods.html">Ensemble methods</a></h2>
 <hr class="half-width"></section><section id="05-clustering"><h2 class="section-heading"><a href="05-clustering.html">Unsupervised methods - Clustering</a></h2>
 <hr class="half-width"></section><section id="06-dimensionality-reduction"><h2 class="section-heading"><a href="06-dimensionality-reduction.html">Unsupervised methods - Dimensionality reduction</a></h2>
