@@ -5,17 +5,17 @@ exercises: 30
 ---
 
 :::::: questions
-- "What are Neural Networks?"
-- "How can we classify images using a neural network?"
+- What are Neural Networks?
+- How can we classify images using a neural network?
 ::::::
 
 :::::: objectives
-- "Understand the basic architecture of a perceptron."
-- "Be able to create a perceptron to encode a simple function."
-- "Understand that layers of perceptrons allow non-linear separable problems to be solved."
-- "Train a multi-layer perceptron using Scikit-Learn."
-- "Evaluate the accuracy of a multi-layer perceptron using real input data."
-- "Understand that cross validation allows the entire data set to be used in the training process."
+- Understand the basic architecture of a perceptron.
+- Be able to create a perceptron to encode a simple function.
+- Understand that layers of perceptrons allow non-linear separable problems to be solved.
+- Train a multi-layer perceptron using Scikit-Learn.
+- Evaluate the accuracy of a multi-layer perceptron using real input data.
+- Understand that cross validation allows the entire data set to be used in the training process.
 ::::::
 
 
@@ -27,7 +27,7 @@ Neural networks are a machine learning method inspired by how the human brain wo
 
 Perceptrons are the building blocks of neural networks. They are an artificial version of a single neuron in the brain. They typically have one or more inputs and a single output. Each input will be multiplied by a weight and the value of all the weighted inputs are then summed together. Finally, the summed value is put through an activation function which decides if the neuron "fires" a signal. In some cases, this activation function is simply a threshold step function which outputs zero below a certain input and one above it. Other designs of neurons use other activation functions, but typically they have an output between zero and one and are still step-like in their nature.
 
-![A diagram of a perceptron](../fig/perceptron.svg)
+![A diagram of a perceptron](fig/perceptron.svg){alt="A diagram of a perceptron, showing three inputs, leading to a summation unit, then a thresholding unit, and finally an output."}
 
 ### Coding a perceptron
 
@@ -152,15 +152,17 @@ This function outputs a zero when all its inputs are one or zero and its not pos
 
 A single perceptron cannot be used to solve a non-linearly separable function. For that, we need to use multiple perceptrons and typically multiple layers of perceptrons. They are formed of networks of artificial neurons which each take one or more inputs and typically have a single output. The neurons are connected together in networks of 10s to 1000s of neurons. Typically, networks are connected in layers with an input layer, middle or hidden layer (or layers), and finally an output layer.
 
-![A multi-layer perceptron](../fig/multilayer_perceptron.svg)
+![A multi-layer perceptron](fig/multilayer_perceptron.svg){alt="A diagram of a multi-layer perceptron, showing an input layer with 3 inputs, a hidden layer with 2 neurons, and an output layer with 3 outputs. The connections between the layers are shown."}
 
 ### Training multi-layer perceptrons
 
-Multi-layer perceptrons need to be trained by showing them a set of training data and measuring the error between the network's predicted output and the true value. Training takes an iterative approach that improves the network a little each time a new training example is presented. There are a number of training algorithms available for a neural network today, but we are going to use one of the best established and well known, the backpropagation algorithm. This algorithm is called back propagation because it takes the error calculated between an output of the network and the true value and takes it back through the network to update the weights. If you want to read more about back propagation, please see [this chapter](http://page.mi.fu-berlin.de/rojas/neural/chapter/K7.pdf) from the book "Neural Networks - A Systematic Introduction".
+Multi-layer perceptrons need to be trained by showing them a set of training data and measuring the error between the network's predicted output and the true value. Training takes an iterative approach that improves the network a little each time a new training example is presented. There are a number of training algorithms available for a neural network today, but we are going to use one of the best established and well known, the backpropagation algorithm. This algorithm is called back propagation because it takes the error calculated between an output of the network and the true value and takes it back through the network to update the weights.
+
+<!--If you want to read more about back propagation, please see [this chapter](http://page.mi.fu-berlin.de/rojas/neural/chapter/K7.pdf) from the book "Neural Networks - A Systematic Introduction". THIS LINK IS BROKEN. -->
 
 ### Multi-layer perceptrons in Scikit-Learn
 
-We are going to build a multi-layer perceptron for recognising handwriting from images. Scikit-Learn includes some example handwriting data from the [MNIST data set](http://yann.lecun.com/exdb/mnist/), which is a dataset containing 70,000 images of hand-written digits. Each image is 28x28 pixels in size (784 pixels in total) and is represented in grayscale with values between zero for fully black and 255 for fully white. This means we will need 784 perceptrons in our input layer, each taking the input of one pixel and 10 perceptrons in our output layer to represent each digit we might classify. If trained correctly, only the perceptron in the output layer will "fire" to represent the contents of the image (but this is a massive oversimplification!).
+We are going to build a multi-layer perceptron for recognising handwriting from images. Scikit-Learn includes some example handwriting data from the [MNIST data set](https://github.com/cvdfoundation/mnist), which is a dataset containing 70,000 images of hand-written digits. Each image is 28x28 pixels in size (784 pixels in total) and is represented in grayscale with values between zero for fully black and 255 for fully white. This means we will need 784 perceptrons in our input layer, each taking the input of one pixel and 10 perceptrons in our output layer to represent each digit we might classify. If trained correctly, only the perceptron in the output layer will "fire" to represent the contents of the image (but this is a massive oversimplification!).
 
 We can import this dataset from `sklearn.datasets` then load it into memory by calling the `fetch_openml` function.
 
@@ -490,14 +492,14 @@ Does it do any better/worse than Google?
 :::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::: keypoints
-- "Perceptrons are artificial neurons which build neural networks."
-- "A perceptron takes multiple inputs, multiplies each by a weight value and sums the weighted inputs. It then applies an activation function to the sum."
-- "A single perceptron can solve simple functions which are linearly separable."
-- "Multiple perceptrons can be combined to form a neural network which can solve functions that aren't linearly separable."
-- "We can train a whole neural network with the back propagation algorithm. Scikit-learn includes an implementation of this algorithm."
-- "Training a neural network requires some training data to show the network examples of what to learn."
-- "To validate our training we split the training data into a training set and a test set."
-- "To ensure the whole dataset can be used in training and testing we can train multiple times with different subsets of the data acting as training/testing data. This is called cross validation."
-- "Deep learning neural networks are a very powerful modern machine learning technique. Scikit-Learn does not support these but other libraries like Tensorflow do."
-- "Several companies now offer cloud APIs where we can train neural networks on powerful computers."
+- Perceptrons are artificial neurons which build neural networks.
+- A perceptron takes multiple inputs, multiplies each by a weight value and sums the weighted inputs. It then applies an activation function to the sum.
+- A single perceptron can solve simple functions which are linearly separable.
+- Multiple perceptrons can be combined to form a neural network which can solve functions that aren't linearly separable.
+- We can train a whole neural network with the back propagation algorithm. Scikit-learn includes an implementation of this algorithm."
+- Training a neural network requires some training data to show the network examples of what to learn
+- To validate our training we split the training data into a training set and a test set.
+- To ensure the whole dataset can be used in training and testing we can train multiple times with different subsets of the data acting as training/testing data. This is called cross validation.
+- Deep learning neural networks are a very powerful modern machine learning technique. Scikit-Learn does not support these but other libraries like Tensorflow do.
+- Several companies now offer cloud APIs where we can train neural networks on powerful computers.
 ::::::

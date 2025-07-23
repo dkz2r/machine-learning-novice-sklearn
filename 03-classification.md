@@ -5,13 +5,13 @@ exercises: 0
 ---
 
 :::::: questions
-- "How can I classify data into known categories?"
+- How can I classify data into known categories?
 ::::::
 
 :::::: objectives
-- "Use two different supervised methods to classify data."
-- "Learn about the concept of hyper-parameters."
-- "Learn to validate and cross-validate models"
+- Use two different supervised methods to classify data.
+- Learn about the concept of hyper-parameters.
+- Learn to validate and cross-validate models
 ::::::
 
 # Classification
@@ -21,12 +21,12 @@ Classification is a supervised method to recognise and group data objects into a
 In this episode we are going to introduce the concept of supervised classification by classifying penguin data into different species of penguins using Scikit-Learn.
 
 ## The penguins dataset
-We're going to be using the penguins dataset of Allison Horst, published [here](https://github.com/allisonhorst/palmerpenguins), The dataset contains 344 size measurements for three penguin species (Chinstrap, Gentoo and Adélie) observed on three islands in the Palmer Archipelago, Antarctica.
+We're going to be using the [Palmer Penguins dataset](https://github.com/allisonhorst/palmerpenguins) of Allison Horst, The dataset contains 344 size measurements for three penguin species (Chinstrap, Gentoo and Adélie) observed on three islands in the Palmer Archipelago, Antarctica.
 
-![*Artwork by @allison_horst*](../fig/palmer_penguins.png)
+![*Artwork by @allison_horst*](fig/palmer_penguins.png){alt="A cartoon image of three penguins standing on a snowy island. The penguins are labelled as Chinstrap, Gentoo and Adélie."}
 
 The physical attributes measured are flipper length, beak length, beak width, body mass, and sex.
-![*Artwork by @allison_horst*](../fig/culmen_depth.png)
+![*Artwork by @allison_horst*](fig/culmen_depth.png){alt="A drawn image of a penguin's head, showing where bill length and bill depth are measured."}
 
 In other words, the dataset contains 344 rows with 7 features i.e. 5 physical attributes, species and the island where the observations were made.
 
@@ -109,7 +109,7 @@ plt.show()
 ```
 
 
-![Visualising the penguins dataset](../fig/e3_penguins_vis.png)
+![Visualising the penguins dataset](fig/e3_penguins_vis.png){alt="A scatter plot of the penguin dataset, showing bill length on the x-axis and bill depth on the y-axis. The points are coloured by species. There are three clusters of points, one for each species, with some overlap between the species."}
 
 As there are four measurements for each penguin, we need quite a few plots to visualise all four dimensions against each other. Here is a handy Seaborn function to do so:
 
@@ -119,7 +119,7 @@ plt.show()
 ```
 
 
-![Visualising the penguins dataset](../fig/pairplot.png)
+![Visualising the penguins dataset](fig/pairplot.png){alt="A pairplot of the penguin dataset, showing scatter plots of each pair of features. The points are coloured by species. There are three clusters of points, one for each species, with some overlap between the species."}
 
 We can see that penguins from each species form fairly distinct spatial clusters in these plots, so that you could draw lines between those clusters to delineate each species. This is effectively what many classification algorithms do. They use the training data to delineate the observation space, in this case the 4 measurement dimensions, into classes. When given a new observation, the model finds which of those class areas the new observation falls in to.
 
@@ -127,7 +127,7 @@ We can see that penguins from each species form fairly distinct spatial clusters
 ## Classification using a decision tree
 We'll first apply a decision tree classifier to the data. Decisions trees are conceptually similar to flow diagrams (or more precisely for the biologists: dichotomous keys). They split the classification problem into a binary tree of comparisons, at each step comparing a measurement to a value, and moving left or right down the tree until a classification is reached.
 
-![Decision tree for classifying penguins](../fig/decision_tree_example.png)
+![Decision tree for classifying penguins](fig/decision_tree_example.png){alt="A decision tree example showing how one might classify four species of animals based on their features. The tree starts with 'Has feathers?' and branches into 'Can Fly?' and 'Has fur?'. The outcomes are Hawk, Penguin, Bear, and Dolphin"}
 
 
 Training and using a decision tree in Scikit-Learn is straightforward:
@@ -162,7 +162,7 @@ plt.show()
 ```
 
 
-![Decision tree for classifying penguins](../fig/e3_dt_2.png)
+![Decision tree for classifying penguins](fig/e3_dt_2.png){alt="An auomatically generated decision tree based on the model we just trained, showing how the model makes decisions based on the penguin features. The tree has 2 levels, with the first level splitting on flipper length, the second level splitting on bill length and bill depth."}
 
 The first first question (`depth=1`) splits the training data into "Adelie" and "Gentoo" categories using the criteria `flipper_length_mm <= 206.5`, and the next two questions (`depth=2`) split the "Adelie" and "Gentoo" categories into "Adelie & Chinstrap" and "Gentoo & Chinstrap" predictions.
 
@@ -193,7 +193,7 @@ plt.show()
 ```
 
 
-![Classification space for our decision tree](../fig/e3_dt_space_2.png)
+![Classification space for our decision tree](fig/e3_dt_space_2.png){alt="A scatter plot of the penguin daaset, showing bill length on the x-axis and body mass on the y-axis. The points are coloured by species. The decision tree is shown as colored regions, with the boundaries between the regions being orthogonal lines. The regions are generally aligned with the species clusters, but there are several misclassifications."}
 
 ## Tuning the `max_depth` hyperparameter
 
@@ -223,7 +223,7 @@ plt.show()
 ```
 
 
-![Performance of decision trees of various depths](../fig/e3_dt_overfit.png)
+![Performance of decision trees of various depths](fig/e3_dt_overfit.png){alt="A line plot showing the accuracy of decision trees with various max_depth hyper-parameters. The x-axis shows the max_depth, and the y-axis shows the accuracy. The accuracy is highest at max_depth=2."}
 
 Here we can see that a `max_depth=2` performs slightly better on the test data than those with `max_depth > 2`. This can seem counter intuitive, as surely more questions should be able to better split up our categories and thus give better predictions?
 
@@ -239,7 +239,7 @@ plt.show()
 ```
 
 
-![Simplified decision tree](../fig/e3_dt_6.png)
+![Simplified decision tree](fig/e3_dt_6.png){alt="An automatically generated decision tree based on the model we just trained, showing how the model makes decisions based on the penguin features. The tree has 4 levels, and is difficult to read."}
 
 It looks like our decision tree has split up the training data into the correct penguin categories and more accurately than the `max_depth=2` model did, however it used some very specific questions to split up the penguins into the correct categories. Let's try visualising the classification space for a more intuitive understanding:
 ```python
@@ -256,7 +256,7 @@ plt.show()
 ```
 
 
-![Classification space of the simplified decision tree](../fig/e3_dt_space_6.png)
+![Classification space of the simplified decision tree](fig/e3_dt_space_6.png){alt="A scatter plot of the penguin daaset, showing bill length on the x-axis and body mass on the y-axis. The points are coloured by species. The decision tree is shown as colored regions, with the boundaries between the regions being orthogonal lines. The regions are generally aligned with the species clusters, but there are many small regions that only select a single point."}
 
 Earlier we saw that the `max_depth=2` model split the data into 3 simple bounding boxes, whereas for `max_depth=5` we see the model has created some very specific classification boundaries to correctly classify every point in the training data.
 
@@ -312,10 +312,10 @@ plt.show()
 ```
 
 
-![Classification space generated by the SVM model](../fig/e3_svc_space.png)
+![Classification space generated by the SVM model](fig/e3_svc_space.png){alt="A scatter plot of the penguin daaset, showing bill length on the x-axis and bill depth on the y-axis. The points are coloured by species. The SVM is shown as colored regions, with the boundaries between the regions being curved lines. The regions are generally aligned with the species clusters, but there are still several misclassifications."}
 
 While this SVM model performs slightly worse than our decision tree (95.6% vs. 98.5%), it's likely that the non-linear boundaries will perform better when exposed to more and more real data, as decision trees are prone to overfitting and requires complex linear models to reproduce simple non-linear boundaries. It's important to pick a model that is appropriate for your problem and data trends!
 
 :::::: keypoints
-- "Classification requires labelled data (is supervised)"
+- Classification requires labelled data (is supervised).
 ::::::

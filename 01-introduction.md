@@ -5,14 +5,14 @@ exercises: 10
 ---
 
 :::::: questions
-- "What is machine learning?"
-- "What are some useful machine learning techniques?"
+- What is machine learning?
+- What are some useful machine learning techniques?
 ::::::
 
 :::::: objectives
-- "Gain an overview of what machine learning is and the techniques available."
-- "Understand how machine learning and artificial intelligence differ."
-- "Be aware of some caveats when using Machine Learning."
+- Gain an overview of what machine learning is and the techniques available.
+- Understand how machine learning and artificial intelligence differ.
+- Be aware of some caveats when using Machine Learning.
 ::::::
 
 # What is machine learning?
@@ -31,7 +31,7 @@ DL is a particular field of machine learning where algorithms called neural netw
 
 The image below shows the relationships between artificial intelligence, machine learning and deep learning.
 
-![An infographic showing some of the relationships between AI, ML, and DL](../fig/introduction/AI_ML_DL_differences.png)
+![An infographic showing some of the relationships between AI, ML, and DL](fig/introduction/AI_ML_DL_differences.png){alt="An infographic showing some of the relationships between AI, ML, and DL"}
 The image above is by Tukijaaliwa, CC BY-SA 4.0, via Wikimedia Commons, original source
 
 
@@ -89,9 +89,9 @@ Machine learning techniques will return an answer based on the input data and mo
 
 ### About Scikit-Learn
 
-[Scikit-Learn](http://github.com/scikit-learn/scikit-learn) is a python package designed to give access to well-known machine learning algorithms within Python code, through a clean application programming interface (API). It has been built by hundreds of contributors from around the world, and is used across industry and academia.
+[Scikit-Learn](https://github.com/scikit-learn/scikit-learn) is a python package designed to give access to well-known machine learning algorithms within Python code, through a clean application programming interface (API). It has been built by hundreds of contributors from around the world, and is used across industry and academia.
 
-Scikit-Learn is built upon Python's [NumPy (Numerical Python)](http://numpy.org) and [SciPy (Scientific Python)](http://scipy.org) libraries, which enable efficient in-core numerical and scientific computation within Python. As such, Scikit-Learn is not specifically designed for extremely large datasets, though there is [some work](https://github.com/ogrisel/parallel_ml_tutorial) in this area. For this introduction to ML we are going to stick to processing small to medium datasets with Scikit-Learn, without the need for a graphical processing unit (GPU).
+Scikit-Learn is built upon Python's [NumPy (Numerical Python)](https://numpy.org/) and [SciPy (Scientific Python)](https://scipy.org/) libraries, which enable efficient in-core numerical and scientific computation within Python. As such, Scikit-Learn is not specifically designed for extremely large datasets, though there is [some work](https://github.com/ogrisel/parallel_ml_tutorial) in this area. For this introduction to ML we are going to stick to processing small to medium datasets with Scikit-Learn, without the need for a graphical processing unit (GPU).
 
 Like any other Python package, we can import Scikit-Learn and check the package version using the following Python commands:
 
@@ -113,7 +113,7 @@ We typically have a "Features Matrix" (usually referred to as the code variable 
 
 If we want our ML models to make predictions or classifications, we also provide "labels" as our expected "answers/results". The model will then be trained on the input features to try and match our provided labels. This is done by providing a "Target Array" (usually referred to as the code variable `y`) which contains the "labels or values" that we wish to predict using the features data.
 
-![Types of Machine Learning](../fig/introduction/sklearn_input.png)
+![Types of Machine Learning](fig/introduction/sklearn_input.png){alt="A feature matrix, which contains N features and N samples (which is referred to as 'X'), and a target array, which contains N labels or values (referred to as 'y')."}
 Figure from the [Python Data Science Handbook](https://github.com/jakevdp/PythonDataScienceHandbook)
 
 # What will we cover today?
@@ -122,12 +122,12 @@ This lesson will introduce you to some of the key concepts and sub-domains of ML
 
 The figure below provides a nice overview of some of the sub-domains of ML and the techniques used within each sub-domain. We recommend checking out the Scikit-Learn [webpage](https://scikit-learn.org/stable/index.html) for additional examples of the topics we will cover in this lesson. We will cover topics highlighted in blue: classical learning techniques such as regression, classification, clustering, and dimension reduction, as well as ensemble methods and a brief introduction to neural networks using perceptrons.
 
-![Types of Machine Learning](../fig/introduction/ML_summary.png)
+![Types of Machine Learning](fig/introduction/ML_summary.png){alt="A cloud diagram showing the relationships between different types of machine learning and the techniques used within each type."}
 [Image from Vasily Zubarev via their blog](https://vas3k.com/blog/machine_learning/) with modifications in blue to denote lesson content.
 
 :::::: keypoints
-- "Machine learning is a set of tools and techniques that use data to make predictions."
-- "Artificial intelligence is a broader term that refers to making computers show human-like intelligence."
-- "Deep learning is a subset of machine learning."
-- "All machine learning systems have limitations to be aware of."
+- Machine learning is a set of tools and techniques that use data to make predictions.
+- Artificial intelligence is a broader term that refers to making computers show human-like intelligence.
+- Deep learning is a subset of machine learning.
+- All machine learning systems have limitations to be aware of.
 ::::::

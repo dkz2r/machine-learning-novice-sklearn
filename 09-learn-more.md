@@ -5,11 +5,11 @@ exercises: 0
 ---
 
 :::::: questions
-- "Where can you find out more about machine learning?"
+- Where can you find out more about machine learning?
 ::::::
 
 :::::: objectives
-- "Know where to go to learn more about machine learning"
+- Know where to go to learn more about machine learning
 ::::::
 
 # Other algorithms
@@ -43,6 +43,6 @@ introduction to the key concepts in machine learning from Amazon.
 * [Azure AI](https://azure.microsoft.com/en-gb/overview/ai-platform/) - Microsoft's Cloud based AI platform.
 
 :::::: keypoints
- - "This course has only touched on a few areas of machine learning and is designed to teach you just enough to do something useful."
- - "Machine learning is a rapidly evolving field and new tools and techniques are constantly appearing."
+ - This course has only touched on a few areas of machine learning and is designed to teach you just enough to do something useful.
+ - Machine learning is a rapidly evolving field and new tools and techniques are constantly appearing.
 ::::::
