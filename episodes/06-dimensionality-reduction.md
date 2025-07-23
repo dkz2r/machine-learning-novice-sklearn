@@ -15,7 +15,7 @@ exercises: 30
  - Evaluate the relative performance of PCA and t-SNE in reducing data dimensionality.
 ::::::
 
-# Dimensionality reduction
+## Dimensionality reduction
 
 As seen in the last episode, general clustering algorithms work well with low-dimensional data. In this episode we see how higher-dimensional data, such as images of handwritten text or numbers, can be processed with dimensionality reduction techniques to make the datasets more accessible for other modelling techniques. The dataset we will be using is the Scikit-Learn subset of the Modified National Institute of Standards and Technology (MNIST) dataset.
 
@@ -125,7 +125,7 @@ As we can see the dataset relations are far more complex than our previous examp
 
 :::::::::::::::::::::::::::::::::::::::::::::::
 
-# Dimensionality reduction with Scikit-Learn
+## Dimensionality reduction with Scikit-Learn
 We will look at two commonly used techniques for dimensionality reduction: Principal Component Analysis (PCA) and t-distributed Stochastic Neighbor Embedding (t-SNE). Both of these techniques are supported by Scikit-Learn.
 
 ### Principal Component Analysis (PCA)

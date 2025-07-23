@@ -12,7 +12,7 @@ exercises: 5
 - Consider the ethical implications of machine learning, in general, and in research.
 ::::::
 
-# Ethics and machine learning
+## Ethics and machine learning
 
 As machine learning has risen in visibility, so to have concerns around the ethics of using the technology to make predictions and decisions that will affect people in everyday life. For example:
 
@@ -42,7 +42,7 @@ This would be an unacceptable margin of error if the results were going to have 
 
 Many machine learning systems (especially deep learning) need vast amounts of computational power which in turn can consume vast amounts of energy. Depending on the source of that energy this might account for significant amounts of fossil fuels being burned. It is not uncommon for a modern GPU-accelerated computer to use several kilowatts of power. Running this system for one hour could easily use as much energy a typical home in the OECD would use in an entire day. Energy use can be particularly high when models are constantly being retrained or when "parameter sweeps" are done to find the best set of parameters to train with.
 
-# Ethics of machine learning in research
+## Ethics of machine learning in research
 
 Not all research using machine learning will have major ethical implications.
 Many research projects don't directly affect the lives of other people, but this isn't always the case.

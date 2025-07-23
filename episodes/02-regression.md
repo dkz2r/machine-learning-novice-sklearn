@@ -18,7 +18,7 @@ exercises: 30
 - Apply polynomial modelling to non-linear data using Scikit-Learn.
 ::::::
 
-# Supervised learning
+## Supervised learning
 
 Classical machine learning is often divided into two categories – supervised and unsupervised learning.
 
@@ -31,7 +31,7 @@ Supervised learning is split up into two further categories: classification and 
 In this episode we will explore how we can use regression to build a "model" that can be used to make predictions.
 
 
-# Regression
+## Regression
 
 Regression is a statistical technique that relates a dependent variable (a label in ML terms) to one or more independent variables (features in ML terms). A regression model attempts to describe this relation by fitting the data as closely as possible according to mathematical criteria. This model can then be used to predict new labelled values by inputting the independent variables into it. For example, if we create a house price model we can then feed in any datetime value we wish, and get a new house price value prediction.
 

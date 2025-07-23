@@ -12,7 +12,7 @@ exercises: 0
 - Know where to go to learn more about machine learning
 ::::::
 
-# Other algorithms
+## Other algorithms
 
 There are many other machine learning algorithms that might be suitable for helping you to answer your research questions.
 
