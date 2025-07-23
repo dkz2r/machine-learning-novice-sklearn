@@ -37,7 +37,7 @@ Regression is a statistical technique that relates a dependent variable (a label
 
 Regression can be as simple as drawing a "line of best fit" through data points, known as linear regression, or more complex models such as polynomial regression, and is used routinely around the world in both industry and research. You may have already used regression in the past without knowing that it is also considered a machine learning technique!
 
-![Example of linear and polynomial regressions](fig/regression_example.png)
+![Example of linear and polynomial regressions](fig/regression_example.png){alt="A pair of graphs comparing a linear and a polynomial regression. The linear regression is a straight line that fits through the data points, while the polynomial regression is a curved line that fits more closely to the data points."}
 
 ### Linear regression using Scikit-Learn
 
@@ -69,7 +69,7 @@ plt.ylabel("y")
 plt.show()
 ```
 
-![Inspection of our dataset](fig/regression_inspect.png)
+![Inspection of our dataset](fig/regression_inspect.png){alt="A scatter plot of the first Anscombe dataset."}
 
 
 In this regression example we will create a Linear Regression model that will try to predict `y` values based upon `x` values.
@@ -175,7 +175,7 @@ plt.show()
 
 
 
-![Linear regression of dataset I](fig/regress_linear.png)
+![Linear regression of dataset I](fig/regress_linear.png){alt="A plot of the first Anscombe dataset with a linear regression line fitted to the data points."}
 
 This looks like a reasonable linear fit to our first dataset. Thanks to our function we can quickly perform more linear regressions on other datasets.
 
@@ -188,7 +188,7 @@ fit_predict_plot_linear(data_2["x"],data_2["y"])
 plt.show()
 ```
 
-![Linear regression of dataset II](fig/regress_linear_2nd.png)
+![Linear regression of dataset II](fig/regress_linear_2nd.png){alt="A plot of the second Anscombe dataset with a linear regression line fitted to the data points. The points are not well aligned with the linear regression line."}
 
 It looks like our linear fit on Dataset II produces a nearly identical fit to the linear fit on Dataset I. Although our errors look to be almost identical our visual inspection tells us that Dataset II is probably not a linear correllation and we should try to make a different model.
 
@@ -207,8 +207,9 @@ fit_predict_plot_linear(data_3["x"],data_3["y"])
 plt.show()
 ```
 
-![Linear regression of dataset III](fig/regress_linear_3rd.png)
-![Linear regression of dataset IV](fig/regress_linear_4th.png)
+![Linear regression of dataset III](fig/regress_linear_3rd.png){alt="A plot of the third Anscombe dataset with a linear regression line fitted to the data points. The points are not well aligned with the linear regression line."}
+
+![Linear regression of dataset IV](fig/regress_linear_4th.png){alt="A plot of the fourth Anscombe dataset with a linear regression line fitted to the data points. The points are not well aligned with the linear regression line."}
 
 The 4 datasets all produce very similar linear regression fit parameters (`m` and `c`) and RMSEs despite visual differences in the 4 datasets.
 This is intentional as the Anscombe Quartet is designed to produce near identical basic statistical values such as means and standard deviations.
@@ -295,7 +296,7 @@ fit_predict_plot_poly(data_2["x"],data_2["y"])
 plt.show()
 ```
 
-![Comparison of the regressions of our dataset](fig/regress_both.png)
+![Comparison of the regressions of our dataset](fig/regress_both.png){alt="The second Anscombe dataset with a linear regression line and a polynomial regression line fitted to the data points. The polynomial regression fits the data points much more closely than the linear regression."}
 
 Comparing the plots and errors it seems like a polynomial regression of N=2 is a far superior fit to Dataset II than a linear fit. In fact, it looks like our polynomial fit almost perfectly fits Dataset II... which is because Dataset II is created from a N=2 polynomial equation!
 
@@ -321,10 +322,10 @@ for ds in ["I","II","III","IV"]:
 ```
 
 
-![Polynomial regression of dataset I](fig/regress_polynomial_1st.png)
-![Polynomial regression of dataset II](fig/regress_polynomial_2nd.png)
-![Polynomial regression of dataset III](fig/regress_polynomial_3rd.png)
-![Polynomial regression of dataset IV](fig/regress_polynomial_4th.png)
+![Polynomial regression of dataset I](fig/regress_polynomial_1st.png){alt="A plot of the first Anscombe dataset with a polynomial regression line fitted to the data points."}
+![Polynomial regression of dataset II](fig/regress_polynomial_2nd.png){alt="A plot of the second Anscombe dataset with a polynomial regression line fitted to the data points."}
+![Polynomial regression of dataset III](fig/regress_polynomial_3rd.png){alt="A plot of the third Anscombe dataset with a polynomial regression line fitted to the data points."}
+![Polynomial regression of dataset IV](fig/regress_polynomial_4th.png){alt="A plot of the fourth Anscombe dataset with a polynomial regression line fitted to the data points."}
 
 The `N=2` polynomial fit is far better for Dataset II. According to the RMSE the polynomial is a slightly better fit for Datasets I and III, however it could be argued that a linear fit is good enough.
 Dataset III looks like a linear relation that has a single outlier, rather than a truly non-linear relation. The polynomial and linear fits perform just as well (or poorly) on Dataset IV.
@@ -385,10 +386,10 @@ With a large enough polynomial you can fit through every point with a unique `x`
 Datasets II and IV remain unchanged beyond `N=2` as the polynomial has converged (dataset II) or cannot model the data (Dataset IV).
 Datasets I and III slowly decrease their RMSE and N is increased, but it is likely that these more complex models are overfitting the data. Overfitting is discussed later in the lesson.
 
-![Polynomial regression of dataset I with N between 1 and 10](fig/regress_polynomial_n_1st.png)
-![Polynomial regression of dataset II with N between 1 and 10](fig/regress_polynomial_n_2nd.png)
-![Polynomial regression of dataset III with N between 1 and 10](fig/regress_polynomial_n_3rd.png)
-![Polynomial regression of dataset IV with N between 1 and 10](fig/regress_polynomial_n_4th.png)
+![Polynomial regression of dataset I with N between 1 and 10](fig/regress_polynomial_n_1st.png){alt="A plot of the first Anscombe dataset with polynomial regression lines fitted to the data points for polynomial degrees N=1 to N=10. The polynomial lines become more complex as N increases."}
+![Polynomial regression of dataset II with N between 1 and 10](fig/regress_polynomial_n_2nd.png){alt="A plot of the second Anscombe dataset with polynomial regression lines fitted to the data points for polynomial degrees N=1 to N=10. All of the polynomial lines are very similar and overlap the data points."}
+![Polynomial regression of dataset III with N between 1 and 10](fig/regress_polynomial_n_3rd.png){alt="A plot of the third Anscombe dataset with polynomial regression lines fitted to the data points for polynomial degrees N=1 to N=10."}
+![Polynomial regression of dataset IV with N between 1 and 10](fig/regress_polynomial_n_4th.png){alt="A plot of the fourth Anscombe dataset with polynomial regression lines fitted to the data points for polynomial degrees N=1 to N=10. All of the polynomial lines are similar and overlap."}
 
 :::::::::::::::::::::::::
 
@@ -431,7 +432,7 @@ plt.show()
 ```
 
 
-![Comparison of the regressions of our dataset](fig/regress_penguin_lin.png)
+![Comparison of the regressions of our dataset](fig/regress_penguin_lin.png){alt="A plot of a subset of the penguin dataset with a linear regression line fitted to the data points. The points are well aligned with the linear regression line."}
 
 Congratulations! We've taken our linear regression function and quickly created and trained a new linear regression model on a brand new dataset. Note that this time we have returned our model from the regression function and assigned it to the variable `trained_model`. We can now use this model to predict `bill_depth_mm` values for any given `body_mass_g` values that we pass it.
 
@@ -455,7 +456,7 @@ plt.show()
 ```
 
 
-![Comparison of the regressions of our dataset](fig/regress_penguin_lin_tot.png)
+![Comparison of the regressions of our dataset](fig/regress_penguin_lin_tot.png){alt="A plot of the same regression, this time with the entire dataset. It is now clear that the lonear regression fits two classes, but is a poor predictor of the third class of penguins."}
 
 Oh dear. It looks like our linear regression fits okay for our subset of the penguin data, and a few additional samples, but there appears to be a cluster of points that are poorly predicted by our model.
 

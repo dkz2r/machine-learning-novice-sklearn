@@ -27,7 +27,7 @@ Neural networks are a machine learning method inspired by how the human brain wo
 
 Perceptrons are the building blocks of neural networks. They are an artificial version of a single neuron in the brain. They typically have one or more inputs and a single output. Each input will be multiplied by a weight and the value of all the weighted inputs are then summed together. Finally, the summed value is put through an activation function which decides if the neuron "fires" a signal. In some cases, this activation function is simply a threshold step function which outputs zero below a certain input and one above it. Other designs of neurons use other activation functions, but typically they have an output between zero and one and are still step-like in their nature.
 
-![A diagram of a perceptron](fig/perceptron.svg)
+![A diagram of a perceptron](fig/perceptron.svg){alt="A diagram of a perceptron, showing three inputs, leading to a summation unit, then a thresholding unit, and finally an output."}
 
 ### Coding a perceptron
 
@@ -152,7 +152,7 @@ This function outputs a zero when all its inputs are one or zero and its not pos
 
 A single perceptron cannot be used to solve a non-linearly separable function. For that, we need to use multiple perceptrons and typically multiple layers of perceptrons. They are formed of networks of artificial neurons which each take one or more inputs and typically have a single output. The neurons are connected together in networks of 10s to 1000s of neurons. Typically, networks are connected in layers with an input layer, middle or hidden layer (or layers), and finally an output layer.
 
-![A multi-layer perceptron](fig/multilayer_perceptron.svg)
+![A multi-layer perceptron](fig/multilayer_perceptron.svg){alt="A diagram of a multi-layer perceptron, showing an input layer with 3 inputs, a hidden layer with 2 neurons, and an output layer with 3 outputs. The connections between the layers are shown."}
 
 ### Training multi-layer perceptrons
 

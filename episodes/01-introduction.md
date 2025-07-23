@@ -31,7 +31,7 @@ DL is a particular field of machine learning where algorithms called neural netw
 
 The image below shows the relationships between artificial intelligence, machine learning and deep learning.
 
-![An infographic showing some of the relationships between AI, ML, and DL](fig/introduction/AI_ML_DL_differences.png)
+![An infographic showing some of the relationships between AI, ML, and DL](fig/introduction/AI_ML_DL_differences.png){alt="An infographic showing some of the relationships between AI, ML, and DL"}
 The image above is by Tukijaaliwa, CC BY-SA 4.0, via Wikimedia Commons, original source
 
 
@@ -113,7 +113,7 @@ We typically have a "Features Matrix" (usually referred to as the code variable 
 
 If we want our ML models to make predictions or classifications, we also provide "labels" as our expected "answers/results". The model will then be trained on the input features to try and match our provided labels. This is done by providing a "Target Array" (usually referred to as the code variable `y`) which contains the "labels or values" that we wish to predict using the features data.
 
-![Types of Machine Learning](fig/introduction/sklearn_input.png)
+![Types of Machine Learning](fig/introduction/sklearn_input.png){alt="A feature matrix, which contains N features and N samples (which is referred to as 'X'), and a target array, which contains N labels or values (referred to as 'y')."}
 Figure from the [Python Data Science Handbook](https://github.com/jakevdp/PythonDataScienceHandbook)
 
 # What will we cover today?
@@ -122,7 +122,7 @@ This lesson will introduce you to some of the key concepts and sub-domains of ML
 
 The figure below provides a nice overview of some of the sub-domains of ML and the techniques used within each sub-domain. We recommend checking out the Scikit-Learn [webpage](https://scikit-learn.org/stable/index.html) for additional examples of the topics we will cover in this lesson. We will cover topics highlighted in blue: classical learning techniques such as regression, classification, clustering, and dimension reduction, as well as ensemble methods and a brief introduction to neural networks using perceptrons.
 
-![Types of Machine Learning](fig/introduction/ML_summary.png)
+![Types of Machine Learning](fig/introduction/ML_summary.png){alt="A cloud diagram showing the relationships between different types of machine learning and the techniques used within each type."}
 [Image from Vasily Zubarev via their blog](https://vas3k.com/blog/machine_learning/) with modifications in blue to denote lesson content.
 
 :::::: keypoints
