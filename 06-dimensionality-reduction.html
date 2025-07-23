@@ -358,6 +358,35 @@
 
         
 
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul><li>How do we apply machine learning techniques to data with higher
+dimensions?</li>
+</ul></div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul><li>“Recall that most data is inherently multidimensional.”</li>
+<li>“Understand that reducing the number of dimensions can simplify
+modelling and allow classifications to be performed.”</li>
+<li>“Apply Principle Component Analysis (PCA) and t-distributed
+Stochastic Neighbor Embedding (t-SNE) to reduce the dimensions of
+data.”</li>
+<li>“Evaluate the relative performance of PCA and t-SNE in reducing data
+dimensionality.”</li>
+</ul></div>
+</div>
+</div>
+</div>
+</div>
 <div class="section level1">
 <h1 id="dimensionality-reduction">Dimensionality reduction<a class="anchor" aria-label="anchor" href="#dimensionality-reduction"></a></h1>
 <p>As seen in the last episode, general clustering algorithms work well
@@ -385,45 +414,54 @@ images. Each image is 8x8 in size for a total of 64 pixels per image,
 resulting in 64 features for us to work with. The pixels can take a
 value between 0-15 (4bits). Let’s retrieve and inspect the Scikit-Learn
 dataset with the following code:</p>
-<pre><code>import numpy as np
-import matplotlib.pyplot as plt
-import sklearn.cluster as skl_cluster
-from sklearn import manifold, decomposition, datasets
-
-# Let's define these here to avoid repetitive code
-def plots_labels(data, labels):
-    tx = data[:, 0]
-    ty = data[:, 1]
-
-    fig = plt.figure(1, figsize=(4, 4))
-    plt.scatter(tx, ty, edgecolor='k', c=labels)
-    plt.show()
-
-def plot_clusters(data, clusters, Kmean):
-    tx = data[:, 0]
-    ty = data[:, 1]
-    fig = plt.figure(1, figsize=(4, 4))
-    plt.scatter(tx, ty, s=5, linewidth=0, c=clusters)
-    for cluster_x, cluster_y in Kmean.cluster_centers_:
-        plt.scatter(cluster_x, cluster_y, s=100, c='r', marker='x')
-    plt.show()
-
-def plot_clusters_labels(data, labels):
-    tx = data[:, 0]
-    ty = data[:, 1]
-
-    # with labels
-    fig = plt.figure(1, figsize=(5, 4))
-    plt.scatter(tx, ty, c=labels, cmap="nipy_spectral",
-            edgecolor='k', label=labels)
-    plt.colorbar(boundaries=np.arange(11)-0.5).set_ticks(np.arange(10))
-    plt.show()</code></pre>
-<p>{: .language-python}</p>
-<p>Next lets load in the digits dataset, ~~~ # load in dataset as a
-Pandas Dataframe, return X and Y features, labels =
-datasets.load_digits(return_X_y=True, as_frame=True)</p>
-<p>print(features.shape, labels.shape) print(labels) features.head() ~~~
-{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="im">import</span> sklearn.cluster <span class="im">as</span> skl_cluster</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> manifold, decomposition, datasets</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co"># Let's define these here to avoid repetitive code</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="kw">def</span> plots_labels(data, labels):</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>    tx <span class="op">=</span> data[:, <span class="dv">0</span>]</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>    ty <span class="op">=</span> data[:, <span class="dv">1</span>]</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>    plt.scatter(tx, ty, edgecolor<span class="op">=</span><span class="st">'k'</span>, c<span class="op">=</span>labels)</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    plt.show()</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="kw">def</span> plot_clusters(data, clusters, Kmean):</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>    tx <span class="op">=</span> data[:, <span class="dv">0</span>]</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>    ty <span class="op">=</span> data[:, <span class="dv">1</span>]</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>    plt.scatter(tx, ty, s<span class="op">=</span><span class="dv">5</span>, linewidth<span class="op">=</span><span class="dv">0</span>, c<span class="op">=</span>clusters)</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>    <span class="cf">for</span> cluster_x, cluster_y <span class="kw">in</span> Kmean.cluster_centers_:</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>        plt.scatter(cluster_x, cluster_y, s<span class="op">=</span><span class="dv">100</span>, c<span class="op">=</span><span class="st">'r'</span>, marker<span class="op">=</span><span class="st">'x'</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>    plt.show()</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a><span class="kw">def</span> plot_clusters_labels(data, labels):</span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>    tx <span class="op">=</span> data[:, <span class="dv">0</span>]</span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>    ty <span class="op">=</span> data[:, <span class="dv">1</span>]</span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>    <span class="co"># with labels</span></span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>))</span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>    plt.scatter(tx, ty, c<span class="op">=</span>labels, cmap<span class="op">=</span><span class="st">"nipy_spectral"</span>,</span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>            edgecolor<span class="op">=</span><span class="st">'k'</span>, label<span class="op">=</span>labels)</span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>    plt.colorbar(boundaries<span class="op">=</span>np.arange(<span class="dv">11</span>)<span class="op">-</span><span class="fl">0.5</span>).set_ticks(np.arange(<span class="dv">10</span>))</span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>    plt.show()</span></code></pre>
+</div>
+<p>Next lets load in the digits dataset,</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># load in dataset as a Pandas Dataframe, return X and Y</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>features, labels <span class="op">=</span> datasets.load_digits(return_X_y<span class="op">=</span><span class="va">True</span>, as_frame<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="bu">print</span>(features.shape, labels.shape)</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="bu">print</span>(labels)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>features.head()</span></code></pre>
+</div>
 <div class="section level2">
 <h2 id="our-goal-using-dimensionality-reduction-to-help-with-machine-learning">Our goal: using dimensionality-reduction to help with machine
 learning<a class="anchor" aria-label="anchor" href="#our-goal-using-dimensionality-reduction-to-help-with-machine-learning"></a></h2>
@@ -435,25 +473,39 @@ learning these spatial relations, and so it stands to reason that
 computers can also extract these relations. Let’s see if it is possible
 to use unsupervised clustering techniques to pull out relations in our
 MNIST dataset of number images.</p>
-<blockquote>
-<h2 id="exercise-try-to-visually-inspect-the-dataset-and-features-for-correlations">Exercise:
-Try to visually inspect the dataset and features for correlations</h2>
+<div id="exercise-try-to-visually-inspect-the-dataset-and-features-for-correlations" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="exercise-try-to-visually-inspect-the-dataset-and-features-for-correlations" class="callout-inner">
+<h3 class="callout-title">Exercise: Try to visually inspect the dataset and features for correlations</h3>
+<div class="callout-content">
 <p>As we did for previous datasets, lets visually inspect relationships
 between our features/pixels. Try and investigate the following pixels
 for relations (written “row_column”): 0_4, 1_4, 2_4, and 3_4.</p>
-<blockquote>
-<h2 id="solution">Solution</h2>
-<pre><code>
-print(features.iloc[0])
-image_1D = features.iloc[0]
-image_2D = np.array(image_1D).reshape(-1,8)
-
-plt.imshow(image_2D,cmap="gray_r")
-# these points are the pixels we will investigate
-# pixels 0,1,2,3 of row 4 of the image
-plt.plot([0,1,2,3],[4,4,4,4],"rx")
-plt.show()</code></pre>
-<p>{: .language-python}</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="bu">print</span>(features.iloc[<span class="dv">0</span>])</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>image_1D <span class="op">=</span> features.iloc[<span class="dv">0</span>]</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>image_2D <span class="op">=</span> np.array(image_1D).reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">8</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>plt.imshow(image_2D,cmap<span class="op">=</span><span class="st">"gray_r"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co"># these points are the pixels we will investigate</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co"># pixels 0,1,2,3 of row 4 of the image</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>plt.plot([<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>],[<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>],<span class="st">"rx"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>plt.show()</span></code></pre>
+</div>
 <figure><img src="fig/mnist_pairplot_pixels.png" alt="SKLearn image with highlighted pixels" class="figure mx-auto d-block"><div class="figcaption">SKLearn image with highlighted pixels</div>
 </figure><pre><code>import seaborn as sns
 
@@ -471,7 +523,6 @@ for i in range(4):
 
 sns.pairplot(seaborn_data, vars=feature_subset, hue="labels",
              palette=sns.mpl_palette("Spectral", n_colors=10))</code></pre>
-<p>{: .language-python}</p>
 <figure><img src="fig/mnist_pairplot.png" alt="SKLearn image with highlighted pixels" class="figure mx-auto d-block"><div class="figcaption">SKLearn image with highlighted pixels</div>
 </figure><p>As we can see the dataset relations are far more complex than our
 previous examples. The histograms show that some numbers appear in those
@@ -483,9 +534,10 @@ penguin data. We can’t easily see definitive clusters in our 2D
 representations, and we know our clustering algorithms will take a long
 time to try and crunch 64 dimensions at once, so let’s see if we can
 represent our 64D data in fewer dimensions.</p>
-<p>{: .solution} {: .challenge}</p>
-</blockquote>
-</blockquote>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section level1">
@@ -505,36 +557,48 @@ relatively simple way.</p>
 * <a href="https://scikit-learn.org/stable/modules/decomposition.html#pca" class="external-link">https://scikit-learn.org/stable/modules/decomposition.html#pca</a></p>
 <p>Let’s apply PCA to the MNIST dataset and retain the two most-major
 components:</p>
-<pre><code><span><span class="co"># PCA with 2 components</span></span>
-<span><span class="va">pca</span> <span class="op">=</span> <span class="fu">decomposition.PCA</span><span class="op">(</span>n_components<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span><span class="va">x_pca</span> <span class="op">=</span> <span class="fu">pca.fit_transform</span><span class="op">(</span><span class="va">features</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">print</span><span class="op">(</span><span class="va">x_pca.shape</span><span class="op">)</span></span></code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># PCA with 2 components</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>pca <span class="op">=</span> decomposition.PCA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>x_pca <span class="op">=</span> pca.fit_transform(features)</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="bu">print</span>(x_pca.shape)</span></code></pre>
+</div>
 <p>This returns us an array of 1797x2 where the 2 remaining columns(our
 new “features” or “dimensions”) contain vector representations of the
 first principle components (column 0) and second principle components
 (column 1) for each of the images. We can plot these two new features
 against each other:</p>
-<pre><code><span><span class="co"># We are passing None becuase it is an unlabelled plot</span></span>
-<span><span class="fu">plots_labels</span><span class="op">(</span><span class="va">x_pca</span>, <span class="va">None</span><span class="op">)</span></span></code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># We are passing None becuase it is an unlabelled plot</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>plots_labels(x_pca, <span class="va">None</span>)</span></code></pre>
+</div>
 <figure><img src="fig/pca_unlabelled.png" alt="Reduction using PCA" class="figure mx-auto d-block"><div class="figcaption">Reduction using PCA</div>
 </figure><p>We now have a 2D representation of our 64D dataset that we can work
 with instead. Let’s try some quick K-means clustering on our 2D
 representation of the data. Because we already have some knowledge about
 our data we can set <code>k=10</code> for the 10 digits present in the
 dataset.</p>
-<pre><code><span><span class="va">Kmean</span> <span class="op">=</span> <span class="fu">skl_cluster.KMeans</span><span class="op">(</span>n_clusters<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span><span class="fu">Kmean.fit</span><span class="op">(</span><span class="va">x_pca</span><span class="op">)</span></span>
-<span><span class="va">clusters</span> <span class="op">=</span> <span class="fu">Kmean.predict</span><span class="op">(</span><span class="va">x_pca</span><span class="op">)</span></span>
-<span><span class="fu">plot_clusters</span><span class="op">(</span><span class="va">x_pca</span>, <span class="va">clusters</span>, <span class="va">Kmean</span><span class="op">)</span></span></code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>Kmean <span class="op">=</span> skl_cluster.KMeans(n_clusters<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>Kmean.fit(x_pca)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>clusters <span class="op">=</span> Kmean.predict(x_pca)</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>plot_clusters(x_pca, clusters, Kmean)</span></code></pre>
+</div>
 <figure><img src="fig/pca_clustered.png" alt="Reduction using PCA" class="figure mx-auto d-block"><div class="figcaption">Reduction using PCA</div>
 </figure><p>And now we can compare how these clusters look against our actual
 image labels by colour coding our first scatter plot:</p>
-<pre><code><span><span class="fu">plot_clusters_labels</span><span class="op">(</span><span class="va">x_pca</span>, <span class="va">labels</span><span class="op">)</span></span></code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>plot_clusters_labels(x_pca, labels)</span></code></pre>
+</div>
 <figure><img src="fig/pca_labelled.png" alt="Reduction using PCA" class="figure mx-auto d-block"><div class="figcaption">Reduction using PCA</div>
 </figure><p>PCA has done a valiant effort to reduce the dimensionality of our
 problem from 64D to 2D while still retaining some of our key structural
@@ -570,26 +634,32 @@ of manifold learning in action: * <a href="https://thedatafrog.com/en/articles/v
 Lets code and apply t-SNE to the MNIST dataset in the same manner that
 we did for the PCA example, and reduce the data down from 64D to 2D
 again:</p>
-<pre><code><span><span class="co"># t-SNE embedding</span></span>
-<span><span class="co"># initialising with "pca" explicitly preserves global structure</span></span>
-<span><span class="va">tsne</span> <span class="op">=</span> <span class="fu">manifold.TSNE</span><span class="op">(</span>n_components<span class="op">=</span><span class="fl">2</span>, init<span class="op">=</span><span class="st">'pca'</span>, random_state <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
-<span><span class="va">x_tsne</span> <span class="op">=</span> <span class="fu">tsne.fit_transform</span><span class="op">(</span><span class="va">features</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">plots_labels</span><span class="op">(</span><span class="va">x_tsne</span>, <span class="va">None</span><span class="op">)</span></span></code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># t-SNE embedding</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co"># initialising with "pca" explicitly preserves global structure</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>tsne <span class="op">=</span> manifold.TSNE(n_components<span class="op">=</span><span class="dv">2</span>, init<span class="op">=</span><span class="st">'pca'</span>, random_state <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>x_tsne <span class="op">=</span> tsne.fit_transform(features)</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>plots_labels(x_tsne, <span class="va">None</span>)</span></code></pre>
+</div>
 <figure><img src="fig/tsne_unlabelled.png" alt="Reduction using PCA" class="figure mx-auto d-block"><div class="figcaption">Reduction using PCA</div>
 </figure><p>It looks like t-SNE has done a much better job of splitting our data
 up into clusters using only a 2D representation of the data. Once again,
 let’s run a simple k-means clustering on this new 2D representation, and
 compare with the actual color-labelled data:</p>
-<pre><code><span><span class="va">Kmean</span> <span class="op">=</span> <span class="fu">skl_cluster.KMeans</span><span class="op">(</span>n_clusters<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">Kmean.fit</span><span class="op">(</span><span class="va">x_tsne</span><span class="op">)</span></span>
-<span><span class="va">clusters</span> <span class="op">=</span> <span class="fu">Kmean.predict</span><span class="op">(</span><span class="va">x_tsne</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">plot_clusters</span><span class="op">(</span><span class="va">x_tsne</span>, <span class="va">clusters</span>, <span class="va">Kmean</span><span class="op">)</span></span>
-<span><span class="fu">plot_clusters_labels</span><span class="op">(</span><span class="va">x_tsne</span>, <span class="va">labels</span><span class="op">)</span></span></code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb10">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>Kmean <span class="op">=</span> skl_cluster.KMeans(n_clusters<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>Kmean.fit(x_tsne)</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>clusters <span class="op">=</span> Kmean.predict(x_tsne)</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>plot_clusters(x_tsne, clusters, Kmean)</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>plot_clusters_labels(x_tsne, labels)</span></code></pre>
+</div>
 <p><img src="fig/tsne_clustered.png" alt="Reduction using PCA" class="figure"><img src="fig/tsne_labelled.png" alt="Reduction using PCA" class="figure"></p>
 <p>It looks like t-SNE has successfully separated out our digits into
 accurate clusters using as little as a 2D representation and a simple
@@ -610,61 +680,131 @@ and not very typical of the modern problems that can now be solved in
 the field of ML and DL. To account for even higher-order input data,
 neural networks were developed to more accurately extract feature
 information.</p>
-<blockquote>
-<h2 id="exercise-working-in-three-dimensions">Exercise: Working in three
-dimensions</h2>
+<div id="exercise-working-in-three-dimensions" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="exercise-working-in-three-dimensions" class="callout-inner">
+<h3 class="callout-title">Exercise: Working in three dimensions</h3>
+<div class="callout-content">
 <p>The above example has considered only two dimensions since humans can
 visualize two dimensions very well. However, there can be cases where a
 dataset requires more than two dimensions to be appropriately
 decomposed. Modify the above programs to use three dimensions and create
 appropriate plots. Do three dimensions allow one to better distinguish
 between the digits?</p>
-<blockquote>
-<h2 id="solution-1">Solution</h2>
-<pre><code>from mpl_toolkits.mplot3d import Axes3D
-# PCA
-pca = decomposition.PCA(n_components=3)
-pca.fit(features)
-x_pca = pca.transform(features)
-fig = plt.figure(1, figsize=(4, 4))
-ax = fig.add_subplot(projection='3d')
-ax.scatter(x_pca[:, 0], x_pca[:, 1], x_pca[:, 2], c=labels,
-          cmap=plt.cm.nipy_spectral, s=9, lw=0)
-plt.show()</code></pre>
-<p>{: .language-python}</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb11">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="im">from</span> mpl_toolkits.mplot3d <span class="im">import</span> Axes3D</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="co"># PCA</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>pca <span class="op">=</span> decomposition.PCA(n_components<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>pca.fit(features)</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>x_pca <span class="op">=</span> pca.transform(features)</span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(projection<span class="op">=</span><span class="st">'3d'</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>ax.scatter(x_pca[:, <span class="dv">0</span>], x_pca[:, <span class="dv">1</span>], x_pca[:, <span class="dv">2</span>], c<span class="op">=</span>labels,</span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>          cmap<span class="op">=</span>plt.cm.nipy_spectral, s<span class="op">=</span><span class="dv">9</span>, lw<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>plt.show()</span></code></pre>
+</div>
 <figure><img src="fig/pca_3d.svg" alt="Reduction to 3 components using pca" class="figure mx-auto d-block"><div class="figcaption">Reduction to 3 components using pca</div>
-</figure><pre><code># t-SNE embedding
-tsne = manifold.TSNE(n_components=3, init='pca',
-        random_state = 0)
-x_tsne = tsne.fit_transform(features)
-fig = plt.figure(1, figsize=(4, 4))
-ax = fig.add_subplot(projection='3d')
-ax.scatter(x_tsne[:, 0], x_tsne[:, 1], x_tsne[:, 2], c=labels,
-          cmap=plt.cm.nipy_spectral, s=9, lw=0)
-plt.show()</code></pre>
-<p>{: .language-python}</p>
+</figure><div class="codewrapper sourceCode" id="cb12">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># t-SNE embedding</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>tsne <span class="op">=</span> manifold.TSNE(n_components<span class="op">=</span><span class="dv">3</span>, init<span class="op">=</span><span class="st">'pca'</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>        random_state <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>x_tsne <span class="op">=</span> tsne.fit_transform(features)</span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(projection<span class="op">=</span><span class="st">'3d'</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>ax.scatter(x_tsne[:, <span class="dv">0</span>], x_tsne[:, <span class="dv">1</span>], x_tsne[:, <span class="dv">2</span>], c<span class="op">=</span>labels,</span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>          cmap<span class="op">=</span>plt.cm.nipy_spectral, s<span class="op">=</span><span class="dv">9</span>, lw<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>plt.show()</span></code></pre>
+</div>
 <figure><img src="fig/tsne_3d.svg" alt="Reduction to 3 components using tsne" class="figure mx-auto d-block"><div class="figcaption">Reduction to 3 components using tsne</div>
-</figure><p>{: .solution} {: .challenge}</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<h2 id="exercise-parameters">Exercise: Parameters</h2>
+</figure></div>
+</div>
+</div>
+</div>
+<div id="exercise-parameters" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="exercise-parameters" class="callout-inner">
+<h3 class="callout-title">Exercise: Parameters</h3>
+<div class="callout-content">
 <p>Look up parameters that can be changed in PCA and t-SNE, and
 experiment with these. How do they change your resulting plots? Might
 the choice of parameters lead you to make different conclusions about
-your data? {: .challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="exercise-other-algorithms">Exercise: Other algorithms</h2>
+your data?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div class="accordion-body">
+
+</div>
+</div>
+</div>
+</div>
+<div id="exercise-other-algorithms" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="exercise-other-algorithms" class="callout-inner">
+<h3 class="callout-title">Exercise: Other algorithms</h3>
+<div class="callout-content">
 <p>There are other algorithms that can be used for doing dimensionality
 reduction (for example the Higher Order Singular Value Decomposition
 (HOSVD)). Do an internet search for some of these and examine the
 example data that they are used on. Are there cases where they do
 poorly? What level of care might you need to use before applying such
 methods for automation in critical scenarios? What about for interactive
-data exploration? {: .challenge}</p>
-</blockquote>
-<p>{% include links.md %}</p>
+data exploration?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
+</button>
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div class="accordion-body">
+
+</div>
+</div>
+</div>
+</div>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points</h3>
+<div class="callout-content">
+<ul><li>“PCA is a linear dimensionality reduction technique for tabular
+data”</li>
+<li>“t-SNE is another dimensionality reduction technique for tabular
+data that is more general than PCA”</li>
+</ul></div>
+</div>
+</div>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.

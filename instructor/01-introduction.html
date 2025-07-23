@@ -360,6 +360,32 @@
 
         
 
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul><li>“What is machine learning?”</li>
+<li>“What are some useful machine learning techniques?”</li>
+</ul></div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul><li>“Gain an overview of what machine learning is and the techniques
+available.”</li>
+<li>“Understand how machine learning and artificial intelligence
+differ.”</li>
+<li>“Be aware of some caveats when using Machine Learning.”</li>
+</ul></div>
+</div>
+</div>
+</div>
+</div>
 <div class="section level1">
 <h1 id="what-is-machine-learning">What is machine learning?<a class="anchor" aria-label="anchor" href="#what-is-machine-learning"></a></h1>
 <p>Machine learning is a set of techniques that enable computers to use
@@ -424,16 +450,24 @@ preferences</li>
 and vehicles, capture text, generate subtitles, and much more</li>
 <li>Self-driving cars and robots use object detection and performance
 feedback to improve their interaction with the world</li>
-</ul><blockquote>
-<h2 id="where-else-have-you-encountered-machine-learning-already">Where
-else have you encountered machine learning already?</h2>
+</ul><div id="where-else-have-you-encountered-machine-learning-already" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="where-else-have-you-encountered-machine-learning-already" class="callout-inner">
+<h3 class="callout-title">Where else have you encountered machine learning already?</h3>
+<div class="callout-content">
 <p>Now that we have explored machine learning in a bit more detail,
-discuss with the person next to you: 1. Where else have I seen machine
-learning in use? 2. What kind of input data does that machine learning
-system use to make predictions/classifications? 3. Is there any evidence
-that your interaction with the system contributes to further training?
-4. Do you have any examples of the system failing? {: .challenge}</p>
-</blockquote>
+discuss with the person next to you:</p>
+<ol style="list-style-type: decimal"><li>Where else have I seen machine learning in use?</li>
+<li>What kind of input data does that machine learning system use to
+make predictions/classifications?</li>
+<li>Is there any evidence that your interaction with the system
+contributes to further training?</li>
+<li>Do you have any examples of the system failing?</li>
+</ol></div>
+</div>
+</div>
 </div>
 <div class="section level3">
 <h3 id="limitations-of-machine-learning">Limitations of machine learning<a class="anchor" aria-label="anchor" href="#limitations-of-machine-learning"></a></h3>
@@ -502,9 +536,12 @@ processing small to medium datasets with Scikit-Learn, without the need
 for a graphical processing unit (GPU).</p>
 <p>Like any other Python package, we can import Scikit-Learn and check
 the package version using the following Python commands:</p>
-<pre><code>import sklearn
-print('scikit-learn:', sklearn.__version__)</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> sklearn</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'scikit-learn:'</span>, sklearn.__version__)</span></code></pre>
+</div>
 </div>
 <div class="section level3">
 <h3 id="representation-of-data-in-scikit-learn">Representation of Data in Scikit-learn<a class="anchor" aria-label="anchor" href="#representation-of-data-in-scikit-learn"></a></h3>
@@ -551,7 +588,22 @@ perceptrons.</p>
 <p><img src="../fig/introduction/ML_summary.png" alt="Types of Machine Learning" class="figure"><a href="https://vas3k.com/blog/machine_learning/" class="external-link">Image from Vasily
 Zubarev via their blog</a> with modifications in blue to denote lesson
 content.</p>
-<p>{% include links.md %}</p>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points</h3>
+<div class="callout-content">
+<ul><li>“Machine learning is a set of tools and techniques that use data to
+make predictions.”</li>
+<li>“Artificial intelligence is a broader term that refers to making
+computers show human-like intelligence.”</li>
+<li>“Deep learning is a subset of machine learning.”</li>
+<li>“All machine learning systems have limitations to be aware of.”</li>
+</ul></div>
+</div>
+</div>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.

@@ -357,6 +357,30 @@
         </div>
 
         
+
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul><li>“How can I classify data into known categories?”</li>
+</ul></div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul><li>“Use two different supervised methods to classify data.”</li>
+<li>“Learn about the concept of hyper-parameters.”</li>
+<li>“Learn to validate and cross-validate models”</li>
+</ul></div>
+</div>
+</div>
+</div>
+</div>
 <div class="section level1">
 <h1 id="classification">Classification<a class="anchor" aria-label="anchor" href="#classification"></a></h1>
 <p>Classification is a supervised method to recognise and group data
@@ -381,11 +405,14 @@ beak width, body mass, and sex. <img src="fig/culmen_depth.png" alt="Artwork by 
 <p>In other words, the dataset contains 344 rows with 7 features i.e. 5
 physical attributes, species and the island where the observations were
 made.</p>
-<pre><code>import seaborn as sns
-
-dataset = sns.load_dataset('penguins')
-dataset.head()</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>dataset <span class="op">=</span> sns.load_dataset(<span class="st">'penguins'</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>dataset.head()</span></code></pre>
+</div>
 <p>Our aim is to develop a classification model that will predict the
 species of a penguin based upon measurements of those variables.</p>
 <p>As a rule of thumb for ML/DL modelling, it is best to start with a
@@ -402,15 +429,18 @@ complexity of the data.</p>
 <h3 id="preprocessing-our-data">Preprocessing our data<a class="anchor" aria-label="anchor" href="#preprocessing-our-data"></a></h3>
 <p>Lets do some pre-processing on our dataset and specify our
 <code>X</code> features and <code>y</code> labels:</p>
-<pre><code># Extract the data we need
-feature_names = ['bill_length_mm', 'bill_depth_mm', 'flipper_length_mm', 'body_mass_g']
-dataset.dropna(subset=feature_names, inplace=True)
-
-class_names = dataset['species'].unique()
-
-X = dataset[feature_names]
-y = dataset['species']</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Extract the data we need</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>feature_names <span class="op">=</span> [<span class="st">'bill_length_mm'</span>, <span class="st">'bill_depth_mm'</span>, <span class="st">'flipper_length_mm'</span>, <span class="st">'body_mass_g'</span>]</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>dataset.dropna(subset<span class="op">=</span>feature_names, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>class_names <span class="op">=</span> dataset[<span class="st">'species'</span>].unique()</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>X <span class="op">=</span> dataset[feature_names]</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>y <span class="op">=</span> dataset[<span class="st">'species'</span>]</span></code></pre>
+</div>
 <p>Having extracted our features <code>X</code> and labels
 <code>y</code>, we can now split the data using the
 <code>train_test_split</code> function.</p>
@@ -427,15 +457,22 @@ dataset to evaluate the accuracy of our trained model.</p>
 <p>We lose a bit of training data in the process, But we can now easily
 evaluate the performance of our model. With more advanced test-train
 split techniques we can even recover this lost training data!</p>
-<blockquote>
-<h2 id="why-do-we-do-this">Why do we do this?</h2>
+<div id="why-do-we-do-this" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="why-do-we-do-this" class="callout-inner">
+<h3 class="callout-title">Why do we do this?</h3>
+<div class="callout-content">
 <p>It’s important to do this early, and to do all of your work with the
 training dataset - this avoids any risk of you introducing bias to the
 model based on your own manual observations of data in the testing set
 (afterall, we want the model to make the decisions about parameters!).
-This can also highlight when you are over-fitting on your training data.
-{: .callout}</p>
-</blockquote>
+This can also highlight when you are over-fitting on your training
+data.</p>
+</div>
+</div>
+</div>
 <p>How we split the data into training and testing sets is also
 extremely important. We need to make sure that our training data is
 representitive of both our test data and actual data.</p>
@@ -450,22 +487,31 @@ penguin data is sorted by species and so our training data only
 considered one type of penguin and thus was not representitive of the
 actual data we tried to fit. We could have avoided this issue by
 randomly shuffling our penguin samples before splitting the data.</p>
-<blockquote>
-<h2 id="when-not-to-shuffle-your-data">When not to shuffle your
-data</h2>
+<div id="when-not-to-shuffle-your-data" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="when-not-to-shuffle-your-data" class="callout-inner">
+<h3 class="callout-title">When not to shuffle your data</h3>
+<div class="callout-content">
 <p>Sometimes your data is dependant on it’s ordering, such as
 time-series data where past values influence future predictions.
 Creating train-test splits for this can be tricky at first glance, but
 fortunately there are existing techniques to tackle this (often called
 stratification): See <a href="https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators" class="external-link">Scikit-Learn</a>
-for more information. {: .callout}</p>
-</blockquote>
+for more information.</p>
+</div>
+</div>
+</div>
 <p>We specify the fraction of data to use as test data, and the function
 randomly shuffles our data prior to splitting:</p>
-<pre><code>from sklearn.model_selection import train_test_split
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span></code></pre>
+</div>
 <p>We’ll use <code>X_train</code> and <code>y_train</code> to develop
 our model, and only look at <code>X_test</code> and <code>y_test</code>
 when it’s time to evaluate its performance.</p>
@@ -474,18 +520,24 @@ when it’s time to evaluate its performance.</p>
 <p>In order to better understand how a model might classify this data,
 we can first take a look at the data visually, to see what patterns we
 might identify.</p>
-<pre><code>import matplotlib.pyplot as plt
-
-fig01 = sns.scatterplot(X_train, x=feature_names[0], y=feature_names[1], hue=dataset['species'])
-plt.show()</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>fig01 <span class="op">=</span> sns.scatterplot(X_train, x<span class="op">=</span>feature_names[<span class="dv">0</span>], y<span class="op">=</span>feature_names[<span class="dv">1</span>], hue<span class="op">=</span>dataset[<span class="st">'species'</span>])</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>plt.show()</span></code></pre>
+</div>
 <figure><img src="fig/e3_penguins_vis.png" alt="Visualising the penguins dataset" class="figure mx-auto d-block"><div class="figcaption">Visualising the penguins dataset</div>
 </figure><p>As there are four measurements for each penguin, we need quite a few
 plots to visualise all four dimensions against each other. Here is a
 handy Seaborn function to do so:</p>
-<pre><code><span><span class="fu">sns.pairplot</span><span class="op">(</span><span class="va">dataset</span>, hue<span class="op">=</span><span class="st">"species"</span><span class="op">)</span></span>
-<span><span class="fu">plt.show</span><span class="op">(</span><span class="op">)</span></span></code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>sns.pairplot(dataset, hue<span class="op">=</span><span class="st">"species"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>plt.show()</span></code></pre>
+</div>
 <figure><img src="fig/pairplot.png" alt="Visualising the penguins dataset" class="figure mx-auto d-block"><div class="figcaption">Visualising the penguins dataset</div>
 </figure><p>We can see that penguins from each species form fairly distinct
 spatial clusters in these plots, so that you could draw lines between
@@ -506,35 +558,52 @@ to a value, and moving left or right down the tree until a
 classification is reached.</p>
 <figure><img src="fig/decision_tree_example.png" alt="Decision tree for classifying penguins" class="figure mx-auto d-block"><div class="figcaption">Decision tree for classifying penguins</div>
 </figure><p>Training and using a decision tree in Scikit-Learn is
-straightforward: ~~~ from sklearn.tree import DecisionTreeClassifier,
-plot_tree</p>
-<p>clf = DecisionTreeClassifier(max_depth=2) clf.fit(X_train,
-y_train)</p>
-<p>clf.predict(X_test) ~~~ {: .language-python}</p>
-<blockquote>
-<h2 id="hyper-parameters-parameters-that-tune-a-model">Hyper-parameters:
-parameters that tune a model</h2>
+straightforward:</p>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier, plot_tree</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>clf <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>clf.fit(X_train, y_train)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>clf.predict(X_test)</span></code></pre>
+</div>
+<div id="hyper-parameters-parameters-that-tune-a-model" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="hyper-parameters-parameters-that-tune-a-model" class="callout-inner">
+<h3 class="callout-title">Hyper-parameters: parameters that tune a model</h3>
+<div class="callout-content">
 <p>‘Max Depth’ is an example of a <em>hyper-parameter</em> for the
 decision tree model. Where models use the parameters of an observation
 to predict a result, hyper-parameters are used to tune how a model
 works. Each model you encounter will have its own set of
 hyper-parameters, each of which affects model behaviour and performance
 in a different way. The process of adjusting hyper-parameters in order
-to improve model performance is called hyper-parameter tuning. {:
-.callout}</p>
-</blockquote>
+to improve model performance is called hyper-parameter tuning.</p>
+</div>
+</div>
+</div>
 <p>We can conveniently check how our model did with the .score()
 function, which will make predictions and report what proportion of them
 were accurate:</p>
-<pre><code><span><span class="va">clf_score</span> <span class="op">=</span> <span class="fu">clf.score</span><span class="op">(</span><span class="va">X_test</span>, <span class="va">y_test</span><span class="op">)</span></span>
-<span><span class="fu">print</span><span class="op">(</span><span class="va">clf_score</span><span class="op">)</span></span></code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>clf_score <span class="op">=</span> clf.score(X_test, y_test)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="bu">print</span>(clf_score)</span></code></pre>
+</div>
 <p>Our model reports an accuracy of ~98% on the test data! We can also
 look at the decision tree that was generated:</p>
-<pre><code>fig = plt.figure(figsize=(12, 10))
-plot_tree(clf, class_names=class_names, feature_names=feature_names, filled=True, ax=fig.gca())
-plt.show()</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">10</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>plot_tree(clf, class_names<span class="op">=</span>class_names, feature_names<span class="op">=</span>feature_names, filled<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>fig.gca())</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>plt.show()</span></code></pre>
+</div>
 <figure><img src="fig/e3_dt_2.png" alt="Decision tree for classifying penguins" class="figure mx-auto d-block"><div class="figcaption">Decision tree for classifying penguins</div>
 </figure><p>The first first question (<code>depth=1</code>) splits the training
 data into “Adelie” and “Gentoo” categories using the criteria
@@ -552,19 +621,22 @@ We can see that rather than clean lines between species, the decision tree produ
 to get a more intuitive feel for what it is doing.Note that our 2D plot
 can only show two parameters at a time, so we will quickly visualise by
 training a new model on only 2 features:</p>
-<pre><code>from sklearn.inspection import DecisionBoundaryDisplay
-
-f1 = feature_names[0]
-f2 = feature_names[3]
-
-clf = DecisionTreeClassifier(max_depth=2)
-clf.fit(X_train[[f1, f2]], y_train)
-
-d = DecisionBoundaryDisplay.from_estimator(clf, X_train[[f1, f2]])
-
-sns.scatterplot(X_train, x=f1, y=f2, hue=y_train, palette="husl")
-plt.show()</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> DecisionBoundaryDisplay</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>f1 <span class="op">=</span> feature_names[<span class="dv">0</span>]</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>f2 <span class="op">=</span> feature_names[<span class="dv">3</span>]</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>clf <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>clf.fit(X_train[[f1, f2]], y_train)</span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>d <span class="op">=</span> DecisionBoundaryDisplay.from_estimator(clf, X_train[[f1, f2]])</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>sns.scatterplot(X_train, x<span class="op">=</span>f1, y<span class="op">=</span>f2, hue<span class="op">=</span>y_train, palette<span class="op">=</span><span class="st">"husl"</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>plt.show()</span></code></pre>
+</div>
 <figure><img src="fig/e3_dt_space_2.png" alt="Classification space for our decision tree" class="figure mx-auto d-block"><div class="figcaption">Classification space for our decision tree</div>
 </figure></div>
 </div>
@@ -575,25 +647,28 @@ and there are still some incorrect predictions in our final
 classifications. Let’s try varying the <code>max_depth</code>
 hyperparameter to see if we can improve our model predictions.</p>
 <!-- We can reduce the over-fitting of our decision tree model by limiting its depth, forcing it to use less decisions to produce a classification, and resulting in a simpler decision space. -->
-<pre><code>import pandas as pd
-
-max_depths = [1, 2, 3, 4, 5]
-
-accuracy = []
-for i, d in enumerate(max_depths):
-    clf = DecisionTreeClassifier(max_depth=d)
-    clf.fit(X_train, y_train)
-    acc = clf.score(X_test, y_test)
-
-    accuracy.append((d, acc))
-
-acc_df = pd.DataFrame(accuracy, columns=['depth', 'accuracy'])
-
-sns.lineplot(acc_df, x='depth', y='accuracy')
-plt.xlabel('Tree depth')
-plt.ylabel('Accuracy')
-plt.show()</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb10">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>max_depths <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>accuracy <span class="op">=</span> []</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="cf">for</span> i, d <span class="kw">in</span> <span class="bu">enumerate</span>(max_depths):</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>    clf <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span>d)</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>    clf.fit(X_train, y_train)</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>    acc <span class="op">=</span> clf.score(X_test, y_test)</span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>    accuracy.append((d, acc))</span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>acc_df <span class="op">=</span> pd.DataFrame(accuracy, columns<span class="op">=</span>[<span class="st">'depth'</span>, <span class="st">'accuracy'</span>])</span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>sns.lineplot(acc_df, x<span class="op">=</span><span class="st">'depth'</span>, y<span class="op">=</span><span class="st">'accuracy'</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>plt.xlabel(<span class="st">'Tree depth'</span>)</span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>plt.ylabel(<span class="st">'Accuracy'</span>)</span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a>plt.show()</span></code></pre>
+</div>
 <figure><img src="fig/e3_dt_overfit.png" alt="Performance of decision trees of various depths" class="figure mx-auto d-block"><div class="figcaption">Performance of decision trees of various
 depths</div>
 </figure><p>Here we can see that a <code>max_depth=2</code> performs slightly
@@ -602,26 +677,37 @@ This can seem counter intuitive, as surely more questions should be able
 to better split up our categories and thus give better predictions?</p>
 <p>Let’s reuse our fitting and plotting codes from above to inspect a
 decision tree that has <code>max_depth=5</code>:</p>
-<pre><code>clf = DecisionTreeClassifier(max_depth=5)
-clf.fit(X_train, y_train)
-
-fig = plt.figure(figsize=(12, 10))
-plot_tree(clf, class_names=class_names, feature_names=feature_names, filled=True, ax=fig.gca())
-plt.show()</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb11">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>clf <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>clf.fit(X_train, y_train)</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">10</span>))</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>plot_tree(clf, class_names<span class="op">=</span>class_names, feature_names<span class="op">=</span>feature_names, filled<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>fig.gca())</span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>plt.show()</span></code></pre>
+</div>
 <figure><img src="fig/e3_dt_6.png" alt="Simplified decision tree" class="figure mx-auto d-block"><div class="figcaption">Simplified decision tree</div>
 </figure><p>It looks like our decision tree has split up the training data into
 the correct penguin categories and more accurately than the
 <code>max_depth=2</code> model did, however it used some very specific
 questions to split up the penguins into the correct categories. Let’s
 try visualising the classification space for a more intuitive
-understanding: ~~~ f1 = feature_names[0] f2 = feature_names[3]</p>
-<p>clf = DecisionTreeClassifier(max_depth=5) clf.fit(X_train[[f1, f2]],
-y_train)</p>
-<p>d = DecisionBoundaryDisplay.from_estimator(clf, X_train[[f1,
-f2]])</p>
-<p>sns.scatterplot(X_train, x=f1, y=f2, hue=y_train, palette=‘husl’)
-plt.show() ~~~ {: .language-python}</p>
+understanding:</p>
+<div class="codewrapper sourceCode" id="cb12">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>f1 <span class="op">=</span> feature_names[<span class="dv">0</span>]</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>f2 <span class="op">=</span> feature_names[<span class="dv">3</span>]</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>clf <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>clf.fit(X_train[[f1, f2]], y_train)</span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>d <span class="op">=</span> DecisionBoundaryDisplay.from_estimator(clf, X_train[[f1, f2]])</span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>sns.scatterplot(X_train, x<span class="op">=</span>f1, y<span class="op">=</span>f2, hue<span class="op">=</span>y_train, palette<span class="op">=</span><span class="st">'husl'</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a>plt.show()</span></code></pre>
+</div>
 <figure><img src="fig/e3_dt_space_6.png" alt="Classification space of the simplified decision tree" class="figure mx-auto d-block"><div class="figcaption">Classification space of the simplified decision
 tree</div>
 </figure><p>Earlier we saw that the <code>max_depth=2</code> model split the data
@@ -650,38 +736,47 @@ directly on this data, it would only consider the parameter with the
 greatest variance (body mass).</p>
 <p>Normalising maps each parameter to a new range so that it has a mean
 of 0 and a standard deviation of 1.</p>
-<pre><code>from sklearn import preprocessing
-import pandas as pd
-
-scalar = preprocessing.StandardScaler()
-scalar.fit(X_train)
-X_train_scaled = pd.DataFrame(scalar.transform(X_train), columns=X_train.columns, index=X_train.index)
-X_test_scaled = pd.DataFrame(scalar.transform(X_test), columns=X_test.columns, index=X_test.index)</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb13">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> preprocessing</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>scalar <span class="op">=</span> preprocessing.StandardScaler()</span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>scalar.fit(X_train)</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>X_train_scaled <span class="op">=</span> pd.DataFrame(scalar.transform(X_train), columns<span class="op">=</span>X_train.columns, index<span class="op">=</span>X_train.index)</span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>X_test_scaled <span class="op">=</span> pd.DataFrame(scalar.transform(X_test), columns<span class="op">=</span>X_test.columns, index<span class="op">=</span>X_test.index)</span></code></pre>
+</div>
 <p>Note that we fit the scalar to our training data - we then use this
 same pre-trained scalar to transform our testing data.</p>
 <p>With this scaled data, training the models works exactly the same as
 before.</p>
-<pre><code>from sklearn import svm
-
-SVM = svm.SVC(kernel='poly', degree=3, C=1.5)
-SVM.fit(X_train_scaled, y_train)
-
-svm_score = SVM.score(X_test_scaled, y_test)
-print("Decision tree score is ", clf_score)
-print("SVM score is ", svm_score)</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb14">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> svm</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>SVM <span class="op">=</span> svm.SVC(kernel<span class="op">=</span><span class="st">'poly'</span>, degree<span class="op">=</span><span class="dv">3</span>, C<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>SVM.fit(X_train_scaled, y_train)</span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>svm_score <span class="op">=</span> SVM.score(X_test_scaled, y_test)</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Decision tree score is "</span>, clf_score)</span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"SVM score is "</span>, svm_score)</span></code></pre>
+</div>
 <p>We can again visualise the decision space produced, also using only
 two parameters:</p>
-<pre><code><span><span class="va">x2</span> <span class="op">=</span> <span class="va">X_train_scaled</span><span class="op">[[</span><span class="va">feature_names</span><span class="op">[</span><span class="fl">0</span><span class="op">]</span>, <span class="va">feature_names</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">]</span></span>
-<span></span>
-<span><span class="va">SVM</span> <span class="op">=</span> <span class="fu">svm.SVC</span><span class="op">(</span>kernel<span class="op">=</span><span class="st">'poly'</span>, degree<span class="op">=</span><span class="fl">3</span>, C<span class="op">=</span><span class="fl">1.5</span><span class="op">)</span></span>
-<span><span class="fu">SVM.fit</span><span class="op">(</span><span class="va">x2</span>, <span class="va">y_train</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">DecisionBoundaryDisplay.from_estimator</span><span class="op">(</span><span class="va">SVM</span>, <span class="va">x2</span><span class="op">)</span> <span class="co">#, ax=ax</span></span>
-<span><span class="fu">sns.scatterplot</span><span class="op">(</span><span class="va">x2</span>, x<span class="op">=</span><span class="va">feature_names</span><span class="op">[</span><span class="fl">0</span><span class="op">]</span>, y<span class="op">=</span><span class="va">feature_names</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, hue<span class="op">=</span><span class="va">dataset</span><span class="op">[</span><span class="st">'species'</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="fu">plt.show</span><span class="op">(</span><span class="op">)</span></span></code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb15">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>x2 <span class="op">=</span> X_train_scaled[[feature_names[<span class="dv">0</span>], feature_names[<span class="dv">1</span>]]]</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>SVM <span class="op">=</span> svm.SVC(kernel<span class="op">=</span><span class="st">'poly'</span>, degree<span class="op">=</span><span class="dv">3</span>, C<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>SVM.fit(x2, y_train)</span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>DecisionBoundaryDisplay.from_estimator(SVM, x2) <span class="co">#, ax=ax</span></span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>sns.scatterplot(x2, x<span class="op">=</span>feature_names[<span class="dv">0</span>], y<span class="op">=</span>feature_names[<span class="dv">1</span>], hue<span class="op">=</span>dataset[<span class="st">'species'</span>])</span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>plt.show()</span></code></pre>
+</div>
 <figure><img src="fig/e3_svc_space.png" alt="Classification space generated by the SVM model" class="figure mx-auto d-block"><div class="figcaption">Classification space generated by the SVM
 model</div>
 </figure><p>While this SVM model performs slightly worse than our decision tree
@@ -689,13 +784,26 @@ model</div>
 perform better when exposed to more and more real data, as decision
 trees are prone to overfitting and requires complex linear models to
 reproduce simple non-linear boundaries. It’s important to pick a model
-that is appropriate for your problem and data trends! <!--
+that is appropriate for your problem and data trends!</p>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points</h3>
+<div class="callout-content">
+<ul><li>“Classification requires labelled data (is supervised)”</li>
+</ul></div>
+</div>
+</div>
+<!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
- --></p>
+ -->
 </div>
 </div>
 </div>
+
 
 
       </div> <!-- / div.lesson-content -->

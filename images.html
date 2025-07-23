@@ -420,7 +420,7 @@ Science Handbook</a></p>
 <p><img src="fig/introduction/ML_summary.png" alt="Types of Machine Learning" class="figure"><a href="https://vas3k.com/blog/machine_learning/" class="external-link">Image from Vasily
 Zubarev via their blog</a> with modifications in blue to denote lesson
 content.</p>
-<hr></section><section id="02-regression"><h2 class="section-heading"><a href="02-regression.html">Supervised methods - RegressionSupervised learning<a class="anchor" aria-label="anchor" href="#supervised-learning"></a>Regression<a class="anchor" aria-label="anchor" href="#regression"></a>just call the function here rather than assign.<a class="anchor" aria-label="anchor" href="#just-call-the-function-here-rather-than-assign-"></a>We don’t need to reuse the trained model yet<a class="anchor" aria-label="anchor" href="#we-dont-need-to-reuse-the-trained-model-yet"></a></a></h2>
+<hr></section><section id="02-regression"><h2 class="section-heading"><a href="02-regression.html">Supervised methods - RegressionSupervised learning<a class="anchor" aria-label="anchor" href="#supervised-learning"></a>Regression<a class="anchor" aria-label="anchor" href="#regression"></a></a></h2>
 <hr class="half-width">
 <h3 id="02-regression-figure-1">Figure 1</h3>
 <p aria-hidden="true">Image 1 of 1: ‘Example of linear and polynomial regressions’</p>
@@ -442,21 +442,7 @@ regressions</div>
 <h3 id="02-regression-figure-5">Figure 5</h3>
 <p aria-hidden="true">Image 1 of 2: ‘Linear regression of dataset III’</p>
 <p aria-hidden="true">Image 2 of 2: ‘Linear regression of dataset IV’</p>
-<p>Adjust your code to repeat the linear regression for the other
-datasets. What can you say about the similarities and/or differences
-between the linear regressions on the 4 datasets? &gt; ## Solution &gt;
-~~~ &gt; # Repeat the following and adjust for dataset IV &gt; data_3 =
-data[data[“dataset”]==“III”] &gt; &gt;
-fit_predict_plot_linear(data_3[“x”],data_3[“y”]) &gt; &gt; plt.show()
-&gt; ~~~ &gt; {: .language-python} &gt; &gt; <img src="fig/regress_linear_3rd.png" alt="Linear regression of dataset III" class="figure"> &gt; <img src="fig/regress_linear_4th.png" alt="Linear regression of dataset IV" class="figure"> &gt; The 4 datasets all produce
-very similar linear regression fit parameters (<code>m</code> and
-<code>c</code>) and RMSEs despite visual differences in the 4 datasets.
-&gt; &gt; This is intentional as the Anscombe Quartet is designed to
-produce near identical basic statistical values such as means and
-standard deviations. &gt; &gt; While the trained model parameters and
-errors are near identical, our visual inspection tells us that a linear
-fit might not be the best way of modelling all of these datasets. {:
-.solution} {: .challenge}</p>
+<p><img src="fig/regress_linear_3rd.png" alt="Linear regression of dataset III" class="figure"><img src="fig/regress_linear_4th.png" alt="Linear regression of dataset IV" class="figure"></p>
 <hr>
 <h3 id="02-regression-figure-6">Figure 6</h3>
 <p aria-hidden="true">Image 1 of 1: ‘Comparison of the regressions of our dataset’</p>
@@ -464,77 +450,25 @@ fit might not be the best way of modelling all of these datasets. {:
 dataset</div>
 </figure><hr>
 <h3 id="02-regression-figure-7">Figure 7</h3>
-<p aria-hidden="true">Image 1 of 8: ‘Polynomial regression of dataset I’</p>
-<p aria-hidden="true">Image 2 of 8: ‘Polynomial regression of dataset II’</p>
-<p aria-hidden="true">Image 3 of 8: ‘Polynomial regression of dataset III’</p>
-<p aria-hidden="true">Image 4 of 8: ‘Polynomial regression of dataset IV’</p>
-<p aria-hidden="true">Image 5 of 8: ‘Polynomial regression of dataset I with N between 1 and 10’</p>
-<p aria-hidden="true">Image 6 of 8: ‘Polynomial regression of dataset II with N between 1 and 10’</p>
-<p aria-hidden="true">Image 7 of 8: ‘Polynomial regression of dataset III with N between 1 and 10’</p>
-<p aria-hidden="true">Image 8 of 8: ‘Polynomial regression of dataset IV with N between 1 and 10’</p>
-<p>Which performs better for each dataset? Modify your polynomial
-regression function to take <code>N</code> as an input parameter to your
-regression model. How does changing the degree of polynomial fit affect
-each dataset? &gt; ## Solution &gt; ~~~ &gt; for ds in
-[“I”,“II”,“III”,“IV”]: &gt; # Sort our data in order of our x (feature)
-values &gt; data_ds = data[data[“dataset”]==ds] &gt; data_ds =
-data_ds.sort_values(“x”) &gt;
-fit_predict_plot_linear(data_ds[“x”],data_ds[“y”]) &gt;
-fit_predict_plot_poly(data_ds[“x”],data_ds[“y”]) &gt; &gt; plt.show()
-&gt; ~~~ &gt; {: .language-python} &gt; &gt; <img src="fig/regress_polynomial_1st.png" alt="Polynomial regression of dataset I" class="figure"> &gt; <img src="fig/regress_polynomial_2nd.png" alt="Polynomial regression of dataset II" class="figure"> &gt; <img src="fig/regress_polynomial_3rd.png" alt="Polynomial regression of dataset III" class="figure"> &gt; <img src="fig/regress_polynomial_4th.png" alt="Polynomial regression of dataset IV" class="figure"> &gt; &gt; The
-<code>N=2</code> polynomial fit is far better for Dataset II. According
-to the RMSE the polynomial is a slightly better fit for Datasets I and
-III, however it could be argued that a linear fit is good enough. &gt;
-Dataset III looks like a linear relation that has a single outlier,
-rather than a truly non-linear relation. The polynomial and linear fits
-perform just as well (or poorly) on Dataset IV. &gt; For Dataset IV it
-looks like <code>y</code> may be a better estimator of <code>x</code>,
-than <code>x</code> is at estimating <code>y</code>. &gt; ~~~ &gt; def
-pre_process_poly(x, y, N): &gt; # sklearn requires a 2D array, so lets
-reshape our 1D arrays. &gt; x_data = np.array(x).reshape(-1, 1) &gt;
-y_data = np.array(y).reshape(-1, 1) &gt; &gt; # create a polynomial
-representation of our data &gt; poly_features =
-PolynomialFeatures(degree=N) &gt; x_poly =
-poly_features.fit_transform(x_data) &gt; &gt; return x_poly, x_data,
-y_data &gt; &gt; def plot_poly_model(x_data, poly_data, N): &gt; #
-visualise! &gt; plt.plot(x_data, poly_data, label=“poly fit N=” +
-str(N)) &gt; plt.legend() &gt; &gt; def fit_predict_plot_poly(x, y, N):
-&gt; # Combine all of the steps &gt; x_poly, x_data, y_data =
-pre_process_poly(x, y, N) &gt; poly_regress = fit_poly_model(x_poly,
-y_data) &gt; poly_data = predict_poly_model(poly_regress, x_poly,
-y_data) &gt; plot_poly_model(x_data, poly_data, N) &gt; &gt; return
-poly_regress &gt; &gt; for ds in [“I”,“II”,“III”,“IV”]: &gt; # Sort our
-data in order of our x (feature) values &gt; data_ds =
-data[data[“dataset”]==ds] &gt; data_ds = data_ds.sort_values(“x”) &gt;
-fit_predict_plot_linear(data_ds[“x”],data_ds[“y”]) &gt; for N in
-range(2,11): &gt; print(“Polynomial degree =”,N) &gt;
-fit_predict_plot_poly(data_ds[“x”],data_ds[“y”],N) &gt; plt.show() &gt;
-~~~ &gt; {: .language-python} &gt; &gt; and &gt; ~~~ &gt; for ds in
-[“I”,“II”,“III”,“IV”]: &gt; # Sort our data in order of our x (feature)
-values &gt; data_ds = data[data[“dataset”]==ds] &gt; data_ds =
-data_ds.sort_values(“x”) &gt;
-fit_predict_plot_linear(data_ds[“x”],data_ds[“y”]) &gt; for N in
-range(2,11): &gt; print(“Polynomial degree =”,N) &gt;
-fit_predict_plot_poly(data_ds[“x”],data_ds[“y”],N) &gt; plt.show() &gt;
-~~~ &gt; {: .language-python} &gt; &gt; With a large enough polynomial
-you can fit through every point with a unique <code>x</code> value. &gt;
-Datasets II and IV remain unchanged beyond <code>N=2</code> as the
-polynomial has converged (dataset II) or cannot model the data (Dataset
-IV). &gt; Datasets I and III slowly decrease their RMSE and N is
-increased, but it is likely that these more complex models are
-overfitting the data. Overfitting is discussed later in the lesson. &gt;
-&gt; <img src="fig/regress_polynomial_n_1st.png" alt="Polynomial regression of dataset I with N between 1 and 10" class="figure"> &gt;
-<img src="fig/regress_polynomial_n_2nd.png" alt="Polynomial regression of dataset II with N between 1 and 10" class="figure">
-&gt; <img src="fig/regress_polynomial_n_3rd.png" alt="Polynomial regression of dataset III with N between 1 and 10" class="figure">
-&gt; <img src="fig/regress_polynomial_n_4th.png" alt="Polynomial regression of dataset IV with N between 1 and 10" class="figure">
-&gt; {: .solution} {: .challenge}</p>
+<p aria-hidden="true">Image 1 of 4: ‘Polynomial regression of dataset I’</p>
+<p aria-hidden="true">Image 2 of 4: ‘Polynomial regression of dataset II’</p>
+<p aria-hidden="true">Image 3 of 4: ‘Polynomial regression of dataset III’</p>
+<p aria-hidden="true">Image 4 of 4: ‘Polynomial regression of dataset IV’</p>
+<p><img src="fig/regress_polynomial_1st.png" alt="Polynomial regression of dataset I" class="figure"><img src="fig/regress_polynomial_2nd.png" alt="Polynomial regression of dataset II" class="figure"><img src="fig/regress_polynomial_3rd.png" alt="Polynomial regression of dataset III" class="figure"><img src="fig/regress_polynomial_4th.png" alt="Polynomial regression of dataset IV" class="figure"></p>
 <hr>
 <h3 id="02-regression-figure-8">Figure 8</h3>
+<p aria-hidden="true">Image 1 of 4: ‘Polynomial regression of dataset I with N between 1 and 10’</p>
+<p aria-hidden="true">Image 2 of 4: ‘Polynomial regression of dataset II with N between 1 and 10’</p>
+<p aria-hidden="true">Image 3 of 4: ‘Polynomial regression of dataset III with N between 1 and 10’</p>
+<p aria-hidden="true">Image 4 of 4: ‘Polynomial regression of dataset IV with N between 1 and 10’</p>
+<p><img src="fig/regress_polynomial_n_1st.png" alt="Polynomial regression of dataset I with N between 1 and 10" class="figure"><img src="fig/regress_polynomial_n_2nd.png" alt="Polynomial regression of dataset II with N between 1 and 10" class="figure"><img src="fig/regress_polynomial_n_3rd.png" alt="Polynomial regression of dataset III with N between 1 and 10" class="figure"><img src="fig/regress_polynomial_n_4th.png" alt="Polynomial regression of dataset IV with N between 1 and 10" class="figure"></p>
+<hr>
+<h3 id="02-regression-figure-9">Figure 9</h3>
 <p aria-hidden="true">Image 1 of 1: ‘Comparison of the regressions of our dataset’</p>
 <figure><img src="fig/regress_penguin_lin.png" alt="Comparison of the regressions of our dataset" class="figure mx-auto d-block"><div class="figcaption">Comparison of the regressions of our
 dataset</div>
 </figure><hr>
-<h3 id="02-regression-figure-9">Figure 9</h3>
+<h3 id="02-regression-figure-10">Figure 10</h3>
 <p aria-hidden="true">Image 1 of 1: ‘Comparison of the regressions of our dataset’</p>
 <figure><img src="fig/regress_penguin_lin_tot.png" alt="Comparison of the regressions of our dataset" class="figure mx-auto d-block"><div class="figcaption">Comparison of the regressions of our
 dataset</div>
@@ -636,8 +570,7 @@ cluster boundaries</div>
 <p aria-hidden="true">Image 1 of 1: ‘Kmeans attempting to classify overlapping clusters’</p>
 <p>Increasing n_samples to 4000 and cluster_std to 3.0 looks like this:
 <img src="fig/kmeans_overlapping_clusters.png" alt="Kmeans attempting to classify overlapping clusters" class="figure"> The straight
-line boundaries between clusters look a bit strange. {: .solution} {:
-.challenge}</p>
+line boundaries between clusters look a bit strange.</p>
 <hr>
 <h3 id="05-clustering-figure-5">Figure 5</h3>
 <p aria-hidden="true">Image 1 of 1: ‘Spectral clustering on two concentric circles’</p>

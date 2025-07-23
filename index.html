@@ -360,9 +360,8 @@ Python virtual environments.</p>
 <div id="installing-python" class="callout-inner">
 <h3 class="callout-title">Installing Python</h3>
 <div class="callout-content">
-<p>[Python][python] is a popular language for scientific computing, and
-a frequent choice for machine learning as well. To install Python,
-follow the <a href="https://wiki.python.org/moin/BeginnersGuide/Download" class="external-link">Beginner’s
+<p>Python is a popular language for scientific computing, and a frequent
+choice for machine learning as well. To install Python, follow the <a href="https://wiki.python.org/moin/BeginnersGuide/Download" class="external-link">Beginner’s
 Guide</a> or head straight to the <a href="https://www.python.org/downloads/" class="external-link">download page</a>.</p>
 <p>Please set up your python environment at least a day in advance of
 the workshop. If you encounter problems with the installation procedure,
@@ -381,9 +380,12 @@ to go as soon as the workshop begins.</p>
 <h1 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a></h1>
 <p>Create a new directory for the workshop, then launch a terminal in
 it:</p>
-<pre><code>mkdir workshop-ml
-cd workshop-ml</code></pre>
-<p>{: .language-bash}</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">mkdir</span> workshop-ml</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="bu">cd</span> workshop-ml</span></code></pre>
+</div>
 <div class="section level2">
 <h2 id="creating-a-new-virtual-environment">Creating a new Virtual Environment<a class="anchor" aria-label="anchor" href="#creating-a-new-virtual-environment"></a></h2>
 <p>We’ll install the prerequisites in a virtual environment, to prevent
@@ -393,14 +395,17 @@ First, create a new directory and ent</p>
 the project, open the terminal (Max/Linux), Git Bash (Windows) or
 Anacomda Prompt (Windows), and type one of the below OS-specific
 options:</p>
-<pre><code>python3 -m venv intro_ml # mac/linux
-python -m venv intro_ml # windows</code></pre>
-<p>{: .language-bash}</p>
-<blockquote>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv intro_ml <span class="co"># mac/linux</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> venv intro_ml <span class="co"># windows</span></span></code></pre>
+</div>
+<div class="info">
 <p>If you’re on Linux and this doesn’t work, you may need to install
 venv first. Try running <code>sudo apt-get install python3-venv</code>
-first, then <code>python3 -m venv intro_ml</code> {: .info}</p>
-</blockquote>
+first, then <code>python3 -m venv intro_ml</code></p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="activate-environment">Activate environment<a class="anchor" aria-label="anchor" href="#activate-environment"></a></h2>
@@ -419,8 +424,11 @@ in Terminal (Mac/Linux) or Git Bash (Windows) or Anaconda Prompt
 <div class="section level2">
 <h2 id="installing-your-prerequisites">Installing your prerequisites<a class="anchor" aria-label="anchor" href="#installing-your-prerequisites"></a></h2>
 <p>Install the prerequisites:</p>
-<pre><code>pip install numpy pandas matplotlib opencv-python scikit-learn</code></pre>
-<p>{: .language-bash}</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">pip</span> install numpy pandas matplotlib opencv-python scikit-learn</span></code></pre>
+</div>
 </div>
 <div class="section level2">
 <h2 id="deactivatingactivating-environment">Deactivating/activating environment<a class="anchor" aria-label="anchor" href="#deactivatingactivating-environment"></a></h2>
@@ -441,7 +449,6 @@ projects.</p>
 run this lesson in <a href="https://colab.research.google.com/" class="external-link">Google
 colab</a>. If you open a jupyter notebook there, the required packages
 are already pre-installed.</p>
-<p>{% include links.md %}</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.

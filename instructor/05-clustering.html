@@ -360,6 +360,34 @@
 
         
 
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul><li>“What is unsupervised learning?”</li>
+<li>“How can we use clustering to find data points with similar
+attributes?”</li>
+</ul></div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul><li>“Understand the difference between supervised and unsupervised
+learning”</li>
+<li>“Identify clusters in data using k-means clustering.”</li>
+<li>“Understand the limitations of k-means when clusters overlap.”</li>
+<li>“Use spectral clustering to overcome the limitations of
+k-means.”</li>
+</ul></div>
+</div>
+</div>
+</div>
+</div>
 <div class="section level1">
 <h1 id="unsupervised-learning">Unsupervised learning<a class="anchor" aria-label="anchor" href="#unsupervised-learning"></a></h1>
 <p>In episode 2 we learnt about supervised learning. Now it is time to
@@ -402,25 +430,38 @@ and all the points in the cluster. The algorithm needs to be told how
 many k clusters to look for, but a common technique is to try different
 numbers of clusters and combine it with other tests to decide on the
 best combination.</p>
-<blockquote>
-<h2 id="hyper-parameters-again">Hyper-parameters again</h2>
+<div id="hyper-parameters-again" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="hyper-parameters-again" class="callout-inner">
+<h3 class="callout-title">Hyper-parameters again</h3>
+<div class="callout-content">
 <p>‘K’ is also an exmaple of a <em>hyper-parameter</em> for the k-means
 clustering technique. Another example of a hyper-parameter is the
 N-degrees of freedom for polynomial regression. Keep an eye out for
-others throughout the lesson! {: .callout}</p>
-</blockquote>
+others throughout the lesson!</p>
+</div>
+</div>
+</div>
 <div class="section level3">
 <h3 id="k-means-with-scikit-learn">K-means with Scikit-Learn<a class="anchor" aria-label="anchor" href="#k-means-with-scikit-learn"></a></h3>
 <p>To perform a k-means clustering with Scikit-Learn we first need to
 import the sklearn.cluster module.</p>
-<pre><code>import sklearn.cluster as skl_cluster</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> sklearn.cluster <span class="im">as</span> skl_cluster</span></code></pre>
+</div>
 <p>For this example, we’re going to use Scikit-Learn’s built-in ‘random
 data blob generator’ instead of using an external dataset. Therefore
 we’ll need the <code>sklearn.datasets.samples_generator</code>
 module.</p>
-<pre><code>import sklearn.datasets as skl_datasets</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="im">import</span> sklearn.datasets <span class="im">as</span> skl_datasets</span></code></pre>
+</div>
 <p>Now lets create some random blobs using the <code>make_blobs</code>
 function. The <code>n_samples</code> argument sets how many points we
 want to use in all of our blobs while <code>cluster_std</code> sets the
@@ -432,30 +473,36 @@ every time we run the program. If we don’t specify a random state then
 we’ll get different points every time we run. This function returns two
 things: an array of data points and a list of which cluster each point
 belongs to.</p>
-<pre><code>import matplotlib.pyplot as plt
-
-#Lets define some functions here to avoid repetitive code
-def plots_labels(data, labels):
-    tx = data[:, 0]
-    ty = data[:, 1]
-
-    fig = plt.figure(1, figsize=(4, 4))
-    plt.scatter(tx, ty, edgecolor='k', c=labels)
-    plt.show()
-
-def plot_clusters(data, clusters, Kmean):
-    tx = data[:, 0]
-    ty = data[:, 1]
-    fig = plt.figure(1, figsize=(4, 4))
-    plt.scatter(tx, ty, s=5, linewidth=0, c=clusters)
-    for cluster_x, cluster_y in Kmean.cluster_centers_:
-        plt.scatter(cluster_x, cluster_y, s=100, c='r', marker='x')
-    plt.show()</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#Lets define some functions here to avoid repetitive code</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="kw">def</span> plots_labels(data, labels):</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>    tx <span class="op">=</span> data[:, <span class="dv">0</span>]</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>    ty <span class="op">=</span> data[:, <span class="dv">1</span>]</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>    plt.scatter(tx, ty, edgecolor<span class="op">=</span><span class="st">'k'</span>, c<span class="op">=</span>labels)</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>    plt.show()</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="kw">def</span> plot_clusters(data, clusters, Kmean):</span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>    tx <span class="op">=</span> data[:, <span class="dv">0</span>]</span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>    ty <span class="op">=</span> data[:, <span class="dv">1</span>]</span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>    plt.scatter(tx, ty, s<span class="op">=</span><span class="dv">5</span>, linewidth<span class="op">=</span><span class="dv">0</span>, c<span class="op">=</span>clusters)</span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>    <span class="cf">for</span> cluster_x, cluster_y <span class="kw">in</span> Kmean.cluster_centers_:</span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>        plt.scatter(cluster_x, cluster_y, s<span class="op">=</span><span class="dv">100</span>, c<span class="op">=</span><span class="st">'r'</span>, marker<span class="op">=</span><span class="st">'x'</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>    plt.show()</span></code></pre>
+</div>
 <p>Lets create the clusters.</p>
-<pre><code>data, cluster_id = skl_datasets.make_blobs(n_samples=400, cluster_std=0.75, centers=4, random_state=1)
-plots_labels(data, cluster_id)</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>data, cluster_id <span class="op">=</span> skl_datasets.make_blobs(n_samples<span class="op">=</span><span class="dv">400</span>, cluster_std<span class="op">=</span><span class="fl">0.75</span>, centers<span class="op">=</span><span class="dv">4</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>plots_labels(data, cluster_id)</span></code></pre>
+</div>
 <figure><img src="../fig/random_clusters.png" alt="Plot of the random clusters" class="figure mx-auto d-block"><div class="figcaption">Plot of the random clusters</div>
 </figure><p>Now that we have some data we can try to identify the clusters using
 k-means. First, we need to initialise the KMeans module and tell it how
@@ -463,10 +510,13 @@ many clusters to look for. Next, we supply it with some data via the
 <code>fit</code> function, in much the same way we did with the
 regression functions earlier on. Finally, we run the predict function to
 find the clusters.</p>
-<pre><code><span><span class="va">Kmean</span> <span class="op">=</span> <span class="fu">skl_cluster.KMeans</span><span class="op">(</span>n_clusters<span class="op">=</span><span class="fl">4</span><span class="op">)</span></span>
-<span><span class="fu">Kmean.fit</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
-<span><span class="va">clusters</span> <span class="op">=</span> <span class="fu">Kmean.predict</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>Kmean <span class="op">=</span> skl_cluster.KMeans(n_clusters<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>Kmean.fit(data)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>clusters <span class="op">=</span> Kmean.predict(data)</span></code></pre>
+</div>
 <p>The data can now be plotted to show all the points we randomly
 generated. To make it clearer which cluster points have been classified
 we can set the colours (the c parameter) to use the
@@ -477,30 +527,38 @@ centre of each cluster. These are stored as a list called
 points from the clusters, colouring them by the output from the K-means
 algorithm, and also plot the centres of each cluster as a red X.</p>
 <pre><code><span><span class="fu">plot_clusters</span><span class="op">(</span><span class="va">data</span>, <span class="va">clusters</span>, <span class="va">Kmean</span><span class="op">)</span></span></code></pre>
-<p>{: .language-python}</p>
 <figure><img src="../fig/random_clusters_centre.png" alt="Plot of the fitted random clusters" class="figure mx-auto d-block"><div class="figcaption">Plot of the fitted random clusters</div>
 </figure><p>Here is the code all in a single block.</p>
-<pre><code>import sklearn.cluster as skl_cluster
-import sklearn.datasets as skl_datasets
-import matplotlib.pyplot as plt
-
-data, cluster_id = skl_datasets.make_blobs(n_samples=400, cluster_std=0.75, centers=4, random_state=1)
-
-Kmean = skl_cluster.KMeans(n_clusters=4)
-Kmean.fit(data)
-clusters = Kmean.predict(data)
-
-plot_clusters(data, clusters, Kmean)</code></pre>
-<p>{: .language-python}</p>
-<blockquote>
-<h2 id="working-in-multiple-dimensions">Working in multiple
-dimensions</h2>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="im">import</span> sklearn.cluster <span class="im">as</span> skl_cluster</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="im">import</span> sklearn.datasets <span class="im">as</span> skl_datasets</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>data, cluster_id <span class="op">=</span> skl_datasets.make_blobs(n_samples<span class="op">=</span><span class="dv">400</span>, cluster_std<span class="op">=</span><span class="fl">0.75</span>, centers<span class="op">=</span><span class="dv">4</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>Kmean <span class="op">=</span> skl_cluster.KMeans(n_clusters<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>Kmean.fit(data)</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>clusters <span class="op">=</span> Kmean.predict(data)</span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>plot_clusters(data, clusters, Kmean)</span></code></pre>
+</div>
+<div id="working-in-multiple-dimensions" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="working-in-multiple-dimensions" class="callout-inner">
+<h3 class="callout-title">Working in multiple dimensions</h3>
+<div class="callout-content">
 <p>Although this example shows two dimensions, the kmeans algorithm can
 work in more than two. It becomes very difficult to show this visually
 once we get beyond 3 dimensions. Its very common in machine learning to
 be working with multiple variables and so our classifiers are working in
-multi-dimensional spaces. {: .callout}</p>
-</blockquote>
+multi-dimensional spaces.</p>
+</div>
+</div>
+</div>
 </div>
 <div class="section level3">
 <h3 id="limitations-of-k-means">Limitations of k-means<a class="anchor" aria-label="anchor" href="#limitations-of-k-means"></a></h3>
@@ -520,44 +578,81 @@ cluster boundaries</div>
 data</li>
 <li>Suitable for large datasets due to its low memory and computing
 requirements</li>
-</ul><blockquote>
-<h2 id="exercise-k-means-with-overlapping-clusters">Exercise: K-Means
-with overlapping clusters</h2>
+</ul><div id="exercise-k-means-with-overlapping-clusters" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="exercise-k-means-with-overlapping-clusters" class="callout-inner">
+<h3 class="callout-title">Exercise: K-Means with overlapping clusters</h3>
+<div class="callout-content">
 <p>Adjust the program above to increase the standard deviation of the
 blobs (the cluster_std parameter to make_blobs) and increase the number
 of samples (n_samples) to 4000. You should start to see the clusters
 overlapping. Do the clusters that are identified make sense? Is there
 any strange behaviour?</p>
-<blockquote>
-<h2 id="solution">Solution</h2>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
 <p>Increasing n_samples to 4000 and cluster_std to 3.0 looks like this:
 <img src="../fig/kmeans_overlapping_clusters.png" alt="Kmeans attempting to classify overlapping clusters" class="figure"> The straight
-line boundaries between clusters look a bit strange. {: .solution} {:
-.challenge}</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<h2 id="exercise-how-many-clusters-should-we-look-for">Exercise: How
-many clusters should we look for?</h2>
+line boundaries between clusters look a bit strange.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exercise-how-many-clusters-should-we-look-for" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="exercise-how-many-clusters-should-we-look-for" class="callout-inner">
+<h3 class="callout-title">Exercise: How many clusters should we look for?</h3>
+<div class="callout-content">
 <p>Using k-means requires us to specify the number of clusters to
 expect. A common strategy to get around this is to vary the number of
 clusters we are looking for. Modify the program to loop through
 searching for between 2 and 10 clusters. Which (if any) of the results
-look more sensible? What criteria might you use to select the best one?
-&gt; ## Solution &gt; ~~~ &gt; for cluster_count in range(2,11): &gt;
-Kmean = skl_cluster.KMeans(n_clusters=cluster_count) &gt;
-Kmean.fit(data) &gt; clusters = Kmean.predict(data) &gt;
-plt.scatter(data[:, 0], data[:, 1], s=5, linewidth=0,c=clusters) &gt;
-for cluster_x, cluster_y in Kmean.cluster_centers_: &gt;
-plt.scatter(cluster_x, cluster_y, s=100, c=‘r’, marker=‘x’) &gt; # give
-the graph a title with the number of clusters &gt;
-plt.title(str(cluster_count)+” Clusters”) &gt; plt.show() &gt; ~~~ &gt;
-{: .language-python} &gt; &gt; None of these look like very sensible
-clusterings because all of the points form one large cluster. &gt; We
-might look at a measure of similarity to test if this single cluster is
-actually multiple clusters. A simple standard deviation or interquartile
-range might be a good starting point. {: .solution} {: .challenge}</p>
-</blockquote>
+look more sensible? What criteria might you use to select the best
+one?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="cf">for</span> cluster_count <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">11</span>):</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>    Kmean <span class="op">=</span> skl_cluster.KMeans(n_clusters<span class="op">=</span>cluster_count)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>    Kmean.fit(data)</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>    clusters <span class="op">=</span> Kmean.predict(data)</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>    plt.scatter(data[:, <span class="dv">0</span>], data[:, <span class="dv">1</span>], s<span class="op">=</span><span class="dv">5</span>, linewidth<span class="op">=</span><span class="dv">0</span>,c<span class="op">=</span>clusters)</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>    <span class="cf">for</span> cluster_x, cluster_y <span class="kw">in</span> Kmean.cluster_centers_:</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>        plt.scatter(cluster_x, cluster_y, s<span class="op">=</span><span class="dv">100</span>, c<span class="op">=</span><span class="st">'r'</span>, marker<span class="op">=</span><span class="st">'x'</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>        <span class="co"># give the graph a title with the number of clusters</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>        plt.title(<span class="bu">str</span>(cluster_count)<span class="op">+</span><span class="st">" Clusters"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>    plt.show()</span></code></pre>
+</div>
+<p>None of these look like very sensible clusterings because all of the
+points form one large cluster. We might look at a measure of similarity
+to test if this single cluster is actually multiple clusters. A simple
+standard deviation or interquartile range might be a good starting
+point.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section level2">
@@ -590,101 +685,174 @@ concentric circles in the above example we need to use the
 <code>make_circles</code> function in the sklearn.datasets module. This
 works in a very similar way to the make_blobs function we used earlier
 on.</p>
-<pre><code>import sklearn.datasets as skl_data
-
-circles, circles_clusters = skl_data.make_circles(n_samples=400, noise=.01, random_state=0)
-plots_labels(circles, circles_clusters)</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="im">import</span> sklearn.datasets <span class="im">as</span> skl_data</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>circles, circles_clusters <span class="op">=</span> skl_data.make_circles(n_samples<span class="op">=</span><span class="dv">400</span>, noise<span class="op">=</span><span class="fl">.01</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>plots_labels(circles, circles_clusters)</span></code></pre>
+</div>
 <p>The code for calculating the SpectralClustering is very similar to
 the kmeans clustering, but instead of using the sklearn.cluster.KMeans
-class we use the <code>sklearn.cluster.SpectralClustering</code> class.
-~~~ model = skl_cluster.SpectralClustering(n_clusters=2,
-affinity=‘nearest_neighbors’, assign_labels=‘kmeans’) ~~~ {:
-.language-python}</p>
+class we use the <code>sklearn.cluster.SpectralClustering</code>
+class.</p>
+<div class="codewrapper sourceCode" id="cb10">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>model <span class="op">=</span> skl_cluster.SpectralClustering(n_clusters<span class="op">=</span><span class="dv">2</span>, affinity<span class="op">=</span><span class="st">'nearest_neighbors'</span>, assign_labels<span class="op">=</span><span class="st">'kmeans'</span>)</span></code></pre>
+</div>
 <p>The SpectralClustering class combines the fit and predict functions
 into a single function called fit_predict.</p>
-<pre><code><span><span class="va">labels</span> <span class="op">=</span> <span class="fu">model.fit_predict</span><span class="op">(</span><span class="va">circles</span><span class="op">)</span></span>
-<span><span class="fu">plots_labels</span><span class="op">(</span><span class="va">circles</span>, <span class="va">labels</span><span class="op">)</span></span></code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb11">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>labels <span class="op">=</span> model.fit_predict(circles)</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>plots_labels(circles, labels)</span></code></pre>
+</div>
 <p>Here is the whole program combined with the kmeans clustering for
 comparison. Note that this produces two figures. To view both of them
 use the “Inline” graphics terminal inside the Python console instead of
 the “Automatic” method which will open a window and only show you one of
 the graphs.</p>
-<pre><code>import sklearn.cluster as skl_cluster
-import sklearn.datasets as skl_data
-
-circles, circles_clusters = skl_data.make_circles(n_samples=400, noise=.01, random_state=0)
-
-# cluster with kmeans
-Kmean = skl_cluster.KMeans(n_clusters=2)
-Kmean.fit(circles)
-clusters = Kmean.predict(circles)
-
-# plot the data, colouring it by cluster
-plot_clusters(circles, clusters, Kmean)
-
-# cluster with spectral clustering
-model = skl_cluster.SpectralClustering(n_clusters=2, affinity='nearest_neighbors', assign_labels='kmeans')
-labels = model.fit_predict(circles)
-plots_labels(circles, labels)</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb12">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="im">import</span> sklearn.cluster <span class="im">as</span> skl_cluster</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="im">import</span> sklearn.datasets <span class="im">as</span> skl_data</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>circles, circles_clusters <span class="op">=</span> skl_data.make_circles(n_samples<span class="op">=</span><span class="dv">400</span>, noise<span class="op">=</span><span class="fl">.01</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co"># cluster with kmeans</span></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>Kmean <span class="op">=</span> skl_cluster.KMeans(n_clusters<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>Kmean.fit(circles)</span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>clusters <span class="op">=</span> Kmean.predict(circles)</span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="co"># plot the data, colouring it by cluster</span></span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a>plot_clusters(circles, clusters, Kmean)</span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a><span class="co"># cluster with spectral clustering</span></span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a>model <span class="op">=</span> skl_cluster.SpectralClustering(n_clusters<span class="op">=</span><span class="dv">2</span>, affinity<span class="op">=</span><span class="st">'nearest_neighbors'</span>, assign_labels<span class="op">=</span><span class="st">'kmeans'</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a>labels <span class="op">=</span> model.fit_predict(circles)</span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a>plots_labels(circles, labels)</span></code></pre>
+</div>
 <p><img src="../fig/kmeans_concentric_circle_2.png" alt="Kmeans attempting to cluster the concentric circles" class="figure"><img src="../fig/spectral_concentric_circle_2.png" alt="Spectral clustering on the concentric circles" class="figure"></p>
-<blockquote>
-<h2 id="comparing-k-means-and-spectral-clustering-performance">Comparing
-k-means and spectral clustering performance</h2>
+<div id="comparing-k-means-and-spectral-clustering-performance" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="comparing-k-means-and-spectral-clustering-performance" class="callout-inner">
+<h3 class="callout-title">Comparing k-means and spectral clustering performance</h3>
+<div class="callout-content">
 <p>Modify the program we wrote in the previous exercise to use spectral
-clustering instead of k-means and save it as a new file. Time how long
-both programs take to run. Add the line <code>import time</code> at the
-top of both files as the first line, and get the start time with
-<code>start_time = time.time()</code>. End the program by getting the
-time again and subtracting the start time from it to get the total run
-time. Add <code>end_time = time.time()</code> and
+clustering instead of k-means and save it as a new file.</p>
+<p>Time how long both programs take to run. Add the line
+<code>import time</code> at the top of both files as the first line, and
+get the start time with <code>start_time = time.time()</code>.</p>
+<p>End the program by getting the time again and subtracting the start
+time from it to get the total run time. Add
+<code>end_time = time.time()</code> and
 <code>print("Elapsed time:",end_time-start_time,"seconds")</code> to the
-end of both files. Compare how long both programs take to run generating
-4,000 samples and testing them for between 2 and 10 clusters. How much
-did your run times differ? How much do they differ if you increase the
-number of samples to 8,000? How long do you think it would take to
-compute 800,000 samples (estimate this, it might take a while to run for
-real)? &gt; ## Solution &gt; KMeans version: runtime around 4 seconds
-(your computer might be faster/slower) &gt; ~~~ &gt; import
-matplotlib.pyplot as plt &gt; import sklearn.cluster as skl_cluster &gt;
-from sklearn.datasets import make_blobs &gt; import time &gt; &gt;
-start_time = time.time() &gt; data, cluster_id =
-make_blobs(n_samples=4000, cluster_std=3, &gt; centers=4,
-random_state=1) &gt; &gt; for cluster_count in range(2,11): &gt; Kmean =
-skl_cluster.KMeans(n_clusters=cluster_count) &gt; Kmean.fit(data) &gt;
-clusters = Kmean.predict(data) &gt; &gt; plt.scatter(data[:, 0], data[:,
-1], s=15, linewidth=0, c=clusters) &gt; plt.title(str(cluster_count)+”
-Clusters”) &gt; &gt; plt.show() &gt; &gt; end_time = time.time() &gt;
-print(“Elapsed time =”, end_time-start_time, “seconds”) &gt; ~~~ &gt; {:
-.language-python} &gt; &gt; Spectral version: runtime around 9 seconds
-(your computer might be faster/slower) &gt; ~~~ &gt; import
-matplotlib.pyplot as plt &gt; import sklearn.cluster as skl_cluster &gt;
-from sklearn.datasets import make_blobs &gt; import time &gt; &gt;
-start_time = time.time() &gt; data, cluster_id =
-make_blobs(n_samples=4000, cluster_std=3, &gt; centers=4,
-random_state=1) &gt; &gt; for cluster_count in range(2,11): &gt; model =
-skl_cluster.SpectralClustering(n_clusters=cluster_count, &gt;
-affinity=‘nearest_neighbors’, &gt; assign_labels=‘kmeans’) &gt; labels =
-model.fit_predict(data) &gt;<br>
-&gt; plt.scatter(data[:, 0], data[:, 1], s=15, linewidth=0, c=labels)
-&gt; plt.title(str(cluster_count)+” Clusters”) &gt; plt.show() &gt;
-end_time = time.time() &gt; print(“Elapsed time =”, end_time-start_time,
-“seconds”) &gt; ~~~ &gt; {: .language-python} &gt; &gt; When the number
-of points increases to 8000 the runtimes are 24 seconds for the spectral
-version and 5.6 seconds for kmeans. &gt; The runtime numbers will differ
-depending on the speed of your computer, but the relative difference
-should be similar. &gt; For 4000 points kmeans took 4 seconds, while
-spectral took 9 seconds. A 2.25 fold difference. &gt; For 8000 points
-kmeans took 5.6 seconds, while spectral took 24 seconds. A 4.28 fold
-difference. Kmeans is 1.4 times slower for double the data, while
-spectral is 2.6 times slower. &gt; The realative difference is
-diverging. If we used 100 times more data we might expect a 100 fold
-divergence in execution times. &gt; Kmeans might take a few minutes
-while spectral will take hours. {: .solution} {: .challenge}</p>
-</blockquote>
-<p>{% include links.md %}</p>
+end of both files.</p>
+<p>Compare how long both programs take to run generating 4,000 samples
+and testing them for between 2 and 10 clusters. - How much did your run
+times differ? - How much do they differ if you increase the number of
+samples to 8,000? - How long do you think it would take to compute
+800,000 samples (estimate this, it might take a while to run for
+real)?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div class="accordion-body">
+<p>KMeans version: runtime around 4 seconds (your computer might be
+faster/slower)</p>
+<div class="codewrapper sourceCode" id="cb13">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="im">import</span> sklearn.cluster <span class="im">as</span> skl_cluster</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_blobs</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>data, cluster_id <span class="op">=</span> make_blobs(n_samples<span class="op">=</span><span class="dv">4000</span>, cluster_std<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>                                       centers<span class="op">=</span><span class="dv">4</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="cf">for</span> cluster_count <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">11</span>):</span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a>    Kmean <span class="op">=</span> skl_cluster.KMeans(n_clusters<span class="op">=</span>cluster_count)</span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a>    Kmean.fit(data)</span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a>    clusters <span class="op">=</span> Kmean.predict(data)</span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a>    plt.scatter(data[:, <span class="dv">0</span>], data[:, <span class="dv">1</span>], s<span class="op">=</span><span class="dv">15</span>, linewidth<span class="op">=</span><span class="dv">0</span>, c<span class="op">=</span>clusters)</span>
+<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a>    plt.title(<span class="bu">str</span>(cluster_count)<span class="op">+</span><span class="st">" Clusters"</span>)</span>
+<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a></span>
+<span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a>plt.show()</span>
+<span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
+<span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Elapsed time = "</span>, end_time<span class="op">-</span>start_time, <span class="st">"seconds"</span>)</span></code></pre>
+</div>
+<p>Spectral version: runtime around 9 seconds (your computer might be
+faster/slower)</p>
+<pre><code>import matplotlib.pyplot as plt
+import sklearn.cluster as skl_cluster
+from sklearn.datasets import make_blobs
+import time
+
+start_time = time.time()
+data, cluster_id = make_blobs(n_samples=4000, cluster_std=3,
+                                       centers=4, random_state=1)
+
+for cluster_count in range(2,11):
+    model = skl_cluster.SpectralClustering(n_clusters=cluster_count,
+                                       affinity='nearest_neighbors',
+                                       assign_labels='kmeans')
+    labels = model.fit_predict(data)
+
+    plt.scatter(data[:, 0], data[:, 1], s=15, linewidth=0, c=labels)
+    plt.title(str(cluster_count)+" Clusters")
+plt.show()
+end_time = time.time()
+print("Elapsed time = ", end_time-start_time, "seconds")</code></pre>
+<p>When the number of points increases to 8000 the runtimes are 24
+seconds for the spectral version and 5.6 seconds for kmeans.</p>
+<p>The runtime numbers will differ depending on the speed of your
+computer, but the relative difference should be similar.</p>
+<p>For 4000 points kmeans took 4 seconds, while spectral took 9 seconds.
+A 2.25 fold difference.</p>
+<p>For 8000 points kmeans took 5.6 seconds, while spectral took 24
+seconds. A 4.28 fold difference. Kmeans is 1.4 times slower for double
+the data, while spectral is 2.6 times slower.</p>
+<p>The relative difference is diverging. If we used 100 times more data
+we might expect a 100 fold divergence in execution times.</p>
+<p>Kmeans might take a few minutes while spectral will take hours.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points</h3>
+<div class="callout-content">
+<ul><li>“Clustering is a form of unsupervised learning.”</li>
+<li>“Unsupervised learning algorithms don’t need training.”</li>
+<li>“Kmeans is a popular clustering algorithm.”</li>
+<li>“Kmeans is less useful when one cluster exists within another, such
+as concentric circles.”</li>
+<li>“Spectral clustering can overcome some of the limitations of
+Kmeans.”</li>
+<li>“Spectral clustering is much slower than Kmeans.”</li>
+<li>“Scikit-Learn has functions to create example data.”</li>
+</ul></div>
+</div>
+</div>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
