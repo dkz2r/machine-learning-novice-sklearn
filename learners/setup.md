@@ -23,7 +23,7 @@ you are ready to go as soon as the workshop begins.
 
 ## Packages
 
-You will need the MatPlotLib, Pandas, Numpy and OpenCV packages.
+You will need the Seaborn, MatPlotLib, Pandas, Numpy and OpenCV packages.
 
 # Setup
 
@@ -61,7 +61,7 @@ To activate the environment, run the following OS-specific commands in Terminal 
 Install the prerequisites:
 
 ```bash
-pip install numpy pandas matplotlib opencv-python scikit-learn
+pip install numpy pandas matplotlib seaborn opencv-python scikit-learn
 ```
 
 ## Deactivating/activating environment
