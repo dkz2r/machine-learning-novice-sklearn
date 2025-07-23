@@ -339,16 +339,50 @@
       <hr></nav><main id="main-content" class="main-content"><h1 class="schedule-heading">Summary and Setup</h1>
       
 
-<p>This is a new lesson built with <a href="https://carpentries.github.io/sandpaper-docs" class="external-link">The Carpentries
-Workbench</a>.</p>
-<!--
+<p>Machine learning is a set of techniques that enable computers to use
+data to improve their performance in a given task. This is similar in
+concept to how humans learn to make predictions based upon previous
+experience and knowledge. Machine learning encompasses a wide range of
+activities, but broadly speaking it can be used to: find trends in a
+dataset, classify data into groups or categories, make predictions based
+upon data, and even “learn” how to interact with an environment when
+provided with goals to achieve.</p>
+<p>We will cover the basics of machine learning using the <a href="https://scikit-learn.org/stable/" class="external-link">Scikit-Learn</a> Python package,
+a popular library for machine learning in Python. Scikit-Learn provides
+a wide range of machine learning algorithms and tools for data
+preprocessing, model selection, and evaluation.</p>
+<div id="prereq1" class="callout prereq">
+<div class="callout-square">
+<i class="callout-icon" data-feather="check"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Prerequisite</h3>
+<div class="callout-content">
+<p>Participants will be assumed to have a basic understanding of Python.
+You should have a basic understanding of how to run Python code in a
+Jupyter Notebook, and be able to write for loops, conditional
+statements, use functions, and import libraries.</p>
+</div>
+</div>
+</div>
+<div id="prereq2" class="callout prereq">
+<div class="callout-square">
+<i class="callout-icon" data-feather="check"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Prerequisite</h3>
+<div class="callout-content">
+<p>You will need to have python installed on your computer, as well as
+some additional packages. please refer to the setup instructions below
+for details.</p>
+</div>
+</div>
+</div>
+<hr><!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
- -->
-
-
-      <section id="setup"><div class="section level1">
-<h1 id="requirements">Requirements<a class="anchor" aria-label="anchor" href="#requirements"></a></h1>
+ --><section id="setup"><div class="section level1">
+<h1 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a></h1>
 <div class="section level2">
 <h2 id="software">Software<a class="anchor" aria-label="anchor" href="#software"></a></h2>
 <p>You will need a terminal, Python 3.8+, and the ability to create
@@ -373,11 +407,12 @@ to go as soon as the workshop begins.</p>
 </div>
 <div class="section level2">
 <h2 id="packages">Packages<a class="anchor" aria-label="anchor" href="#packages"></a></h2>
-<p>You will need the MatPlotLib, Pandas, Numpy and OpenCV packages.</p>
+<p>You will need the Seaborn, MatPlotLib, Pandas, Numpy and OpenCV
+packages.</p>
 </div>
 </div>
 <div class="section level1">
-<h1 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a></h1>
+<h1 id="setup-1">Setup<a class="anchor" aria-label="anchor" href="#setup-1"></a></h1>
 <p>Create a new directory for the workshop, then launch a terminal in
 it:</p>
 <div class="codewrapper sourceCode" id="cb1">
@@ -391,9 +426,26 @@ it:</p>
 <p>We’ll install the prerequisites in a virtual environment, to prevent
 them from cluttering up your Python environment and causing conflicts.
 First, create a new directory and ent</p>
+<div class="tabs">
+<nav><div id="nav-tab-1" class="nav nav-tabs" role="tablist">
+<button class="nav-link active" id="nav-tab-1-1" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-1" type="button" role="tab" aria-controls="nav-tabpanel-1-1" aria-selected="true">
+  <h3 class="tab-header" id="nav-tab-heading-1-1">
+  venv
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-2" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-2" type="button" role="tab" aria-controls="nav-tabpanel-1-2" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-2">
+  uv
+  </h3>
+</button>
+</div>
+</nav><div id="nav-tabContent-1" class="tab-content">
+<div id="nav-tabpanel-1-1" class="tab-pane show active" aria-labelledby="nav-tab-1-1" role="tabpanel">
+<p>Python usually comes with a built-in module called <code>venv</code>
+that allows you to create isolated environments for your projects.</p>
 <p>To create a new virtual environment (“venv”) called “intro_ml” for
-the project, open the terminal (Max/Linux), Git Bash (Windows) or
-Anacomda Prompt (Windows), and type one of the below OS-specific
+the project, open the terminal (Mac/Linux), Git Bash (Windows) or
+Anaconda Prompt (Windows), and type one of the below OS-specific
 options:</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -401,22 +453,9 @@ options:</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv intro_ml <span class="co"># mac/linux</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> venv intro_ml <span class="co"># windows</span></span></code></pre>
 </div>
-<div id="callout2" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Callout</h3>
-<div class="callout-content">
-<p>If you’re on Linux and this doesn’t work, you may need to install
+<p>(If you’re on Linux and this doesn’t work, you may need to install
 venv first. Try running <code>sudo apt-get install python3-venv</code>
-first, then <code>python3 -m venv intro_ml</code></p>
-</div>
-</div>
-</div>
-</div>
-<div class="section level2">
-<h2 id="activate-environment">Activate environment<a class="anchor" aria-label="anchor" href="#activate-environment"></a></h2>
+first, then <code>python3 -m venv intro_ml</code>)</p>
 <p>To activate the environment, run the following OS-specific commands
 in Terminal (Mac/Linux) or Git Bash (Windows) or Anaconda Prompt
 (Windows):</p>
@@ -428,14 +467,63 @@ in Terminal (Mac/Linux) or Git Bash (Windows) or Anaconda Prompt
 </li>
 <li>Mac/Linux: <code>source intro_ml/bin/activate</code>
 </li>
-</ul></div>
-<div class="section level2">
-<h2 id="installing-your-prerequisites">Installing your prerequisites<a class="anchor" aria-label="anchor" href="#installing-your-prerequisites"></a></h2>
-<p>Install the prerequisites:</p>
+</ul><p>With the environment activated, install the prerequisites:</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">pip</span> install numpy pandas matplotlib opencv-python scikit-learn</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">pip</span> install numpy pandas matplotlib seaborn opencv-python scikit-learn</span></code></pre>
+</div>
+</div>
+<div id="nav-tabpanel-1-2" class="tab-pane" aria-labelledby="nav-tab-1-2" role="tabpanel">
+<p>UV is a package manager that allows you to easily create and manage
+virtual environments. It is a great alternative to <code>venv</code>,
+<code>pip</code>, and <code>conda</code> for managing Python
+environments and packages. It is a newer tool, written in Rust, and is
+designed to be fast and efficient.</p>
+<p>To install UV, run the following command in your terminal:</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">pip</span> install uv</span></code></pre>
+</div>
+<p>To create a new virtual environment in your current directory,
+run:</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">uv</span> venv</span></code></pre>
+</div>
+<p>This will create a new virtual environment in a directory called
+<code>.venv</code> in your current directory.</p>
+<p>You should see a message indicating that the virtual environment has
+been created successfully, and a command to activate it (this command
+will vary depending on your operating system):</p>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">Using</span> CPython 3.12.6 interpreter at: C:<span class="dt">\p</span>ython<span class="dt">\3</span>.12.6<span class="dt">\p</span>ython.exe</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="ex">Creating</span> virtual environment at: .venv</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="ex">Activate</span> with: source .venv/Scripts/activate</span></code></pre>
+</div>
+<p>Run the indicated command to activate the virtual environment. You
+should now see the name of the virtual environment in your terminal
+prompt in parentheses, indicating that it is active:</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">user@my_device</span> MINGW64 /c/Users/user/Documents/intro_ml</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="ex">$</span> source .venv/Scripts/activate</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="kw">(</span><span class="ex">intro_ml</span><span class="kw">)</span></span></code></pre>
+</div>
+<p>Once the environment is activated, you can install the required
+packages using:</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">uv</span> pip install numpy pandas matplotlib seaborn opencv-python scikit-learn</span></code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section level2">
