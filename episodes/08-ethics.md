@@ -2,16 +2,15 @@
 title: "Ethics and the Implications of Machine Learning"
 teaching: 10
 exercises: 5
-questions:
-- "What are the ethical implications of using machine learning in research?"
-objectives:
-- "Consider the ethical implications of machine learning, in general, and in research."
-keypoints:
-- "The results of machine learning reflect biases in the training and input data."
-- "Many machine learning algorithms can't explain how they arrived at a decision."
-- "Machine learning can be used for unethical purposes."
-- "Consider the implications of false positives and false negatives."
 ---
+
+:::::: questions
+- "What are the ethical implications of using machine learning in research?"
+::::::
+
+:::::: objectives
+- "Consider the ethical implications of machine learning, in general, and in research."
+::::::
 
 # Ethics and machine learning
 
@@ -56,12 +55,19 @@ Some questions you might want to ask yourself (and which an ethics committee mig
  * Are there any inherent biases in the dataset(s) you're using for training?
  * How much energy will this computation use? Are there more efficient ways to get the same answer?
 
+::::::::::::::::::::::::::::::::::::: discussion
 
-> ## Exercise: Ethical implications of your own research
-> Split into pairs or groups of three.
-> Think of a use case for machine learning in your research areas.
-> What ethical implications (if any) might there be from using machine learning in your research?
-> Write down your group's answers in the etherpad.
-{: .challenge}
+## Exercise: Ethical implications of your own research
+Split into pairs or groups of three.
+Think of a use case for machine learning in your research areas.
+What ethical implications (if any) might there be from using machine learning in your research?
+Write down your group's answers in the etherpad.
 
-{% include links.md %}
+:::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::: keypoints
+- "The results of machine learning reflect biases in the training and input data."
+- "Many machine learning algorithms can't explain how they arrived at a decision."
+- "Machine learning can be used for unethical purposes."
+- "Consider the implications of false positives and false negatives."
+::::::
