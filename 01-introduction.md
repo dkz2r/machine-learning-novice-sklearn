@@ -2,20 +2,18 @@
 title: "Introduction"
 teaching: 30
 exercises: 10
-questions:
+---
+
+:::::: questions
 - "What is machine learning?"
 - "What are some useful machine learning techniques?"
-objectives:
+::::::
+
+:::::: objectives
 - "Gain an overview of what machine learning is and the techniques available."
 - "Understand how machine learning and artificial intelligence differ."
 - "Be aware of some caveats when using Machine Learning."
-
-keypoints:
-- "Machine learning is a set of tools and techniques that use data to make predictions."
-- "Artificial intelligence is a broader term that refers to making computers show human-like intelligence."
-- "Deep learning is a subset of machine learning."
-- "All machine learning systems have limitations to be aware of."
----
+::::::
 
 # What is machine learning?
 
@@ -25,11 +23,11 @@ Machine learning is a set of techniques that enable computers to use data to imp
 
 The term machine learning (ML) is often mentioned alongside artificial intelligence (AI) and deep learning (DL). Deep learning is a subset of machine learning, and machine learning is a subset of artificial intelligence.
 
-AI is increasingly being used as a catch-all term to describe things that encompass ML and DL systems - from simple email spam filters, to more complex image recognition systems, to large language models such as ChatGPT. The more specific term "Artificial General Intelligence" (AGI) is used to describe a system possessing a "general intelligence" that can be applied to solve a diverse range of problems, often mimicking the behaviour of intelligent biological systems. Modern attempts at AGI are getting close to fooling humans, but while there have been great advances in AI research, human-like intelligence is only possible in a few specialist areas. 
+AI is increasingly being used as a catch-all term to describe things that encompass ML and DL systems - from simple email spam filters, to more complex image recognition systems, to large language models such as ChatGPT. The more specific term "Artificial General Intelligence" (AGI) is used to describe a system possessing a "general intelligence" that can be applied to solve a diverse range of problems, often mimicking the behaviour of intelligent biological systems. Modern attempts at AGI are getting close to fooling humans, but while there have been great advances in AI research, human-like intelligence is only possible in a few specialist areas.
 
 ML refers to techniques where a computer can "learn" patterns in data, usually by being shown many training examples. While ML algorithms can learn to solve specific problems, or multiple similar problems, they are not considered to possess a general intelligence. ML algorithms often need hundreds or thousands of examples to learn a task and are confined to activities such as simple classifications. A human-like system could learn much quicker than this, and potentially learn from a single example by using it's knowledge of many other problems.
 
-DL is a particular field of machine learning where algorithms called neural networks are used to create highly complex systems. Large collections of neural networks are able to learn from vast quantities of data. Deep learning can be used to solve a wide range of problems, but it can also require huge amounts of input data and computational resources to train. 
+DL is a particular field of machine learning where algorithms called neural networks are used to create highly complex systems. Large collections of neural networks are able to learn from vast quantities of data. Deep learning can be used to solve a wide range of problems, but it can also require huge amounts of input data and computational resources to train.
 
 The image below shows the relationships between artificial intelligence, machine learning and deep learning.
 
@@ -48,13 +46,18 @@ Machine learning has quickly become an important technology and is now frequentl
 * Image, object, and pattern recognition is used to identify humans and vehicles, capture text, generate subtitles, and much more
 * Self-driving cars and robots use object detection and performance feedback to improve their interaction with the world
 
-> ## Where else have you encountered machine learning already?
-> Now that we have explored machine learning in a bit more detail, discuss with the person next to you:
-> 1. Where else have I seen machine learning in use?
-> 2. What kind of input data does that machine learning system use to make predictions/classifications?
-> 3. Is there any evidence that your interaction with the system contributes to further training?
-> 4. Do you have any examples of the system failing?
-{: .challenge}
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Where else have you encountered machine learning already?
+Now that we have explored machine learning in a bit more detail, discuss with the person next to you:
+
+1. Where else have I seen machine learning in use?
+2. What kind of input data does that machine learning system use to make predictions/classifications?
+3. Is there any evidence that your interaction with the system contributes to further training?
+4. Do you have any examples of the system failing?
+
+:::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ### Limitations of machine learning
@@ -63,7 +66,7 @@ Like any other systems machine learning has limitations, caveats, and "gotchas" 
 
 #### Garbage in = garbage out
 
-There is a classic expression in computer science: "garbage in = garbage out". This means that if the input data we use is garbage then the ouput will be too. If, for example, we try to use a machine learning system to find a link between two unlinked variables then it may well manage to produce a model attempting this, but the output will be meaningless. 
+There is a classic expression in computer science: "garbage in = garbage out". This means that if the input data we use is garbage then the ouput will be too. If, for example, we try to use a machine learning system to find a link between two unlinked variables then it may well manage to produce a model attempting this, but the output will be meaningless.
 
 #### Biases due to training data
 
@@ -75,11 +78,11 @@ We can only make reliable predictions about data which is in the same range as o
 
 #### Over fitting
 
-Sometimes ML algorithms become over-trained and subsequently don't perform well when presented with real data. It's important to consider how many rounds of training a ML system has recieved and whether or not it may have become over-trained. 
+Sometimes ML algorithms become over-trained and subsequently don't perform well when presented with real data. It's important to consider how many rounds of training a ML system has recieved and whether or not it may have become over-trained.
 
 #### Inability to explain answers
 
-Machine learning techniques will return an answer based on the input data and model parameters even if that answer is wrong. Most systems are unable to explain the logic used to arrive at that answer. This can make detecting and diagnosing problems difficult. 
+Machine learning techniques will return an answer based on the input data and model parameters even if that answer is wrong. Most systems are unable to explain the logic used to arrive at that answer. This can make detecting and diagnosing problems difficult.
 
 
 # Getting started with Scikit-Learn
@@ -92,11 +95,10 @@ Scikit-Learn is built upon Python's [NumPy (Numerical Python)](http://numpy.org)
 
 Like any other Python package, we can import Scikit-Learn and check the package version using the following Python commands:
 
-~~~
+```python
 import sklearn
 print('scikit-learn:', sklearn.__version__)
-~~~
-{: .language-python}
+```
 
 ### Representation of Data in Scikit-learn
 
@@ -104,7 +106,7 @@ Machine learning is about creating models from data: for that reason, we'll star
 
 Most machine learning algorithms implemented in scikit-learn expect data to be stored in a two-dimensional array or matrix. The arrays can be either numpy arrays, or in some cases scipy.sparse matrices. The size of the array is expected to be [n_samples, n_features]
 
-We typically have a "Features Matrix" (usually referred to as the code variable `X`) which are the "features" data we wish to train on. 
+We typically have a "Features Matrix" (usually referred to as the code variable `X`) which are the "features" data we wish to train on.
 
 * n_samples: The number of samples. A sample can be a document, a picture, a sound, a video, an astronomical object, a row in database or CSV file, or whatever you can describe with a fixed set of quantitative traits.
 * n_features: The number of features (variables) that can be used to describe each item in a quantitative manner. Features are generally real-valued, but may be boolean or discrete-valued in some cases.
@@ -123,4 +125,9 @@ The figure below provides a nice overview of some of the sub-domains of ML and t
 ![Types of Machine Learning](../fig/introduction/ML_summary.png)
 [Image from Vasily Zubarev via their blog](https://vas3k.com/blog/machine_learning/) with modifications in blue to denote lesson content.
 
-{% include links.md %}
+:::::: keypoints
+- "Machine learning is a set of tools and techniques that use data to make predictions."
+- "Artificial intelligence is a broader term that refers to making computers show human-like intelligence."
+- "Deep learning is a subset of machine learning."
+- "All machine learning systems have limitations to be aware of."
+::::::
