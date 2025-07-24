@@ -1667,7 +1667,7 @@ the <code>max_depth</code> values.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2653,7 +2653,7 @@ any strange behaviour?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Increasing n_samples to 4000 and cluster_std to 3.0 looks like
 this:</p>
@@ -2685,7 +2685,7 @@ one?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2829,7 +2829,7 @@ real)?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>KMeans version: runtime around 4 seconds (your computer might be
 faster/slower)</p>
@@ -2923,7 +2923,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-06-dimensionality-reduction"><p>Content from <a href="06-dimensionality-reduction.html">Unsupervised methods - Dimensionality reduction</a></p>
 <hr>
-<p>Last updated on 2025-07-23 |
+<p>Last updated on 2025-07-24 |
 
         <a href="https://github.com/jonathan-hartman/machine-learning-novice-sklearn/edit/main/episodes/06-dimensionality-reduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2995,37 +2995,36 @@ dataset with the following code:</p>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="im">import</span> sklearn.cluster <span class="im">as</span> skl_cluster</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> manifold, decomposition, datasets</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co"># Let's define these here to avoid repetitive code</span></span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="kw">def</span> plots_labels(data, labels):</span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>    tx <span class="op">=</span> data[:, <span class="dv">0</span>]</span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>    ty <span class="op">=</span> data[:, <span class="dv">1</span>]</span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>    plt.scatter(tx, ty, edgecolor<span class="op">=</span><span class="st">'k'</span>, c<span class="op">=</span>labels)</span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    plt.show()</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="im">from</span> sklearn.manifold <span class="im">import</span> TSNE</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> datasets</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co"># Let's define these here to avoid repetitive code</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="kw">def</span> _setup_plot(data, figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>)):</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>figsize)</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>    tx <span class="op">=</span> data[:, <span class="dv">0</span>]</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>    ty <span class="op">=</span> data[:, <span class="dv">1</span>]</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    <span class="cf">return</span> fig, tx, ty</span>
 <span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="kw">def</span> plot_clusters(data, clusters, Kmean):</span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>    tx <span class="op">=</span> data[:, <span class="dv">0</span>]</span>
-<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>    ty <span class="op">=</span> data[:, <span class="dv">1</span>]</span>
-<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>    plt.scatter(tx, ty, s<span class="op">=</span><span class="dv">5</span>, linewidth<span class="op">=</span><span class="dv">0</span>, c<span class="op">=</span>clusters)</span>
-<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>    <span class="cf">for</span> cluster_x, cluster_y <span class="kw">in</span> Kmean.cluster_centers_:</span>
-<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>        plt.scatter(cluster_x, cluster_y, s<span class="op">=</span><span class="dv">100</span>, c<span class="op">=</span><span class="st">'r'</span>, marker<span class="op">=</span><span class="st">'x'</span>)</span>
-<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>    plt.show()</span>
-<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a><span class="kw">def</span> plot_clusters_labels(data, labels):</span>
-<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>    tx <span class="op">=</span> data[:, <span class="dv">0</span>]</span>
-<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>    ty <span class="op">=</span> data[:, <span class="dv">1</span>]</span>
-<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>    <span class="co"># with labels</span></span>
-<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>))</span>
-<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>    plt.scatter(tx, ty, c<span class="op">=</span>labels, cmap<span class="op">=</span><span class="st">"nipy_spectral"</span>,</span>
-<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>            edgecolor<span class="op">=</span><span class="st">'k'</span>, label<span class="op">=</span>labels)</span>
-<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>    plt.colorbar(boundaries<span class="op">=</span>np.arange(<span class="dv">11</span>)<span class="op">-</span><span class="fl">0.5</span>).set_ticks(np.arange(<span class="dv">10</span>))</span>
-<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>    plt.show()</span></code></pre>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="kw">def</span> plots_labels(data, labels):</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>    fig, tx, ty <span class="op">=</span> _setup_plot(data)</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>    plt.scatter(tx, ty, edgecolor<span class="op">=</span><span class="st">'k'</span>, c<span class="op">=</span>labels)</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>    plt.show()</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="kw">def</span> plot_clusters(data, clusters, kmeans):</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>    fig, tx, ty <span class="op">=</span> _setup_plot(data)</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>    plt.scatter(tx, ty, s<span class="op">=</span><span class="dv">5</span>, linewidth<span class="op">=</span><span class="dv">0</span>, c<span class="op">=</span>clusters)</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>    <span class="cf">for</span> cluster_x, cluster_y <span class="kw">in</span> kmeans.cluster_centers_:</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>        plt.scatter(cluster_x, cluster_y, s<span class="op">=</span><span class="dv">100</span>, c<span class="op">=</span><span class="st">'r'</span>, marker<span class="op">=</span><span class="st">'x'</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>    plt.show()</span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a><span class="kw">def</span> plot_clusters_labels(data, labels):</span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>    fig, tx, ty <span class="op">=</span> _setup_plot(data, figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>))</span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>    plt.scatter(tx, ty, c<span class="op">=</span>labels, cmap<span class="op">=</span><span class="st">"nipy_spectral"</span>,</span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>            edgecolor<span class="op">=</span><span class="st">'k'</span>, label<span class="op">=</span>labels)</span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>    plt.colorbar(boundaries<span class="op">=</span>np.arange(<span class="dv">11</span>)<span class="op">-</span><span class="fl">0.5</span>).set_ticks(np.arange(<span class="dv">10</span>))</span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>    plt.show()</span></code></pre>
 </div>
 <p>Next lets load in the digits dataset,</p>
 <div class="codewrapper sourceCode" id="cb2">
@@ -3060,16 +3059,8 @@ MNIST dataset of number images.</p>
 <p>As we did for previous datasets, lets visually inspect relationships
 between our features/pixels. Try and investigate the following pixels
 for relations (written “row_column”): 0_4, 1_4, 2_4, and 3_4.</p>
-</div>
-</div>
-</div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
-</button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
-<div class="accordion-body">
+<p>The specific pixels we are looking at can be identified with the
+following code:</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -3084,13 +3075,53 @@ for relations (written “row_column”): 0_4, 1_4, 2_4, and 3_4.</p>
 <span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
 <figure><img src="fig/mnist_pairplot_pixels.png" alt="A pixelated image of a handwritten '0', with red crosses marking the pixels at positions 0_4, 1_4, 2_4, and 3_4." class="figure mx-auto d-block"><div class="figcaption">SKLearn image with highlighted pixels</div>
-</figure><pre><code>import seaborn as sns
-
-# make a temporary copy of data for plotting here only
-seaborn_data = features
-
-# add labels for pairplot color coding
-seaborn_data["labels"] = labels
+</figure>
+</div>
+</div>
+</div>
+<div id="accordionHint1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
+  <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
+</button>
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div class="accordion-body">
+<p>Use the <code>sns.pairplot</code> function from seaborn to plot the
+relationships between these pixels. You can use the <code>vars</code>
+parameter to specify which features to plot</p>
+<p><code>sns.pairplot(___, vars=___, hue=___, palette="tab10")</code></p>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionHint2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
+  <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
+</button>
+<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
+<div class="accordion-body">
+<p>Since the <code>sns.pairplot</code> function expects a single
+dataframe, you will have to make a temporary copy of the data for this
+plot, where the first four columns are the pixel values, and the last
+column is the label.</p>
+<p>You can either create a new dataframe with the selected columns, or
+use the <code>pd.concat</code> function to combine the features and
+labels into a single dataframe (use <code>axis=1</code> to concatenate
+along columns)</p>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<pre><code>import seaborn as sns
+import pandas as pd
 
 # make a short list of N features for plotting N*N figures
 # 4**2 = 16 plots, whereas 64**2 is over 4000!
@@ -3098,8 +3129,12 @@ feature_subset = []
 for i in range(4):
     feature_subset.append("pixel_"+str(i)+"_4")
 
-sns.pairplot(seaborn_data, vars=feature_subset, hue="labels",
-             palette=sns.mpl_palette("Spectral", n_colors=10))</code></pre>
+sns.pairplot(
+    pd.concat([features, labels], axis=1),
+    vars=feature_subset,
+    hue="target",
+    palette="tab10"
+)</code></pre>
 <figure><img src="fig/mnist_pairplot.png" alt="A pairplot of the MNIST dataset, showing the relationships between the pixels at positions 0_4, 1_4, 2_4, and 3_4. Each plot is coloured by the digit label, with distinct clusters visible for some digits." class="figure mx-auto d-block"><div class="figcaption">SKLearn image with highlighted pixels</div>
 </figure><p>As we can see the dataset relations are far more complex than our
 previous examples. The histograms show that some numbers appear in those
@@ -3138,7 +3173,7 @@ components:</p>
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># PCA with 2 components</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>pca <span class="op">=</span> decomposition.PCA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>x_pca <span class="op">=</span> pca.fit_transform(features)</span>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="bu">print</span>(x_pca.shape)</span></code></pre>
@@ -3163,10 +3198,10 @@ dataset.</p>
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>Kmean <span class="op">=</span> skl_cluster.KMeans(n_clusters<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>Kmean.fit(x_pca)</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>clusters <span class="op">=</span> Kmean.predict(x_pca)</span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>plot_clusters(x_pca, clusters, Kmean)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>kmean_clusters <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>kmean_clusters.fit(x_pca)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>clusters <span class="op">=</span> kmean_clusters.predict(x_pca)</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>plot_clusters(x_pca, clusters, kmean_clusters)</span></code></pre>
 </div>
 <figure><img src="fig/pca_clustered.png" alt="A scatter plot of the PCA reduced data, with the points coloured by their cluster id. The centres of each cluster are marked with a red X." class="figure mx-auto d-block"><div class="figcaption">Reduction using PCA</div>
 </figure><p>And now we can compare how these clusters look against our actual
@@ -3217,7 +3252,7 @@ again:</p>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># t-SNE embedding</span></span>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co"># initialising with "pca" explicitly preserves global structure</span></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>tsne <span class="op">=</span> manifold.TSNE(n_components<span class="op">=</span><span class="dv">2</span>, init<span class="op">=</span><span class="st">'pca'</span>, random_state <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>tsne <span class="op">=</span> TSNE(n_components<span class="op">=</span><span class="dv">2</span>, init<span class="op">=</span><span class="st">'pca'</span>, random_state <span class="op">=</span> <span class="dv">0</span>)</span>
 <span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>x_tsne <span class="op">=</span> tsne.fit_transform(features)</span>
 <span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
 <span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>plots_labels(x_tsne, <span class="va">None</span>)</span></code></pre>
@@ -3230,12 +3265,12 @@ compare with the actual color-labelled data:</p>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>Kmean <span class="op">=</span> skl_cluster.KMeans(n_clusters<span class="op">=</span><span class="dv">10</span>)</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>kmean <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">10</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>Kmean.fit(x_tsne)</span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>clusters <span class="op">=</span> Kmean.predict(x_tsne)</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>kmean.fit(x_tsne)</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>clusters <span class="op">=</span> kmean.predict(x_tsne)</span>
 <span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>plot_clusters(x_tsne, clusters, Kmean)</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>plot_clusters(x_tsne, clusters, kmean)</span>
 <span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>plot_clusters_labels(x_tsne, labels)</span></code></pre>
 </div>
 <figure><img src="fig/tsne_clustered.png" alt="A scatter plot of the t-SNE reduced data, with the points coloured by their cluster id. The centres of each cluster are marked with a red X." class="figure mx-auto d-block"><div class="figcaption">Reduction using PCA</div>
@@ -3275,40 +3310,82 @@ between the digits?</p>
 </div>
 </div>
 </div>
+<div id="accordionHint3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint3" aria-expanded="false" aria-controls="collapseHint3">
+  <h4 class="accordion-header" id="headingHint3"> Give me a hint </h4>
+</button>
+<div id="collapseHint3" class="accordion-collapse collapse" data-bs-parent="#accordionHint3" aria-labelledby="headingHint3">
+<div class="accordion-body">
+<p>You will need to use the <code>Axes3D</code> class from
+<code>mpl_toolkits.mplot3d</code> to create 3D plots:</p>
+<div class="codewrapper sourceCode" id="cb11">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="im">from</span> mpl_toolkits.mplot3d <span class="im">import</span> Axes3D</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(projection<span class="op">=</span><span class="st">'3d'</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>ax.scatter({my X values}, {my Y values}, {my Z values}, c<span class="op">=</span>labels)</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>plt.show()</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionHint4" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint4" aria-expanded="false" aria-controls="collapseHint4">
+  <h4 class="accordion-header" id="headingHint4"> Give me a hint </h4>
+</button>
+<div id="collapseHint4" class="accordion-collapse collapse" data-bs-parent="#accordionHint4" aria-labelledby="headingHint4">
+<div class="accordion-body">
+<p>Our plotting code for the 2D plots contains the following two
+lines:</p>
+<div class="codewrapper sourceCode" id="cb12">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>tx <span class="op">=</span> data[:, <span class="dv">0</span>]</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>ty <span class="op">=</span> data[:, <span class="dv">1</span>]</span></code></pre>
+</div>
+<p>We need a third dimension for these plots…</p>
+</div>
+</div>
+</div>
+</div>
 <div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="im">from</span> mpl_toolkits.mplot3d <span class="im">import</span> Axes3D</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="co"># PCA</span></span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>pca <span class="op">=</span> decomposition.PCA(n_components<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>pca.fit(features)</span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>x_pca <span class="op">=</span> pca.transform(features)</span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(projection<span class="op">=</span><span class="st">'3d'</span>)</span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>ax.scatter(x_pca[:, <span class="dv">0</span>], x_pca[:, <span class="dv">1</span>], x_pca[:, <span class="dv">2</span>], c<span class="op">=</span>labels,</span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>          cmap<span class="op">=</span>plt.cm.nipy_spectral, s<span class="op">=</span><span class="dv">9</span>, lw<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="im">from</span> mpl_toolkits.mplot3d <span class="im">import</span> Axes3D</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="co"># PCA</span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>pca.fit(features)</span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>x_pca <span class="op">=</span> pca.transform(features)</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(projection<span class="op">=</span><span class="st">'3d'</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>ax.scatter(x_pca[:, <span class="dv">0</span>], x_pca[:, <span class="dv">1</span>], x_pca[:, <span class="dv">2</span>], c<span class="op">=</span>labels,</span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a>          cmap<span class="op">=</span>plt.cm.nipy_spectral, s<span class="op">=</span><span class="dv">9</span>, lw<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
 <figure><img src="fig/pca_3d.svg" alt="A 3D scatter plot showing the results of PCA on the MNIST dataset. The points are coloured by their digit label, with distinct clusters visible for some digits." class="figure mx-auto d-block"><div class="figcaption">Reduction to 3 components using pca</div>
-</figure><div class="codewrapper sourceCode" id="cb12">
+</figure><div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># t-SNE embedding</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>tsne <span class="op">=</span> manifold.TSNE(n_components<span class="op">=</span><span class="dv">3</span>, init<span class="op">=</span><span class="st">'pca'</span>,</span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>        random_state <span class="op">=</span> <span class="dv">0</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>x_tsne <span class="op">=</span> tsne.fit_transform(features)</span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(projection<span class="op">=</span><span class="st">'3d'</span>)</span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>ax.scatter(x_tsne[:, <span class="dv">0</span>], x_tsne[:, <span class="dv">1</span>], x_tsne[:, <span class="dv">2</span>], c<span class="op">=</span>labels,</span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>          cmap<span class="op">=</span>plt.cm.nipy_spectral, s<span class="op">=</span><span class="dv">9</span>, lw<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># t-SNE embedding</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>tsne <span class="op">=</span> TSNE(n_components<span class="op">=</span><span class="dv">3</span>, init<span class="op">=</span><span class="st">'pca'</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>        random_state <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>x_tsne <span class="op">=</span> tsne.fit_transform(features)</span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(projection<span class="op">=</span><span class="st">'3d'</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>ax.scatter(x_tsne[:, <span class="dv">0</span>], x_tsne[:, <span class="dv">1</span>], x_tsne[:, <span class="dv">2</span>], c<span class="op">=</span>labels,</span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>          cmap<span class="op">=</span>plt.cm.nipy_spectral, s<span class="op">=</span><span class="dv">9</span>, lw<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
 <figure><img src="fig/tsne_3d.svg" alt="A 3D scatter plot showing the results of t-SNE on the MNIST dataset. The points are coloured by their digit label, with distinct clusters visible for some digits." class="figure mx-auto d-block"><div class="figcaption">Reduction to 3 components using tsne</div>
 </figure>
@@ -3327,6 +3404,9 @@ between the digits?</p>
 experiment with these. How do they change your resulting plots? Might
 the choice of parameters lead you to make different conclusions about
 your data?</p>
+<p><a href="https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html" class="external-link">scikit-learn
+PCA documentation</a> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html" class="external-link">scikit-learn
+t-SNE documentation</a></p>
 </div>
 </div>
 </div>
@@ -3335,7 +3415,7 @@ your data?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 
 </div>
@@ -3364,7 +3444,7 @@ data exploration?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 
 </div>
@@ -4486,8 +4566,8 @@ any links that you are not going to use.
   "url": "https://jonathan-hartman.github.io/machine-learning-novice-sklearn/aio.html",
   "identifier": "https://jonathan-hartman.github.io/machine-learning-novice-sklearn/aio.html",
   "dateCreated": "2025-07-23",
-  "dateModified": "2025-07-23",
-  "datePublished": "2025-07-23"
+  "dateModified": "2025-07-24",
+  "datePublished": "2025-07-24"
 }
 
   </script><script>
