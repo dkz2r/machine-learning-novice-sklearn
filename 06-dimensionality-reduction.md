@@ -31,33 +31,32 @@ To make this episode a bit less computationally intensive, the Scikit-Learn exam
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
-import sklearn.cluster as skl_cluster
-from sklearn import manifold, decomposition, datasets
+from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
+from sklearn.manifold import TSNE
+from sklearn import datasets
 
 # Let's define these here to avoid repetitive code
-def plots_labels(data, labels):
+def _setup_plot(data, figsize=(4, 4)):
+    fig = plt.figure(1, figsize=figsize)
     tx = data[:, 0]
     ty = data[:, 1]
+    return fig, tx, ty
 
-    fig = plt.figure(1, figsize=(4, 4))
+def plots_labels(data, labels):
+    fig, tx, ty = _setup_plot(data)
     plt.scatter(tx, ty, edgecolor='k', c=labels)
     plt.show()
 
-def plot_clusters(data, clusters, Kmean):
-    tx = data[:, 0]
-    ty = data[:, 1]
-    fig = plt.figure(1, figsize=(4, 4))
+def plot_clusters(data, clusters, kmeans):
+    fig, tx, ty = _setup_plot(data)
     plt.scatter(tx, ty, s=5, linewidth=0, c=clusters)
-    for cluster_x, cluster_y in Kmean.cluster_centers_:
+    for cluster_x, cluster_y in kmeans.cluster_centers_:
         plt.scatter(cluster_x, cluster_y, s=100, c='r', marker='x')
     plt.show()
 
 def plot_clusters_labels(data, labels):
-    tx = data[:, 0]
-    ty = data[:, 1]
-
-    # with labels
-    fig = plt.figure(1, figsize=(5, 4))
+    fig, tx, ty = _setup_plot(data, figsize=(5, 4))
     plt.scatter(tx, ty, c=labels, cmap="nipy_spectral",
             edgecolor='k', label=labels)
     plt.colorbar(boundaries=np.arange(11)-0.5).set_ticks(np.arange(10))
@@ -84,7 +83,8 @@ As humans we are pretty good at object and pattern recognition. We can look at t
 ## Exercise: Try to visually inspect the dataset and features for correlations
 As we did for previous datasets, lets visually inspect relationships between our features/pixels. Try and investigate the following pixels for relations (written "row_column"): 0_4, 1_4, 2_4, and 3_4.
 
-:::::::::::::::: solution
+The specific pixels we are looking at can be identified with the following code:
+
 ```python
 print(features.iloc[0])
 image_1D = features.iloc[0]
@@ -96,16 +96,35 @@ plt.imshow(image_2D,cmap="gray_r")
 plt.plot([0,1,2,3],[4,4,4,4],"rx")
 plt.show()
 ```
+
 ![SKLearn image with highlighted pixels](fig/mnist_pairplot_pixels.png){alt="A pixelated image of a handwritten '0', with red crosses marking the pixels at positions 0_4, 1_4, 2_4, and 3_4."}
+
+::: hint
+
+Use the `sns.pairplot` function from seaborn to plot the relationships between these pixels. You
+can use the `vars` parameter to specify which features to plot
+
+`sns.pairplot(___, vars=___, hue=___, palette="tab10")`
+
+:::
+
+::: hint
+
+Since the `sns.pairplot` function expects a single dataframe, you will have to make a temporary
+copy of the data for this plot, where the first four columns are the pixel values, and the last
+column is the label.
+
+You can either create a new dataframe with the selected columns, or use the `pd.concat` function
+to combine the features and labels into a single dataframe (use `axis=1` to concatenate along
+columns)
+
+:::
+
+:::::::::::::::: solution
 
 ```
 import seaborn as sns
-
-# make a temporary copy of data for plotting here only
-seaborn_data = features
-
-# add labels for pairplot color coding
-seaborn_data["labels"] = labels
+import pandas as pd
 
 # make a short list of N features for plotting N*N figures
 # 4**2 = 16 plots, whereas 64**2 is over 4000!
@@ -113,8 +132,12 @@ feature_subset = []
 for i in range(4):
     feature_subset.append("pixel_"+str(i)+"_4")
 
-sns.pairplot(seaborn_data, vars=feature_subset, hue="labels",
-             palette=sns.mpl_palette("Spectral", n_colors=10))
+sns.pairplot(
+    pd.concat([features, labels], axis=1),
+    vars=feature_subset,
+    hue="target",
+    palette="tab10"
+)
 ```
 
 ![SKLearn image with highlighted pixels](fig/mnist_pairplot.png){alt="A pairplot of the MNIST dataset, showing the relationships between the pixels at positions 0_4, 1_4, 2_4, and 3_4. Each plot is coloured by the digit label, with distinct clusters visible for some digits."}
@@ -140,7 +163,7 @@ Let's apply PCA to the MNIST dataset and retain the two most-major components:
 
 ```python
 # PCA with 2 components
-pca = decomposition.PCA(n_components=2)
+pca = PCA(n_components=2)
 x_pca = pca.fit_transform(features)
 
 print(x_pca.shape)
@@ -160,10 +183,10 @@ plots_labels(x_pca, None)
 We now have a 2D representation of our 64D dataset that we can work with instead. Let's try some quick K-means clustering on our 2D representation of the data. Because we already have some knowledge about our data we can set `k=10` for the 10 digits present in the dataset.
 
 ```python
-Kmean = skl_cluster.KMeans(n_clusters=10)
-Kmean.fit(x_pca)
-clusters = Kmean.predict(x_pca)
-plot_clusters(x_pca, clusters, Kmean)
+kmean_clusters = KMeans(n_clusters=10)
+kmean_clusters.fit(x_pca)
+clusters = kmean_clusters.predict(x_pca)
+plot_clusters(x_pca, clusters, kmean_clusters)
 ```
 
 
@@ -197,7 +220,7 @@ Scikit-Learn allows us to apply t-SNE in a relatively simple way. Lets code and 
 ```python
 # t-SNE embedding
 # initialising with "pca" explicitly preserves global structure
-tsne = manifold.TSNE(n_components=2, init='pca', random_state = 0)
+tsne = TSNE(n_components=2, init='pca', random_state = 0)
 x_tsne = tsne.fit_transform(features)
 
 plots_labels(x_tsne, None)
@@ -209,12 +232,12 @@ plots_labels(x_tsne, None)
 It looks like t-SNE has done a much better job of splitting our data up into clusters using only a 2D representation of the data. Once again, let's run a simple k-means clustering on this new 2D representation, and compare with the actual color-labelled data:
 
 ```python
-Kmean = skl_cluster.KMeans(n_clusters=10)
+kmean = KMeans(n_clusters=10)
 
-Kmean.fit(x_tsne)
-clusters = Kmean.predict(x_tsne)
+kmean.fit(x_tsne)
+clusters = kmean.predict(x_tsne)
 
-plot_clusters(x_tsne, clusters, Kmean)
+plot_clusters(x_tsne, clusters, kmean)
 plot_clusters_labels(x_tsne, labels)
 ```
 
@@ -241,12 +264,39 @@ decomposed. Modify the above programs to use three dimensions and
 create appropriate plots.
 Do three dimensions allow one to better distinguish between the digits?
 
+::: hint
+
+You will need to use the `Axes3D` class from `mpl_toolkits.mplot3d` to create 3D plots:
+
+```python
+from mpl_toolkits.mplot3d import Axes3D
+fig = plt.figure(1, figsize=(4, 4))
+ax = fig.add_subplot(projection='3d')
+ax.scatter({my X values}, {my Y values}, {my Z values}, c=labels)
+plt.show()
+```
+
+:::
+
+::: hint
+
+Our plotting code for the 2D plots contains the following two lines:
+
+```python
+tx = data[:, 0]
+ty = data[:, 1]
+```
+
+We need a third dimension for these plots...
+
+:::
+
 :::::::::::::::: solution
 
 ```python
 from mpl_toolkits.mplot3d import Axes3D
 # PCA
-pca = decomposition.PCA(n_components=3)
+pca = PCA(n_components=3)
 pca.fit(features)
 x_pca = pca.transform(features)
 fig = plt.figure(1, figsize=(4, 4))
@@ -256,12 +306,11 @@ ax.scatter(x_pca[:, 0], x_pca[:, 1], x_pca[:, 2], c=labels,
 plt.show()
 ```
 
-
 ![Reduction to 3 components using pca](fig/pca_3d.svg){alt="A 3D scatter plot showing the results of PCA on the MNIST dataset. The points are coloured by their digit label, with distinct clusters visible for some digits."}
 
 ```python
 # t-SNE embedding
-tsne = manifold.TSNE(n_components=3, init='pca',
+tsne = TSNE(n_components=3, init='pca',
         random_state = 0)
 x_tsne = tsne.fit_transform(features)
 fig = plt.figure(1, figsize=(4, 4))
@@ -283,6 +332,9 @@ Look up parameters that can be changed in PCA and t-SNE,
 and experiment with these. How do they change your resulting
 plots?  Might the choice of parameters lead you to make different
 conclusions about your data?
+
+[scikit-learn PCA documentation](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html)
+[scikit-learn t-SNE documentation](https://scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html)
 
 :::::::::::::::: solution
 
