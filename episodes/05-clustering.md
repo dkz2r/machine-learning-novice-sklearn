@@ -70,22 +70,15 @@ Now lets create some random blobs using the `make_blobs` function. The `n_sample
 ```python
 import matplotlib.pyplot as plt
 
-#Lets define some functions here to avoid repetitive code
-def plots_labels(data, labels):
+# Lets define a plotting function for ourselves.
+def plot_clusters(data, labels, centers=None):
     tx = data[:, 0]
     ty = data[:, 1]
-
     fig = plt.figure(1, figsize=(4, 4))
     plt.scatter(tx, ty, edgecolor='k', c=labels)
-    plt.show()
-
-def plot_clusters(data, clusters, Kmean):
-    tx = data[:, 0]
-    ty = data[:, 1]
-    fig = plt.figure(1, figsize=(4, 4))
-    plt.scatter(tx, ty, s=5, linewidth=0, c=clusters)
-    for cluster_x, cluster_y in Kmean.cluster_centers_:
-        plt.scatter(cluster_x, cluster_y, s=100, c='r', marker='x')
+    if centers is not None:
+        for cluster_x, cluster_y in centers:
+            plt.scatter(cluster_x, cluster_y, s=150, c='white', edgecolor='k', linewidths=1.5, marker='X')
     plt.show()
 ```
 
@@ -93,7 +86,7 @@ Lets create the clusters.
 
 ```python
 data, cluster_id = skl_datasets.make_blobs(n_samples=400, cluster_std=0.75, centers=4, random_state=1)
-plots_labels(data, cluster_id)
+plot_clusters(data, cluster_id)
 ```
 
 ![Plot of the random clusters](fig/random_clusters.png){alt="A scatter plot of randomly generated clusters. The points are coloured by their cluster id, with four distinct clusters visible."}
@@ -109,7 +102,7 @@ clusters = Kmean.predict(data)
 The data can now be plotted to show all the points we randomly generated. To make it clearer which cluster points have been classified we can set the colours (the c parameter) to use the `clusters` list that was returned by the `predict` function. The Kmeans algorithm also lets us know where it identified the centre of each cluster. These are stored as a list called 'cluster_centers_' inside the `Kmean` object. Let's plot the points from the clusters, colouring them by the output from the K-means algorithm, and also plot the centres of each cluster as a red X.
 
 ```
-plot_clusters(data, clusters, Kmean)
+plot_clusters(data, clusters, Kmean.cluster_centers_)
 ```
 
 ![Plot of the fitted random clusters](fig/random_clusters_centre.png){alt="A scatter plot of the random clusters, with the points coloured by their cluster id. The centres of each cluster are marked with a red X."}
@@ -127,7 +120,7 @@ Kmean = skl_cluster.KMeans(n_clusters=4)
 Kmean.fit(data)
 clusters = Kmean.predict(data)
 
-plot_clusters(data, clusters, Kmean)
+plot_clusters(data, clusters, Kmean.cluster_centers_)
 ```
 
 ::: callout
@@ -197,6 +190,117 @@ We might look at a measure of similarity to test if this single cluster is actua
 
 :::::::::::::::::::::::::::::::::::::::::::::::
 
+## DBSCAN
+
+### Disadvanges of K-means
+
+Kmeans seems to work pretty well for our contrived example of blobs of data, but let's look at
+exactly why it struggles with irregular clusters. For the next section, we'll use the `make_moons`
+function to generate our data. This will create two interleaving half circles.
+
+```python
+data, cluster_id = skl_datasets.make_moons(n_samples=400, noise=0.1, random_state=1)
+plots_labels(data, cluster_id)
+```
+
+![](fig/moons_dataset.png){alt="A scatter plot of the moons dataset, with the points coloured by their cluster id. The data forms two interleaving half circles."}
+
+Next, let's try to use Kmeans on this data the same way we did before.
+
+```python
+Kmean = skl_cluster.KMeans(n_clusters=2)
+Kmean.fit(data)
+clusters = Kmean.predict(data)
+plot_clusters(data, clusters, Kmean.cluster_centers_)
+```
+
+![](fig/kmeans_moons.png){alt="A scatter plot showing the results of k-means clustering on the moons dataset. The points are coloured by their cluster id, with two interleaving half circles visible. Each half circle of points is partially in one cluster and partially in the other."}
+
+This is an example of exactly what we mean when we say that k-means struggles with irregular
+clusters. The clusters are not circular in nature, and there is no straight line that can be drawn
+to separate them. Luckily, there's another method we can use to cluster this data...
+
+### DBSCAN clustering
+
+DBSCAN stands for **D**ensity **B**ased **S**patial **C**lustering of **A**pplications with
+**N**oise. The general concept is that it looks for clusters of data that are closely packed
+together, and marks points that are far away from any cluster as noise.
+
+The algorithm is iterative, and works like this:
+
+- Define a radius (eps) and a minimum number of points (min_samples) to form a cluster
+- For each point
+  - Find all points within a specified radius (eps)
+    - If a point has more than min_samples neighbors, it is a core point and starts/expands a cluster
+    - If a point has fewer than min_samples neighbors, it is a border point and is added to the nearest cluster
+    - If a point has no neighbors, it is marked as noise
+  - Points that are not core or border points are considered noise
+
+Compared to K-means, this method has several advantages:
+
+- we are able to identify a cluster of arbitrary shape, as membership in a cluster is determined
+    by proximity to the other points of the cluster, rather than proximity to a central point.
+- We can identify noise points that do not belong to any cluster, which can be useful for outlier
+    detection.
+- We do not need to specify the number of clusters in advance, as the algorithm will find as many
+    clusters as there are dense regions in the data.
+
+Let's try it out on our data:
+
+```python
+dbscan = skl_cluster.DBSCAN(min_samples=5, eps=0.18)
+dbscan.fit(data)
+plot_clusters(data, dbscan.labels_)
+```
+
+![](fig/dbscan_moons.png){alt="A scatter plot showing the results of DBSCAN clustering on the moons dataset. The points are coloured by their cluster id, with two interleaving half circles visible. Each half circle of points is correctly identified as a single cluster."}
+
+### Disadvantages of DBSCAN
+
+DBSCAN isn't perfect though, and has some disadvantages:
+
+- It can struggle to identify clusters in data with varying densities, as the eps and min_samples
+    parameters are global and may not be suitable for all clusters.
+- It can be sensitive to the choice of eps and min_samples parameters, which can be difficult to
+    select without prior knowledge of the data.
+- It can struggle with high-dimensional data, as the concept of density becomes less meaningful in
+    high-dimensional spaces.
+
+::: callout
+
+## Selecting Hyper-parameters for DBSCAN
+
+For low dimensionality data, `min_samples` is commonly set to 5. A general rule of thumb for
+high dimensionality data is to set `min_samples` to 2 * number of dimensions.
+
+The `eps` parameter can be selected by plotting the k-distance graph, which shows the distance to
+the k-th nearest neighbor for each point in the dataset. The value of `eps` can be chosen as the
+distance at which there is a significant change in the slope of the graph, indicating a transition
+from dense to sparse regions of the data.
+
+We can create a k-distance graph from our data like this:
+
+```python
+from sklearn.neighbors import NearestNeighbors
+import numpy as np
+
+k = 5  # min_samples for DBSCAN
+nearest_neighbors = NearestNeighbors(n_neighbors=k).fit(data)
+distances, _ = nearest_neighbors.kneighbors(data)
+
+k_distances = np.sort(distances[:, k - 1])[::-1]
+
+plt.plot(k_distances)
+plt.xlabel("Points")
+plt.ylabel(f"{k}-NN Distance")
+plt.title("k-Distance")
+plt.axhline(y=0.18, color='r', linestyle='--')
+plt.show()
+```
+
+![](fig/dbscan_k_distance_plot.png){alt="A line plot showing the k-distance graph for the moons dataset. The x-axis represents the points sorted by distance to their 5th nearest neighbor, and the y-axis represents the distance to the 5th nearest neighbor. A red dashed line is drawn at y=0.18, which is the chosen value for eps."}
+
+:::
 
 ## Spectral clustering
 
