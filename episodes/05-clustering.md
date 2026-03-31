@@ -152,40 +152,47 @@ multi-dimensional spaces.
 
 ## Exercise: K-Means with overlapping clusters
 
-Adjust the program above to increase the standard deviation of the blobs (the cluster_std parameter to make_blobs) and increase the number of samples (n_samples) to 4000.
-You should start to see the clusters overlapping.
+Adjust the program above to increase the standard deviation of the blobs (the cluster_std parameter
+to make_blobs) and increase the number of samples (n_samples) to 4000. You should start to see the
+clusters overlapping.
+
 Do the clusters that are identified make sense?
 Is there any strange behaviour?
 
 :::::::::::::::: solution
 Increasing n_samples to 4000 and cluster_std to 3.0 looks like this:
 
-![Kmeans attempting to classify overlapping clusters](fig/kmeans_overlapping_clusters.png){alt="A scatter plot showing two rings of points."}
+![Kmeans attempting to classify overlapping clusters](fig/kmeans_overlapping_clusters.png){alt="A scatter plot showing the results of k-means clustering on overlapping clusters."}
 
 The straight line boundaries between clusters look a bit strange.
 :::::::::::::::::::::::::
 
 
 ## Exercise: How many clusters should we look for?
-Using k-means requires us to specify the number of clusters to expect. A common strategy to get around this is to vary the number of clusters we are looking for.
-Modify the program to loop through searching for between 2 and 10 clusters. Which (if any) of the results look more sensible? What criteria might you use to select the best one?
+Using k-means requires us to specify the number of clusters to expect. A common strategy to get
+around this is to vary the number of clusters we are looking for.
+
+Modify the code you wrote in the previous exercise to loop through searching for between 2 and 10
+clusters of 400 points. Which (if any) of the results look more sensible? What criteria might you
+use to select the best one? Try increasing the number of centers to 6. If you didn't know this
+value, how would you select the best number of clusters?
 
 :::::::::::::::: solution
 ```python
+data, cluster_id = skl_datasets.make_blobs(n_samples=400, cluster_std=3, centers=6, random_state=1)
 for cluster_count in range(2,11):
     Kmean = skl_cluster.KMeans(n_clusters=cluster_count)
     Kmean.fit(data)
     clusters = Kmean.predict(data)
-    plt.scatter(data[:, 0], data[:, 1], s=5, linewidth=0,c=clusters)
-    for cluster_x, cluster_y in Kmean.cluster_centers_:
-        plt.scatter(cluster_x, cluster_y, s=100, c='r', marker='x')
-        # give the graph a title with the number of clusters
-        plt.title(str(cluster_count)+" Clusters")
-    plt.show()
+    plot_clusters(data, clusters, Kmean.cluster_centers_)
 ```
 
-None of these look like very sensible clusterings because all of the points form one large cluster.
-We might look at a measure of similarity to test if this single cluster is actually multiple clusters. A simple standard deviation or interquartile range might be a good starting point.
+We of course know ahead of time that there are 6 centers, but imagine if we didn't. You might find
+some of the clusters more sensible than others but there is no real way to know which one is best.
+
+Data in the wild is unlikely to be as neat and tidy as the examples here, so it's good to keep in
+mind that there may not be a single clear 'right answer' when it comes to clustering.
+
 :::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::::::
@@ -200,7 +207,7 @@ function to generate our data. This will create two interleaving half circles.
 
 ```python
 data, cluster_id = skl_datasets.make_moons(n_samples=400, noise=0.1, random_state=1)
-plots_labels(data, cluster_id)
+plot_clusters(data, cluster_id)
 ```
 
 ![](fig/moons_dataset.png){alt="A scatter plot of the moons dataset, with the points coloured by their cluster id. The data forms two interleaving half circles."}
@@ -327,7 +334,7 @@ Lets try out using Scikit-Learn's spectral clustering. To make the concentric ci
 import sklearn.datasets as skl_data
 
 circles, circles_clusters = skl_data.make_circles(n_samples=400, noise=.01, random_state=0)
-plots_labels(circles, circles_clusters)
+plot_clusters(circles, circles_clusters)
 ```
 
 
@@ -342,7 +349,7 @@ The SpectralClustering class combines the fit and predict functions into a singl
 
 ```python
 labels = model.fit_predict(circles)
-plots_labels(circles, labels)
+plot_clusters(circles, labels)
 ```
 
 
@@ -360,12 +367,12 @@ Kmean.fit(circles)
 clusters = Kmean.predict(circles)
 
 # plot the data, colouring it by cluster
-plot_clusters(circles, clusters, Kmean)
+plot_clusters(circles, clusters, Kmean.cluster_centers_)
 
 # cluster with spectral clustering
 model = skl_cluster.SpectralClustering(n_clusters=2, affinity='nearest_neighbors', assign_labels='kmeans')
 labels = model.fit_predict(circles)
-plots_labels(circles, labels)
+plot_clusters(circles, labels)
 ```
 
 
