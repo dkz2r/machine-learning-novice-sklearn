@@ -359,7 +359,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Ethics and the Implications of Machine Learning</h1>
-        <p>Last updated on 2025-07-23 |
+        <p>Last updated on 2026-04-01 |
 
         <a href="https://github.com/jonathan-hartman/machine-learning-novice-sklearn/edit/main/episodes/08-ethics.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -401,11 +401,11 @@ decisions that will affect people in everyday life. For example:</p>
 <ul><li>The first death from a driverless car which failed to brake for a
 pedestrian.<a href="https://www.forbes.com/sites/meriameberboucha/2018/05/28/uber-self-driving-car-crash-what-really-happened/" class="external-link"><span class="math display">\[1\]</span></a>
 </li>
-<li>Highly targetted advertising based around social media and internet
+<li>Highly targeted advertising based around social media and internet
 usage. <a href="https://www.wired.com/story/big-tech-can-use-ai-to-extract-many-more-ad-dollars-from-our-clicks/" class="external-link"><span class="math display">\[2\]</span></a>
 </li>
 <li>The outcomes of elections and referenda being influenced by highly
-targetted social media posts. This is compounded by data being obtained
+targeted social media posts. This is compounded by data being obtained
 without the user’s consent. <a href="https://www.vox.com/policy-and-politics/2018/3/23/17151916/facebook-cambridge-analytica-trump-diagram" class="external-link"><span class="math display">\[3\]</span></a>
 </li>
 <li>The widespread use of facial recognition technologies. <a href="https://www.bbc.co.uk/news/technology-44089161" class="external-link"><span class="math display">\[4\]</span></a>
@@ -425,6 +425,9 @@ cases or groups. For example, if you were trying to automatically screen
 job candidates and your training data consisted only of people who were
 previously hired by the company, then any biases in employment processes
 would be reflected in the results of the machine learning.</p>
+<p>Examples: - Amazon’s recruitment tool which was found to be biased
+against women - A facial recognition system which was found to be less
+accurate at identifying people with darker skin tones</p>
 </section><section><h2 class="section-heading" id="problems-with-explaining-decisions">Problems with explaining decisions<a class="anchor" aria-label="anchor" href="#problems-with-explaining-decisions"></a></h2>
 <hr class="half-width"><p>Many machine learning systems (e.g. neural networks) can’t really
 explain their decisions. Although the input and output are known, trying
@@ -432,6 +435,10 @@ to explain why the training caused the network to behave in a certain
 way can be very difficult. When decisions are questioned by a human it’s
 difficult to provide any rationale for how a decision was arrived
 at.</p>
+<p>Examples: - LLMs are generally unable to explain <em>how</em> they
+arrived at a particular answer. - Dutch SyRI system used to identify
+people who might be committing welfare fraud. Because the system could
+not explain its decisions, it was ruled to be illegal.</p>
 </section><section><h2 class="section-heading" id="problems-with-accuracy">Problems with accuracy<a class="anchor" aria-label="anchor" href="#problems-with-accuracy"></a></h2>
 <hr class="half-width"><p>No machine learning system is ever 100% accurate. Getting into the
 high 90s is usually considered good. But when we’re evaluating millions
@@ -439,6 +446,11 @@ of data items this can translate into 100s of thousands of
 mis-identifications. This would be an unacceptable margin of error if
 the results were going to have major implications for people, such as
 criminal sentencing decisions or structuring debt repayments.</p>
+<p>Examples: - The COMPAS system used to predict likelihood of
+re-offending by criminals in the US. - The Epic Sepsis Prediction Model
+used to predict likelihood of sepsis in hospital patients was found to
+have an ROC AUC of 0.63, which is only slightly better than random
+guessing (0.5).</p>
 </section><section><h2 class="section-heading" id="energy-use">Energy use<a class="anchor" aria-label="anchor" href="#energy-use"></a></h2>
 <hr class="half-width"><p>Many machine learning systems (especially deep learning) need vast
 amounts of computational power which in turn can consume vast amounts of
@@ -450,6 +462,16 @@ typical home in the OECD would use in an entire day. Energy use can be
 particularly high when models are constantly being retrained or when
 “parameter sweeps” are done to find the best set of parameters to train
 with.</p>
+<p>A 2025 article from the MIT Technology Review attempted to estimate
+the true carbon footprint of training and querying a large language
+model. It was estimated that training OpenAI’s GPT-4 model took over 50
+Gigawatt hours of energy - enough to power a large city for three days.
+Individual queries are difficult to quantify, but estimates range from
+around 0.24 to 0.93 Watt-hours per query - something like turning on a
+TV or running a microwave for a few seconds. But with billions of users
+submitting hundreds of thousands of queries every minute, overall energy
+usage of these models is creating potential bottlenecks in global energy
+production.</p>
 </section><section><h2 class="section-heading" id="ethics-of-machine-learning-in-research">Ethics of machine learning in research<a class="anchor" aria-label="anchor" href="#ethics-of-machine-learning-in-research"></a></h2>
 <hr class="half-width"><p>Not all research using machine learning will have major ethical
 implications. Many research projects don’t directly affect the lives of
@@ -459,7 +481,7 @@ committee might also ask you):</p>
 <ul><li>Will the results of your machine learning influence a decision that
 will have a significant effect on a person’s life?</li>
 <li>Will the results of your machine learning influence a decision that
-will have a significant effect on an animial’s life?</li>
+will have a significant effect on an animal’s life?</li>
 <li>Will you be using any people to create your training data, and if
 so, will they have to look at any disturbing or traumatic material
 during the training process?</li>
@@ -564,8 +586,8 @@ any links that you are not going to use.
   "url": "https://jonathan-hartman.github.io/machine-learning-novice-sklearn/08-ethics.html",
   "identifier": "https://jonathan-hartman.github.io/machine-learning-novice-sklearn/08-ethics.html",
   "dateCreated": "2025-07-23",
-  "dateModified": "2025-07-23",
-  "datePublished": "2026-03-31"
+  "dateModified": "2026-04-01",
+  "datePublished": "2026-04-01"
 }
 
   </script><script>
