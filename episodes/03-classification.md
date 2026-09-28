@@ -31,10 +31,10 @@ The physical attributes measured are flipper length, beak length, beak width, bo
 In other words, the dataset contains 344 rows with 7 features i.e. 5 physical attributes, species and the island where the observations were made.
 
 ```python
-import seaborn as sns
+# import seaborn as sns
 
-dataset = sns.load_dataset('penguins')
-dataset.head()
+# dataset = sns.load_dataset('penguins')
+#  dataset.head()
 ```
 
 
@@ -51,14 +51,9 @@ The above table contains multiple categorical objects such as species. If we att
 Lets do some pre-processing on our dataset and specify our `X` features and `y` labels:
 
 ```python
-# Extract the data we need
-feature_names = ['bill_length_mm', 'bill_depth_mm', 'flipper_length_mm', 'body_mass_g']
-dataset.dropna(subset=feature_names, inplace=True)
+from util import get_penguin_classification_data
 
-class_names = dataset['species'].unique()
-
-X = dataset[feature_names]
-y = dataset['species']
+X, y = get_penguin_classification_data()
 ```
 
 
@@ -102,10 +97,9 @@ We'll use `X_train` and `y_train` to develop our model, and only look at `X_test
 In order to better understand how a model might classify this data, we can first take a look at the data visually, to see what patterns we might identify.
 
 ```python
-import matplotlib.pyplot as plt
+import seaborn as sns
 
-fig01 = sns.scatterplot(X_train, x=feature_names[0], y=feature_names[1], hue=dataset['species'])
-plt.show()
+sns.scatterplot(X_train, x="bill_length_mm", y="bill_depth_mm", hue=y_train)
 ```
 
 
@@ -114,8 +108,7 @@ plt.show()
 As there are four measurements for each penguin, we need quite a few plots to visualise all four dimensions against each other. Here is a handy Seaborn function to do so:
 
 ```python
-sns.pairplot(dataset, hue="species")
-plt.show()
+sns.pairplot(sns.load_dataset("penguins"), hue="species")
 ```
 
 
@@ -156,9 +149,9 @@ print(clf_score)
 Our model reports an accuracy of ~98% on the test data! We can also look at the decision tree that was generated:
 
 ```python
-fig = plt.figure(figsize=(12, 10))
-plot_tree(clf, class_names=class_names, feature_names=feature_names, filled=True, ax=fig.gca())
-plt.show()
+from util import view_decision_tree_classifier
+
+view_decision_tree_classifier(clf)
 ```
 
 
@@ -178,18 +171,12 @@ We can see that rather than clean lines between species, the decision tree produ
 We can visualise the classification space (decision tree boundaries) to get a more intuitive feel for what it is doing.Note that our 2D plot can only show two parameters at a time, so we will quickly visualise by training a new model on only 2 features:
 
 ```python
-from sklearn.inspection import DecisionBoundaryDisplay
-
-f1 = feature_names[0]
-f2 = feature_names[3]
+from util import plot_decision_tree_decision_boundary
 
 clf = DecisionTreeClassifier(max_depth=2)
-clf.fit(X_train[[f1, f2]], y_train)
+clf.fit(X_train[["bill_length_mm", "body_mass_g"]], y_train)
 
-d = DecisionBoundaryDisplay.from_estimator(clf, X_train[[f1, f2]])
-
-sns.scatterplot(X_train, x=f1, y=f2, hue=y_train, palette="husl")
-plt.show()
+plot_decision_tree_decision_boundary(clf, X_train, y_train)
 ```
 
 
@@ -265,10 +252,7 @@ Let's reuse our fitting and plotting codes from above to inspect a decision tree
 ```python
 clf = DecisionTreeClassifier(max_depth=5)
 clf.fit(X_train, y_train)
-
-fig = plt.figure(figsize=(12, 10))
-plot_tree(clf, class_names=class_names, feature_names=feature_names, filled=True, ax=fig.gca())
-plt.show()
+view_decision_tree_classifier(clf)
 ```
 
 
@@ -276,16 +260,10 @@ plt.show()
 
 It looks like our decision tree has split up the training data into the correct penguin categories and more accurately than the `max_depth=2` model did, however it used some very specific questions to split up the penguins into the correct categories. Let's try visualising the classification space for a more intuitive understanding:
 ```python
-f1 = feature_names[0]
-f2 = feature_names[3]
-
 clf = DecisionTreeClassifier(max_depth=5)
-clf.fit(X_train[[f1, f2]], y_train)
+clf.fit(X_train[["bill_length_mm", "body_mass_g"]], y_train)
 
-d = DecisionBoundaryDisplay.from_estimator(clf, X_train[[f1, f2]])
-
-sns.scatterplot(X_train, x=f1, y=f2, hue=y_train, palette='husl')
-plt.show()
+plot_decision_tree_decision_boundary(clf, X_train, y_train)
 ```
 
 
