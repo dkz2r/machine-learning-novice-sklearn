@@ -2,6 +2,7 @@ import math
 
 import matplotlib.pyplot as plt
 import numpy as np
+import sklearn.datasets as skl_datasets
 from sklearn.inspection import DecisionBoundaryDisplay
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
@@ -153,3 +154,41 @@ def plot_decision_tree_decision_boundaries(clf, X_train, y_train, feature1="bill
     d = DecisionBoundaryDisplay.from_estimator(clf, X_train[[feature1, feature2]])
     sns.scatterplot(X_train, x=feature1, y=feature2, hue=y_train, palette="husl")
     plt.show()
+
+def get_cluster_data(num_clusters=4, cluster_std=0.75):
+    data, cluster_id = skl_datasets.make_blobs(n_samples=400, cluster_std=cluster_std, centers=num_clusters, random_state=1)
+    return data, cluster_id
+
+def plot_clusters(data, labels=None, centers=None):
+    tx = data[:, 0]
+    ty = data[:, 1]
+    fig = plt.figure(1, figsize=(4, 4))
+    if labels is not None:
+        plt.scatter(tx, ty, edgecolor='k', c=labels)
+    else:
+        plt.scatter(tx, ty, edgecolor='k', c=labels)
+    if centers is not None:
+        for cluster_x, cluster_y in centers:
+            plt.scatter(cluster_x, cluster_y, s=150, c='white', edgecolor='k', linewidths=1.5, marker='X')
+    plt.show()
+
+def get_moons_data():
+    data, cluster_id = skl_datasets.make_moons(n_samples=400, noise=0.1, random_state=1)
+    return data, cluster_id
+
+def view_random_forest_tree_classifiers(clf):
+    fig, axes = plt.subplots(nrows=1, ncols=5 ,figsize=(12,6))
+    dataset = get_penguin_data()
+
+    class_names = dataset['species'].unique()
+    feature_names = ['bill_length_mm', 'bill_depth_mm', 'flipper_length_mm', 'body_mass_g']
+    
+    # plot first 5 trees in forest
+    for index in range(0, 5):
+        plot_tree(clf.estimators_[index],
+            class_names=class_names,
+            feature_names=feature_names,
+            filled=True,
+            ax=axes[index])
+    
+        axes[index].set_title(f'Tree: {index}')
