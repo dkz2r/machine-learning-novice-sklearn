@@ -349,7 +349,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Supervised methods - Regression</h1>
-        <p>Last updated on 2026-09-28 |
+        <p>Last updated on 2026-09-29 |
 
         <a href="https://github.com/jonathan-hartman/machine-learning-novice-sklearn/edit/main/episodes/02-regression.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -936,12 +936,8 @@ features and labels.</p>
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1" aria-label="code-block-16-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1" aria-label="code-block-16-2"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1" aria-label="code-block-16-3"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1" aria-label="code-block-16-4"></a></span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1" aria-label="code-block-16-5"></a>dataset <span class="op">=</span> sns.load_dataset(<span class="st">"penguins"</span>)</span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1" aria-label="code-block-16-6"></a>dataset.head()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1" aria-label="code-block-16-1"></a>dataset <span class="op">=</span> sns.load_dataset(<span class="st">"penguins"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1" aria-label="code-block-16-2"></a>dataset.head()</span></code></pre>
 </div>
 <p>We can see that we have seven columns in total: 4 continuous
 (numerical) columns named <code>bill_length_mm</code>,
@@ -967,24 +963,16 @@ our model.</p>
 <div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1" aria-label="code-block-18-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1" aria-label="code-block-18-2"></a><span class="im">from</span> util <span class="im">import</span> plot_linear_model</span>
-<span id="cb18-3"><a href="#cb18-3" tabindex="-1" aria-label="code-block-18-3"></a></span>
-<span id="cb18-4"><a href="#cb18-4" tabindex="-1" aria-label="code-block-18-4"></a>dataset_1 <span class="op">=</span> dataset[:<span class="dv">146</span>]</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1" aria-label="code-block-18-1"></a>dataset_1 <span class="op">=</span> dataset[:<span class="dv">146</span>]</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1" aria-label="code-block-18-2"></a></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1" aria-label="code-block-18-3"></a>x_data <span class="op">=</span> dataset_1[<span class="st">"body_mass_g"</span>]</span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1" aria-label="code-block-18-4"></a>y_data <span class="op">=</span> dataset_1[<span class="st">"bill_depth_mm"</span>]</span>
 <span id="cb18-5"><a href="#cb18-5" tabindex="-1" aria-label="code-block-18-5"></a></span>
-<span id="cb18-6"><a href="#cb18-6" tabindex="-1" aria-label="code-block-18-6"></a>x_data <span class="op">=</span> dataset_1[<span class="st">"body_mass_g"</span>]</span>
-<span id="cb18-7"><a href="#cb18-7" tabindex="-1" aria-label="code-block-18-7"></a>y_data <span class="op">=</span> dataset_1[<span class="st">"bill_depth_mm"</span>]</span>
-<span id="cb18-8"><a href="#cb18-8" tabindex="-1" aria-label="code-block-18-8"></a></span>
-<span id="cb18-9"><a href="#cb18-9" tabindex="-1" aria-label="code-block-18-9"></a><span class="co"># trained_model = fit_predict_plot_linear(x_data, y_data)</span></span>
-<span id="cb18-10"><a href="#cb18-10" tabindex="-1" aria-label="code-block-18-10"></a></span>
-<span id="cb18-11"><a href="#cb18-11" tabindex="-1" aria-label="code-block-18-11"></a>X <span class="op">=</span> np.array(x_data).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb18-12"><a href="#cb18-12" tabindex="-1" aria-label="code-block-18-12"></a>y <span class="op">=</span> np.array(y_data).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb18-13"><a href="#cb18-13" tabindex="-1" aria-label="code-block-18-13"></a></span>
-<span id="cb18-14"><a href="#cb18-14" tabindex="-1" aria-label="code-block-18-14"></a>model <span class="op">=</span> LinearRegression()</span>
-<span id="cb18-15"><a href="#cb18-15" tabindex="-1" aria-label="code-block-18-15"></a>lin_regress <span class="op">=</span> model.fit(X, y)</span>
-<span id="cb18-16"><a href="#cb18-16" tabindex="-1" aria-label="code-block-18-16"></a>predictions <span class="op">=</span> model.predict(X)</span>
-<span id="cb18-17"><a href="#cb18-17" tabindex="-1" aria-label="code-block-18-17"></a></span>
-<span id="cb18-18"><a href="#cb18-18" tabindex="-1" aria-label="code-block-18-18"></a>plot_linear_model(X, y, predictions)</span></code></pre>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1" aria-label="code-block-18-6"></a>trained_model <span class="op">=</span> fit_predict_plot_linear(x_data, y_data)</span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1" aria-label="code-block-18-7"></a></span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1" aria-label="code-block-18-8"></a>plt.xlabel(<span class="st">"mass g"</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1" aria-label="code-block-18-9"></a>plt.ylabel(<span class="st">"depth mm"</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1" aria-label="code-block-18-10"></a>plt.show()</span></code></pre>
 </div>
 <figure><img src="../fig/regress_penguin_lin.png" alt="A plot of a subset of the penguin dataset with a linear regression line fitted to the data points. The points are well aligned with the linear regression line." class="figure mx-auto d-block"><div class="figcaption">Comparison of the regressions of our
 dataset</div>
@@ -1000,18 +988,20 @@ inspect how the linear regression model performs.</p>
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1" aria-label="code-block-19-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1" aria-label="code-block-19-1"></a>x_data_all, y_data_all <span class="op">=</span> pre_process_linear(dataset[<span class="st">"body_mass_g"</span>], dataset[<span class="st">"bill_depth_mm"</span>])</span>
 <span id="cb19-2"><a href="#cb19-2" tabindex="-1" aria-label="code-block-19-2"></a></span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1" aria-label="code-block-19-3"></a>x_data_all <span class="op">=</span> dataset[<span class="st">"body_mass_g"</span>]</span>
-<span id="cb19-4"><a href="#cb19-4" tabindex="-1" aria-label="code-block-19-4"></a>y_data_all <span class="op">=</span> dataset[<span class="st">"bill_depth_mm"</span>]</span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1" aria-label="code-block-19-5"></a></span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1" aria-label="code-block-19-6"></a>X_all <span class="op">=</span> np.array(x_data_all).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb19-7"><a href="#cb19-7" tabindex="-1" aria-label="code-block-19-7"></a>y_all <span class="op">=</span> np.array(y_data_all).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb19-8"><a href="#cb19-8" tabindex="-1" aria-label="code-block-19-8"></a></span>
-<span id="cb19-9"><a href="#cb19-9" tabindex="-1" aria-label="code-block-19-9"></a>new_predictions <span class="op">=</span> model.predict(X_all)</span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1" aria-label="code-block-19-3"></a>y_predictions <span class="op">=</span> predict_linear_model(trained_model, x_data_all, y_data_all)</span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1" aria-label="code-block-19-4"></a></span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1" aria-label="code-block-19-5"></a>plt.scatter(x_data_all, y_data_all, label<span class="op">=</span><span class="st">"all data"</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1" aria-label="code-block-19-6"></a>plt.scatter(x_data, y_data, label<span class="op">=</span><span class="st">"training data"</span>)</span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1" aria-label="code-block-19-7"></a></span>
+<span id="cb19-8"><a href="#cb19-8" tabindex="-1" aria-label="code-block-19-8"></a>plt.plot(x_data_all, y_predictions, label<span class="op">=</span><span class="st">"fit"</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1" aria-label="code-block-19-9"></a>plt.plot(x_data_all, y_predictions, <span class="st">"rx"</span>, label<span class="op">=</span><span class="st">"predictions"</span>)</span>
 <span id="cb19-10"><a href="#cb19-10" tabindex="-1" aria-label="code-block-19-10"></a></span>
-<span id="cb19-11"><a href="#cb19-11" tabindex="-1" aria-label="code-block-19-11"></a>plt.scatter(x_data_all, y_data_all, label<span class="op">=</span><span class="st">"all data"</span>)</span>
-<span id="cb19-12"><a href="#cb19-12" tabindex="-1" aria-label="code-block-19-12"></a>plt.plot(x_data_all, new_predictions, label<span class="op">=</span><span class="st">"linear fit"</span>)</span></code></pre>
+<span id="cb19-11"><a href="#cb19-11" tabindex="-1" aria-label="code-block-19-11"></a>plt.xlabel(<span class="st">"mass g"</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" tabindex="-1" aria-label="code-block-19-12"></a>plt.ylabel(<span class="st">"depth mm"</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" tabindex="-1" aria-label="code-block-19-13"></a>plt.legend()</span>
+<span id="cb19-14"><a href="#cb19-14" tabindex="-1" aria-label="code-block-19-14"></a>plt.show()</span></code></pre>
 </div>
 <figure><img src="../fig/regress_penguin_lin_tot.png" alt="A plot of the same regression, this time with the entire dataset. It is now clear that the lonear regression fits two classes, but is a poor predictor of the third class of penguins." class="figure mx-auto d-block"><div class="figcaption">Comparison of the regressions of our
 dataset</div>
@@ -1117,8 +1107,8 @@ any links that you are not going to use.
   "url": "https://jonathan-hartman.github.io/machine-learning-novice-sklearn/instructor/02-regression.html",
   "identifier": "https://jonathan-hartman.github.io/machine-learning-novice-sklearn/instructor/02-regression.html",
   "dateCreated": "2025-07-23",
-  "dateModified": "2026-09-28",
-  "datePublished": "2026-09-28"
+  "dateModified": "2026-09-29",
+  "datePublished": "2026-09-29"
 }
 
   </script><script>
