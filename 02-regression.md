@@ -450,6 +450,10 @@ Now that we have some convenient Python functions to perform quick regressions o
 Let's start by loading in and examining a new dataset from Seaborn: a penguin dataset containing a few hundred samples and a number of features and labels.
 
 ```python
+import numpy as np
+import seaborn as sns
+from sklearn.linear_model import LinearRegression
+
 dataset = sns.load_dataset("penguins")
 dataset.head()
 ```
@@ -466,16 +470,24 @@ dataset.head()
 Now that we have cleaned our data we can try and predict a penguins bill depth using their body mass. In this scenario we will train a linear regression model using `body_mass_g` as our feature data and `bill_depth_mm` as our label data. We will train our model on a subset of the data by slicing the first 146 samples of our cleaned data. We will then use our regression function to train and plot our model.
 
 ```python
+from sklearn.linear_model import LinearRegression
+from util import plot_linear_model
+
 dataset_1 = dataset[:146]
 
 x_data = dataset_1["body_mass_g"]
 y_data = dataset_1["bill_depth_mm"]
 
-trained_model = fit_predict_plot_linear(x_data, y_data)
+# trained_model = fit_predict_plot_linear(x_data, y_data)
 
-plt.xlabel("mass g")
-plt.ylabel("depth mm")
-plt.show()
+X = np.array(x_data).reshape(-1, 1)
+y = np.array(y_data).reshape(-1, 1)
+
+model = LinearRegression()
+lin_regress = model.fit(X, y)
+predictions = model.predict(X)
+
+plot_linear_model(X, y, predictions)
 ```
 
 
@@ -486,20 +498,18 @@ Congratulations! We've taken our linear regression function and quickly created 
 Let's provide the model with all of the penguin samples and visually inspect how the linear regression model performs.
 
 ```python
-x_data_all, y_data_all = pre_process_linear(dataset["body_mass_g"], dataset["bill_depth_mm"])
+import matplotlib.pyplot as plt
 
-y_predictions = predict_linear_model(trained_model, x_data_all, y_data_all)
+x_data_all = dataset["body_mass_g"]
+y_data_all = dataset["bill_depth_mm"]
+
+X_all = np.array(x_data_all).reshape(-1, 1)
+y_all = np.array(y_data_all).reshape(-1, 1)
+
+new_predictions = model.predict(X_all)
 
 plt.scatter(x_data_all, y_data_all, label="all data")
-plt.scatter(x_data, y_data, label="training data")
-
-plt.plot(x_data_all, y_predictions, label="fit")
-plt.plot(x_data_all, y_predictions, "rx", label="predictions")
-
-plt.xlabel("mass g")
-plt.ylabel("depth mm")
-plt.legend()
-plt.show()
+plt.plot(x_data_all, new_predictions, label="linear fit")
 ```
 
 
