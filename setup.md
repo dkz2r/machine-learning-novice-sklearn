@@ -22,17 +22,6 @@ you are ready to go as soon as the workshop begins.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
-::: spoiler
-
-The short version:
-
-- You will need a python environment with the following packages:
-  - numpy pandas matplotlib seaborn opencv-python scikit-learn
-  - (optional) jupyterlab
-- [Download the `util.py`](./data/util.py) file and place it in your project directory.
-
-:::
-
 ## Packages
 
 You will need the Seaborn, MatPlotLib, Pandas, Numpy and OpenCV packages.
@@ -45,11 +34,6 @@ Create a new directory for the workshop, then launch a terminal in it:
 mkdir workshop-ml
 cd workshop-ml
 ```
-
-In the interest of focusing more on concepts than code, we've prepared a utilities file that
-contains code that will be useful throughout the workshop.
-[Download the `util.py` file](./data/util.py)
-and place it in your project directory.
 
 ## Creating a new Virtual Environment
 We'll install the prerequisites in a virtual environment, to prevent them from cluttering up your Python environment and causing conflicts.
@@ -137,4 +121,3 @@ To deactivate your virtual environment, simply run `deactivate` in your terminal
 
 ## Fallback option: cloud environment
 If a local installation does not work for you, it is also possible to run this lesson in [Google colab](https://colab.research.google.com/). If you open a jupyter notebook there, the required packages are already pre-installed.
-

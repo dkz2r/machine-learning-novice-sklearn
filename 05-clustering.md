@@ -56,22 +56,37 @@ it with other tests to decide on the best combination.
 To perform a k-means clustering with Scikit-Learn we first need to import the sklearn.cluster module.
 
 ```python
-# import sklearn.cluster as skl_cluster
+import sklearn.cluster as skl_cluster
 ```
 
 For this example, we're going to use Scikit-Learn's built-in 'random data blob generator' instead of using an external dataset. Therefore we'll need the `sklearn.datasets.samples_generator` module.
 
 ```python
-#,import sklearn.datasets as skl_datasets
+import sklearn.datasets as skl_datasets
 ```
 
 Now lets create some random blobs using the `make_blobs` function. The `n_samples` argument sets how many points we want to use in all of our blobs while `cluster_std` sets the standard deviation of the points. The smaller this value the closer together they will be. `centers` sets how many clusters we'd like. `random_state` is the initial state of the random number generator. By specifying this value we'll get the same results every time we run the program. If we don't specify a random state then we'll get different points every time we run. This function returns two things: an array of data points and a list of which cluster each point belongs to.
 
 ```python
-from util import get_cluster_data, plot_clusters
+import matplotlib.pyplot as plt
 
-data, cluster_id = get_cluster_data()
-plot_clusters(data)
+# Lets define a plotting function for ourselves.
+def plot_clusters(data, labels, centers=None):
+    tx = data[:, 0]
+    ty = data[:, 1]
+    fig = plt.figure(1, figsize=(4, 4))
+    plt.scatter(tx, ty, edgecolor='k', c=labels)
+    if centers is not None:
+        for cluster_x, cluster_y in centers:
+            plt.scatter(cluster_x, cluster_y, s=150, c='white', edgecolor='k', linewidths=1.5, marker='X')
+    plt.show()
+```
+
+Lets create the clusters.
+
+```python
+data, cluster_id = skl_datasets.make_blobs(n_samples=400, cluster_std=0.75, centers=4, random_state=1)
+plot_clusters(data, cluster_id)
 ```
 
 ![Plot of the random clusters](fig/random_clusters.png){alt="A scatter plot of randomly generated clusters. The points are coloured by their cluster id, with four distinct clusters visible."}
@@ -79,13 +94,9 @@ plot_clusters(data)
 Now that we have some data we can try to identify the clusters using k-means. First, we need to initialise the KMeans module and tell it how many clusters to look for. Next, we supply it with some data via the `fit` function, in much the same way we did with the regression functions earlier on. Finally, we run the predict function to find the clusters.
 
 ```python
-from sklearn.cluster import KMeans
-
-model = KMeans(n_clusters=4)
-model.fit(data)
-clusters = model.predict(data)
-
-plot_clusters(data, clusters)
+Kmean = skl_cluster.KMeans(n_clusters=4)
+Kmean.fit(data)
+clusters = Kmean.predict(data)
 ```
 
 The data can now be plotted to show all the points we randomly generated. To make it clearer which cluster points have been classified we can set the colours (the c parameter) to use the `clusters` list that was returned by the `predict` function. The Kmeans algorithm also lets us know where it identified the centre of each cluster. These are stored as a list called 'cluster_centers_' inside the `Kmean` object. Let's plot the points from the clusters, colouring them by the output from the K-means algorithm, and also plot the centres of each cluster as a red X.
@@ -195,9 +206,7 @@ exactly why it struggles with irregular clusters. For the next section, we'll us
 function to generate our data. This will create two interleaving half circles.
 
 ```python
-from util import get_moons_data
-
-data, cluster_id = get_moons_data()
+data, cluster_id = skl_datasets.make_moons(n_samples=400, noise=0.1, random_state=1)
 plot_clusters(data, cluster_id)
 ```
 
@@ -206,10 +215,10 @@ plot_clusters(data, cluster_id)
 Next, let's try to use Kmeans on this data the same way we did before.
 
 ```python
-model = .KMeans(n_clusters=2)
-model.fit(data)
-clusters = model.predict(data)
-plot_clusters(data, clusters, model.cluster_centers_)
+Kmean = skl_cluster.KMeans(n_clusters=2)
+Kmean.fit(data)
+clusters = Kmean.predict(data)
+plot_clusters(data, clusters, Kmean.cluster_centers_)
 ```
 
 ![](fig/kmeans_moons.png){alt="A scatter plot showing the results of k-means clustering on the moons dataset. The points are coloured by their cluster id, with two interleaving half circles visible. Each half circle of points is partially in one cluster and partially in the other."}
@@ -246,9 +255,9 @@ Compared to K-means, this method has several advantages:
 Let's try it out on our data:
 
 ```python
-model = DBSCAN(min_samples=5, eps=0.18)
-model.fit(data)
-plot_clusters(data, model.labels_)
+dbscan = skl_cluster.DBSCAN(min_samples=5, eps=0.18)
+dbscan.fit(data)
+plot_clusters(data, dbscan.labels_)
 ```
 
 ![](fig/dbscan_moons.png){alt="A scatter plot showing the results of DBSCAN clustering on the moons dataset. The points are coloured by their cluster id, with two interleaving half circles visible. Each half circle of points is correctly identified as a single cluster."}
