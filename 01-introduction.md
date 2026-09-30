@@ -34,11 +34,10 @@ The image below shows the relationships between artificial intelligence, machine
 ![An infographic showing some of the relationships between AI, ML, and DL](fig/introduction/AI_ML_DL_differences.png){alt="An infographic showing some of the relationships between AI, ML, and DL"}
 The image above is by Tukijaaliwa, CC BY-SA 4.0, via Wikimedia Commons, original source
 
-::: discussion
 
-## Where else have you encountered machine learning already?
+### Machine learning in our daily lives
 
-Some examples:
+Machine learning has quickly become an important technology and is now frequently used to perform services we encounter in our daily lives. Here are just a few examples:
 
 * Banks look for trends in transaction data to detect outliers that may be fraudulent
 * Email inboxes use text to decide whether an email is spam or not, and adjust their rules based upon how we flag emails
@@ -47,17 +46,16 @@ Some examples:
 * Image, object, and pattern recognition is used to identify humans and vehicles, capture text, generate subtitles, and much more
 * Self-driving cars and robots use object detection and performance feedback to improve their interaction with the world
 
-:::
 
-
-::::::::::::::::::::::::::::::::::::: discussion
+::::::::::::::::::::::::::::::::::::: challenge
 
 ## Where else have you encountered machine learning already?
 Now that we have explored machine learning in a bit more detail, discuss with the person next to you:
 
-1. What kind of input data does that machine learning system use to make predictions/classifications?
-2. Is there any evidence that your interaction with the system contributes to further training?
-3. Do you have any examples of the system failing?
+1. Where else have I seen machine learning in use?
+2. What kind of input data does that machine learning system use to make predictions/classifications?
+3. Is there any evidence that your interaction with the system contributes to further training?
+4. Do you have any examples of the system failing?
 
 :::::::::::::::::::::::::::::::::::::::::::::::
 

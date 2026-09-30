@@ -73,11 +73,29 @@ Machine learning jargon can often be hard to remember, so here is a quick summar
 In this session we'll take another look at the penguins data and applying one of the most common bagging approaches, random forests, to try and solve our species classification problem. First we'll load in the dataset and define a train and test split.
 
 ```python
+# import libraries
+import numpy as np
+import pandas as pd
+import seaborn as sns
 from sklearn.model_selection import train_test_split
-from util import get_penguin_classification_data
 
-X, y = get_penguin_classification_data()
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
+# load penguins data
+penguins = sns.load_dataset('penguins')
+
+# prepare and define our data and targets
+feature_names = ['bill_length_mm', 'bill_depth_mm', 'flipper_length_mm', 'body_mass_g']
+penguins.dropna(subset=feature_names, inplace=True)
+
+species_names = penguins['species'].unique()
+
+X = penguins[feature_names]
+y = penguins.species
+
+# Split data in training and test set
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=5)
+
+print("train size:", X_train.shape)
+print("test size", X_test.shape)
 ```
 
 We'll now take a look how we can use ensemble methods to perform a classification task such as identifying penguin species! We're going to use a Random forest classifier available in scikit-learn which is a widely used example of a bagging approach.
@@ -92,22 +110,38 @@ We can now define a random forest estimator and train it using the penguin train
 
 ```python
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.tree import plot_tree
 
-clf = RandomForestClassifier(n_estimators=100, max_depth=7, min_samples_leaf=1)
+# Define our model
+# extra parameter called n_estimators which is number of trees in the forest
+# a leaf is a class label at the end of the decision tree
+forest = RandomForestClassifier(n_estimators=100, max_depth=7, min_samples_leaf=1)
 
 # train our model
-clf.fit(X_train, y_train)
+forest.fit(X_train, y_train)
 
 # Score our model
-clf.score(X_test, y_test)
+print(forest.score(X_test, y_test))
 ```
 
 You might notice that we have a different value (hopefully increased) compared with the decision tree classifier used above on the same training data. Lets plot the first 5 trees in the forest to get an idea of how this model differs from a single decision tree.
 
 ```python
-from util import view_random_forest_tree_classifiers
+import matplotlib.pyplot as plt
 
-view_random_forest_tree_classifiers(clf)
+fig, axes = plt.subplots(nrows=1, ncols=5 ,figsize=(12,6))
+
+# plot first 5 trees in forest
+for index in range(0, 5):
+    plot_tree(forest.estimators_[index],
+        class_names=species_names,
+        feature_names=feature_names,
+        filled=True,
+        ax=axes[index])
+
+    axes[index].set_title(f'Tree: {index}')
+
+plt.show()
 ```
 
 ![random forest trees](fig/rf_5_trees.png){alt="A figure showing the first 5 trees in a random forest model. Each tree is a decision tree with different splits based on the penguin features, and each tree has a different structure and depth."}
@@ -117,10 +151,20 @@ We can see the first 5 (of 100) trees that were fitted as part of the forest.
 If we train the random forest estimator using the same two parameters used to plot the classification space for the decision tree classifier what do we think the plot will look like?
 
 ```python
-from util import plot_decision_tree_decision_boundaries
+# lets train a random forest for only two features (body mass and bill length)
+from sklearn.inspection import DecisionBoundaryDisplay
+f1 = feature_names[0]
+f2 = feature_names[3]
 
-clf.fit(X_train[["body_mass_g", "bill_length_mm"]], y_train)
-plot_decision_tree_decision_boundaries(clf, X_train, y_train)
+# plot classification space for body mass and bill length with random forest
+forest_2d = RandomForestClassifier(n_estimators=100, max_depth=7, min_samples_leaf=1, random_state=5)
+forest_2d.fit(X_train[[f1, f2]], y_train)
+
+# Lets plot the decision boundaries made by the model for the two trained features
+d = DecisionBoundaryDisplay.from_estimator(forest_2d, X_train[[f1, f2]])
+
+sns.scatterplot(X_train, x=f1, y=f2, hue=y_train, palette="husl")
+plt.show()
 ```
 
 ![random forest clf space](fig/EM_rf_clf_space.png){alt="A scatter plot of the penguin dataset, showing body mass on the x-axis and bill length on the y-axis. The points are coloured by species. The random forest classifier is shown as colored regions, with the boundaries between the regions being orthogonal lines. The regions are generally aligned with the species clusters, but there are still several misclassifications and a complicated decision space."}
